@@ -3,12 +3,24 @@
 import fs from "fs/promises";
 import path from "path";
 import crypto from "crypto";
-import sharp from "sharp";
 
 const UPLOAD_DIR = path.join(process.cwd(), "public/uploads");
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_WIDTH = 1920;
+
+async function optimizeWithSharp(buffer: Buffer): Promise<Buffer | null> {
+  try {
+    const sharp = (await import("sharp")).default;
+    return await sharp(buffer)
+      .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+      .webp({ quality: 80 })
+      .toBuffer();
+  } catch (err) {
+    console.error("[Upload] Sharp optimization failed:", err);
+    return null;
+  }
+}
 
 export async function uploadImage(
   file: File
@@ -28,19 +40,25 @@ export async function uploadImage(
   try {
     await fs.mkdir(UPLOAD_DIR, { recursive: true });
 
-    const randomId = crypto.randomBytes(8).toString("hex");
-    const filename = `${Date.now()}-${randomId}.webp`;
-
     const rawBuffer = Buffer.from(await file.arrayBuffer());
-    const optimized = await sharp(rawBuffer)
-      .resize({ width: MAX_WIDTH, withoutEnlargement: true })
-      .webp({ quality: 80 })
-      .toBuffer();
+    const randomId = crypto.randomBytes(8).toString("hex");
 
-    await fs.writeFile(path.join(UPLOAD_DIR, filename), optimized);
+    // Try to optimize with sharp, fallback to raw file
+    const optimized = await optimizeWithSharp(rawBuffer);
 
+    if (optimized) {
+      const filename = `${Date.now()}-${randomId}.webp`;
+      await fs.writeFile(path.join(UPLOAD_DIR, filename), optimized);
+      return { path: `/uploads/${filename}` };
+    }
+
+    // Fallback: save original file as-is
+    const ext = file.type.split("/")[1] === "jpeg" ? "jpg" : file.type.split("/")[1];
+    const filename = `${Date.now()}-${randomId}.${ext}`;
+    await fs.writeFile(path.join(UPLOAD_DIR, filename), rawBuffer);
     return { path: `/uploads/${filename}` };
-  } catch {
+  } catch (err) {
+    console.error("[Upload] Failed:", err);
     return { error: "Upload fehlgeschlagen" };
   }
 }
