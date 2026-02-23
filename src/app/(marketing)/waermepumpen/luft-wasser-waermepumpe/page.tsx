@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
@@ -100,13 +99,11 @@ export default async function LuftWasserPage() {
               </div>
             </div>
             <div>
-              <Image
-                src="/images/wp-outdoor.jpg"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={t("hero", "image", "/images/wp-outdoor.jpg")}
                 alt="Luft-Wasser-Wärmepumpe Außengerät"
-                width={600}
-                height={450}
                 className="rounded-2xl shadow-lg object-cover w-full"
-                priority
               />
             </div>
           </div>
@@ -139,11 +136,10 @@ export default async function LuftWasserPage() {
         <Container>
           <SectionHeading title={t("function", "title", "Funktionsweise")} subtitle={t("function", "subtitle", "So funktioniert eine Luft-Wasser-Wärmepumpe.")} />
           <div className="mb-12 flex justify-center">
-            <Image
-              src="/images/wp-system-diagram.jpg"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={t("function", "image", "/images/wp-system-diagram.jpg")}
               alt="Systemdarstellung einer Wärmepumpenanlage im Einfamilienhaus"
-              width={800}
-              height={600}
               className="rounded-2xl shadow-md max-h-96 w-auto object-contain"
             />
           </div>

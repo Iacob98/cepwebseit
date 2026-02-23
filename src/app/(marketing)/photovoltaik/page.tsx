@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
@@ -82,13 +81,11 @@ export default async function PhotovoltaikPage() {
               </div>
             </div>
             <div className="relative">
-              <Image
-                src="/images/pv-house-full.jpg"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={t("hero", "image", "/images/pv-house-full.jpg")}
                 alt="Photovoltaikanlage auf einem Einfamilienhaus"
-                width={600}
-                height={500}
                 className="rounded-2xl shadow-lg object-cover w-full"
-                priority
               />
             </div>
           </div>
@@ -132,11 +129,10 @@ export default async function PhotovoltaikPage() {
             subtitle={t("components", "subtitle", "Hochwertige Technik für maximale Erträge.")}
           />
           <div className="mb-12 overflow-hidden rounded-2xl">
-            <Image
-              src="/images/pv-roof-close.jpg"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={t("components", "image", "/images/pv-roof-close.jpg")}
               alt="Photovoltaik-Module auf einem Ziegeldach — Nahaufnahme"
-              width={1200}
-              height={500}
               className="w-full h-64 sm:h-80 object-cover"
             />
           </div>

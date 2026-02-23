@@ -46,7 +46,8 @@
   "waermepumpen": {
     "hero": {
       "title": "Wärmepumpen — Effizient heizen mit erneuerbarer Energie",
-      "description": "Eine Wärmepumpe nutzt kostenlose Umweltwärme aus Luft, Erde oder Grundwasser und wandelt sie in Heizenergie um. So sparen Sie bis zu 75% Heizkosten und profitieren von bis zu 70% staatlicher Förderung."
+      "description": "Eine Wärmepumpe nutzt kostenlose Umweltwärme aus Luft, Erde oder Grundwasser und wandelt sie in Heizenergie um. So sparen Sie bis zu 75% Heizkosten und profitieren von bis zu 70% staatlicher Förderung.",
+      "image": "/images/wp-outdoor.jpg"
     },
     "types": {
       "title": "Wärmepumpen-Typen im Überblick",
@@ -73,10 +74,19 @@
       "description": "Lassen Sie sich kostenlos und unverbindlich beraten. Wir finden die optimale Lösung für Ihr Zuhause."
     }
   },
+  "luft-wasser-waermepumpe": {
+    "hero": {
+      "image": "/images/wp-outdoor.jpg"
+    },
+    "function": {
+      "image": "/images/wp-system-diagram.jpg"
+    }
+  },
   "photovoltaik": {
     "hero": {
       "title": "Photovoltaik — Erzeugen Sie Ihren eigenen Strom",
-      "description": "Mit einer modernen Photovoltaikanlage erzeugen Sie Ihren eigenen Strom, senken Ihre Energiekosten und leisten einen Beitrag zum Klimaschutz. Von der Planung bis zur Installation — alles aus einer Hand."
+      "description": "Mit einer modernen Photovoltaikanlage erzeugen Sie Ihren eigenen Strom, senken Ihre Energiekosten und leisten einen Beitrag zum Klimaschutz. Von der Planung bis zur Installation — alles aus einer Hand.",
+      "image": "/images/pv-house-full.jpg"
     },
     "benefits": {
       "title": "Vorteile einer Photovoltaikanlage",
@@ -97,6 +107,7 @@
     "components": {
       "title": "Komponenten Ihrer Solaranlage",
       "subtitle": "Hochwertige Technik für maximale Erträge.",
+      "image": "/images/pv-roof-close.jpg",
       "comp1Title": "Solarmodule",
       "comp1Desc": "Hocheffiziente Module namhafter Hersteller mit mindestens 25 Jahren Leistungsgarantie.",
       "comp2Title": "Wechselrichter",

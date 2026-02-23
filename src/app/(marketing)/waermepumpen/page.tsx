@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
@@ -92,13 +91,11 @@ export default async function WaermepumpenPage() {
               </div>
             </div>
             <div>
-              <Image
-                src="/images/wp-outdoor.jpg"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={t("hero", "image", "/images/wp-outdoor.jpg")}
                 alt="Wärmepumpe Außengerät an einem modernen Einfamilienhaus"
-                width={600}
-                height={450}
                 className="rounded-2xl shadow-lg object-cover w-full"
-                priority
               />
             </div>
           </div>

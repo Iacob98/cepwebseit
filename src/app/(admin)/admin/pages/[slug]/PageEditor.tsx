@@ -2,6 +2,9 @@
 
 import { AdminForm } from "@/components/admin/AdminForm";
 import { AboutImagesEditor } from "./AboutImagesEditor";
+import { PageImageField } from "./PageImageField";
+
+const IMAGE_FIELDS = new Set(["image", "diagramImage"]);
 
 interface PageEditorProps {
   slug: string;
@@ -27,6 +30,20 @@ export function PageEditor({ slug, content, action }: PageEditorProps) {
                   // Skip images field in about section — handled by AboutImagesEditor
                   if (slug === "home" && section === "about" && field === "images") {
                     return null;
+                  }
+
+                  // Render image uploader for image fields
+                  if (IMAGE_FIELDS.has(field)) {
+                    return (
+                      <div key={field}>
+                        <PageImageField
+                          slug={slug}
+                          section={section}
+                          field={field}
+                          currentImage={String(value)}
+                        />
+                      </div>
+                    );
                   }
 
                   return (
