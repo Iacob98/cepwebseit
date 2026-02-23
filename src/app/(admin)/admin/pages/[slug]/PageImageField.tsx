@@ -28,8 +28,7 @@ export function PageImageField({ slug, section, field, currentImage }: PageImage
     });
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  function handleSave() {
     const fd = new FormData();
     fd.append("slug", slug);
     fd.append("section", section);
@@ -49,7 +48,7 @@ export function PageImageField({ slug, section, field, currentImage }: PageImage
       {state?.error && <p className="text-sm text-red-600">{state.error}</p>}
       {state?.success && <p className="text-sm text-green-600">Bild gespeichert!</p>}
 
-      <form onSubmit={handleSubmit} className="space-y-2">
+      <div className="space-y-2">
         <div className="relative aspect-video max-w-sm rounded-lg border-2 border-dashed border-gray-300 overflow-hidden bg-gray-50 flex items-center justify-center">
           {preview ? (
             /* eslint-disable-next-line @next/next/no-img-element */
@@ -72,13 +71,14 @@ export function PageImageField({ slug, section, field, currentImage }: PageImage
         />
 
         <button
-          type="submit"
+          type="button"
+          onClick={handleSave}
           disabled={isPending || (!newFile && !currentImage)}
           className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 disabled:opacity-50"
         >
           {isPending ? "Hochladen..." : "Bild speichern"}
         </button>
-      </form>
+      </div>
     </div>
   );
 }
