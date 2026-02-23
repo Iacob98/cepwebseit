@@ -25,7 +25,12 @@ export async function updatePageAction(
       }
     }
 
-    pages[slug] = content;
+    // Merge with existing data to preserve image fields saved separately
+    const existing = pages[slug] ?? {};
+    for (const [section, fields] of Object.entries(content)) {
+      existing[section] = { ...(existing[section] as Record<string, unknown> ?? {}), ...fields };
+    }
+    pages[slug] = existing;
     await savePages(pages);
     revalidatePath("/", "layout");
     return { success: true };
