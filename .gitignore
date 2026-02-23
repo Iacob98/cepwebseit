@@ -43,3 +43,7 @@ next-env.d.ts
 # Submission data (private)
 /content/contact-submissions.json
 /content/rechner-submissions.json
+/content/partner-submissions.json
+
+# Uploaded images
+/uploads/

@@ -52,10 +52,8 @@ export async function updateProjectAction(
 
     let image = formData.get("image_current") as string || projects[index].image;
     const file = formData.get("image") as File;
-    console.log("[Project] Update:", id, "file:", file?.name, "size:", file?.size, "current:", image);
     if (file && file.size > 0) {
       const result = await uploadImage(file);
-      console.log("[Project] Upload result:", result);
       if (result.error) return { error: result.error };
       image = result.path!;
     }
