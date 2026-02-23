@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useTransition } from "react";
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog";
 import type { HeroSlideData } from "@/lib/dal-schemas";
@@ -31,8 +30,9 @@ export function SlidesList({ slides, deleteAction, reorderAction }: SlidesListPr
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {sorted.map((slide, index) => (
         <div key={slide.id} className="rounded-xl border border-gray-200 bg-white overflow-hidden">
-          <div className="relative h-40 w-full">
-            <Image src={slide.image} alt={slide.title || "Slide"} fill className="object-cover" />
+          <div className="h-40 w-full">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={slide.image} alt={slide.title || "Slide"} className="h-full w-full object-cover" />
           </div>
           <div className="p-4">
             {slide.title && <p className="font-medium text-gray-900 text-sm">{slide.title}</p>}

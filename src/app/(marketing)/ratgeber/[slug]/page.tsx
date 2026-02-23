@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { BreadcrumbNav } from "@/components/shared/BreadcrumbNav";
@@ -146,12 +145,12 @@ export default async function ArticlePage({ params }: PageProps) {
 
             {article.image && (
               <div className="mt-8 aspect-video rounded-xl overflow-hidden">
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={article.image}
                   alt={article.title}
-                  width={800}
-                  height={450}
                   className="h-full w-full object-cover"
+                  loading="lazy"
                 />
               </div>
             )}

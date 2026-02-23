@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
 import { motion } from "motion/react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -42,12 +41,11 @@ export function HeroSection({ content, slides = [] }: HeroSectionProps) {
               className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
               style={{ opacity: i === current ? 1 : 0 }}
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={slide.image}
                 alt={slide.title || ""}
-                fill
-                className="object-cover"
-                priority={i === 0}
+                className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
           ))}

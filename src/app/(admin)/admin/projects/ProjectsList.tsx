@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog";
 import type { Project } from "@/types";
 
@@ -35,8 +34,9 @@ export function ProjectsList({ projects, deleteAction }: ProjectsListProps) {
             <tr key={p.id} className="border-b border-gray-100 last:border-0">
               <td className="px-4 py-3">
                 {p.image && (
-                  <div className="relative h-12 w-16 rounded overflow-hidden">
-                    <Image src={p.image} alt={p.title} fill className="object-cover" />
+                  <div className="h-12 w-16 rounded overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={p.image} alt={p.title} className="h-full w-full object-cover" />
                   </div>
                 )}
               </td>

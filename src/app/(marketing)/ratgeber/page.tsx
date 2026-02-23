@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { BreadcrumbNav } from "@/components/shared/BreadcrumbNav";
@@ -56,12 +55,12 @@ export default async function RatgeberPage() {
                 >
                   {article.image ? (
                     <div className="aspect-video overflow-hidden">
-                      <Image
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
                         src={article.image}
                         alt={article.title}
-                        width={600}
-                        height={340}
                         className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
                       />
                     </div>
                   ) : (

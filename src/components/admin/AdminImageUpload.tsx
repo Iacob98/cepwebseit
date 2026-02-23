@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Image from "next/image";
 
 interface AdminImageUploadProps {
   name: string;
@@ -27,7 +26,8 @@ export function AdminImageUpload({ name, currentImage, label = "Bild" }: AdminIm
       <div className="flex items-start gap-4">
         {preview && (
           <div className="relative h-24 w-24 rounded-lg overflow-hidden border border-gray-200 flex-shrink-0">
-            <Image src={preview} alt="Preview" fill className="object-cover" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={preview} alt="Preview" className="h-full w-full object-cover" />
           </div>
         )}
         <div className="flex-1">

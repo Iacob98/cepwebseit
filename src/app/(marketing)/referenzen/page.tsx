@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Card, CardTitle, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -54,12 +53,12 @@ export default async function ReferenzenPage() {
               <Card key={project.id} hover>
                 {project.image ? (
                   <div className="aspect-video rounded-lg overflow-hidden mb-4">
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={project.image}
                       alt={project.title}
-                      width={600}
-                      height={340}
                       className="h-full w-full object-cover"
+                      loading="lazy"
                     />
                   </div>
                 ) : (

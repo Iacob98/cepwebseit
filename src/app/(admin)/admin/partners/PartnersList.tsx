@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog";
 import type { Partner } from "@/types";
 
@@ -27,8 +26,9 @@ export function PartnersList({ partners, deleteAction }: PartnersListProps) {
             <tr key={p.id} className="border-b border-gray-100 last:border-0">
               <td className="px-4 py-3">
                 {p.logo && (
-                  <div className="relative h-10 w-20">
-                    <Image src={p.logo} alt={p.name} fill className="object-contain" />
+                  <div className="h-10 w-20">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={p.logo} alt={p.name} className="h-full w-full object-contain" />
                   </div>
                 )}
               </td>
