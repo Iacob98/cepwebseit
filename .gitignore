@@ -40,10 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Submission data (private)
-/content/contact-submissions.json
-/content/rechner-submissions.json
-/content/partner-submissions.json
+# CMS content (managed via admin panel, not git)
+/content/
 
 # Uploaded images
 /uploads/
