@@ -14,8 +14,7 @@
       "description2": "Was uns antreibt? Die Überzeugung, dass nachhaltige Energie für jeden zugänglich sein sollte. Deshalb setzen wir auf faire Preise, modernste Technik und einen Service, der keine Wünsche offen lässt.",
       "buttonLabel": "Mehr über uns",
       "buttonHref": "/ueber-uns",
-      "image": "/images/wp-outdoor.jpg",
-      "imageAlt": "Arvernus Team bei der Arbeit"
+      "images": "/images/wp-outdoor.jpg"
     },
     "howItWorks": {
       "title": "So einfach geht's",

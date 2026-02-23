@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getPages, savePages } from "@/lib/dal";
+import { uploadImage } from "@/actions/admin/images";
 
 export async function updatePageAction(
   _prevState: { success?: boolean; error?: string } | null,
@@ -30,5 +31,38 @@ export async function updatePageAction(
     return { success: true };
   } catch {
     return { error: "Fehler beim Speichern" };
+  }
+}
+
+export async function updateAboutImagesAction(
+  _prevState: { success?: boolean; error?: string } | null,
+  formData: FormData
+): Promise<{ success?: boolean; error?: string }> {
+  try {
+    const paths: string[] = [];
+
+    for (let i = 0; i < 3; i++) {
+      const file = formData.get(`image-${i}`) as File | null;
+      const existing = formData.get(`existing-${i}`) as string | null;
+
+      if (file && file.size > 0) {
+        const result = await uploadImage(file);
+        if (result.error) return { error: result.error };
+        if (result.path) paths.push(result.path);
+      } else if (existing) {
+        paths.push(existing);
+      }
+    }
+
+    const pages = await getPages();
+    if (!pages.home) pages.home = {};
+    if (!pages.home.about) pages.home.about = {};
+    (pages.home.about as Record<string, unknown>).images = paths.join(",");
+
+    await savePages(pages);
+    revalidatePath("/", "layout");
+    return { success: true };
+  } catch {
+    return { error: "Fehler beim Speichern der Bilder" };
   }
 }
