@@ -68,6 +68,7 @@ export async function updateCompanyAction(
         facebook: formData.get("facebook") as string || current.social.facebook,
         instagram: formData.get("instagram") as string || current.social.instagram,
         linkedin: formData.get("linkedin") as string || current.social.linkedin,
+        twitter: (formData.get("twitter") as string) || current.social.twitter || undefined,
       },
       stats: {
         projectsCompleted: Number(formData.get("projectsCompleted")) || current.stats.projectsCompleted,

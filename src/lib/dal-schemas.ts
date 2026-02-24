@@ -29,6 +29,7 @@ export const companySchema = z.object({
     facebook: z.string().url(),
     instagram: z.string().url(),
     linkedin: z.string().url(),
+    twitter: z.string().url().optional(),
   }),
   legal: z.object({
     ceo: z.string(),

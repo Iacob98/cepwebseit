@@ -4,6 +4,9 @@ import { getPages } from "@/lib/dal";
 const slugLabels: Record<string, string> = {
   home: "Startseite",
   waermepumpen: "Wärmepumpen",
+  "luft-wasser-waermepumpe": "Luft-Wasser-Wärmepumpe",
+  "sole-wasser-waermepumpe": "Sole-Wasser-Wärmepumpe",
+  "wasser-wasser-waermepumpe": "Wasser-Wasser-Wärmepumpe",
   photovoltaik: "Photovoltaik",
   referenzen: "Referenzen",
   "ueber-uns": "Über uns",

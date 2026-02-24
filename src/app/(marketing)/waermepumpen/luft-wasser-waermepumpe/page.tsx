@@ -9,6 +9,13 @@ import { CTABanner } from "@/components/shared/CTABanner";
 import { TrustBadges, type TrustBadgeItem } from "@/components/shared/TrustBadges";
 import { WPTypeCrossLinks } from "@/components/shared/WPTypeCrossLinks";
 import { FoerderungServiceCallout } from "@/components/shared/FoerderungServiceCallout";
+import { HeatingCostChart } from "@/components/shared/HeatingCostChart";
+import { KeyFactsSummary } from "@/components/sections/waermepumpen/KeyFactsSummary";
+import { ProsConsSection } from "@/components/sections/waermepumpen/ProsConsSection";
+import { CostsEconomics } from "@/components/sections/waermepumpen/CostsEconomics";
+import { PVSynergySection } from "@/components/sections/waermepumpen/PVSynergySection";
+import { InstallationProcess } from "@/components/sections/waermepumpen/InstallationProcess";
+import { SuitabilityCheck } from "@/components/sections/waermepumpen/SuitabilityCheck";
 import { getServices, getPageContent } from "@/lib/dal";
 
 export const metadata: Metadata = {
@@ -23,6 +30,11 @@ const defaultFaq = [
   { question: "Wo wird das Außengerät aufgestellt?", answer: "Das Außengerät benötigt einen gut belüfteten Standort im Freien. Idealerweise wird es an einer wind- und lärmgeschützten Stelle aufgestellt, mit ausreichend Abstand zu Nachbargebäuden." },
   { question: "Wie hoch sind die Betriebskosten?", answer: "Für ein durchschnittliches Einfamilienhaus liegen die jährlichen Stromkosten bei ca. 800–1.200 Euro. In Kombination mit Photovoltaik können die Kosten deutlich gesenkt werden." },
 ];
+
+/** Collect numbered fields like pro1, pro2, ... into an array */
+function collectItems(t: (s: string, f: string, fb: string) => string, section: string, prefix: string, fallbacks: string[]): string[] {
+  return fallbacks.map((fb, i) => t(section, `${prefix}${i + 1}`, fb));
+}
 
 export default async function LuftWasserPage() {
   const [servicesData, pageContent] = await Promise.all([
@@ -82,6 +94,7 @@ export default async function LuftWasserPage() {
         ]}
       />
 
+      {/* Hero */}
       <section className="bg-gradient-to-b from-primary-50 to-white py-16">
         <Container>
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
@@ -110,10 +123,24 @@ export default async function LuftWasserPage() {
         </Container>
       </section>
 
+      {/* Trust Badges */}
       <section className="py-8 border-b border-border">
         <Container><TrustBadges items={wpBadges} /></Container>
       </section>
 
+      {/* Key Facts */}
+      <KeyFactsSummary
+        facts={[
+          { icon: "cop", label: t("keyFacts", "fact1Label", "COP (Effizienz)"), value: t("keyFacts", "fact1Value", "3,0 – 4,5") },
+          { icon: "cost", label: t("keyFacts", "fact2Label", "Investitionskosten"), value: t("keyFacts", "fact2Value", "15.000 – 25.000 €") },
+          { icon: "operating", label: t("keyFacts", "fact3Label", "Betriebskosten/Jahr"), value: t("keyFacts", "fact3Value", "800 – 1.200 €") },
+          { icon: "permit", label: t("keyFacts", "fact4Label", "Genehmigung"), value: t("keyFacts", "fact4Value", "Nicht erforderlich") },
+          { icon: "ideal", label: t("keyFacts", "fact5Label", "Ideal für"), value: t("keyFacts", "fact5Value", "Bestand & Neubau") },
+          { icon: "time", label: t("keyFacts", "fact6Label", "Installationszeit"), value: t("keyFacts", "fact6Value", "1 – 2 Tage") },
+        ]}
+      />
+
+      {/* Advantages */}
       <section className="py-20">
         <Container>
           <SectionHeading title={t("advantages", "title", "Vorteile der Luft-Wasser-Wärmepumpe")} />
@@ -132,7 +159,26 @@ export default async function LuftWasserPage() {
         </Container>
       </section>
 
-      <section className="py-20 bg-muted/30">
+      {/* Pros & Cons */}
+      <ProsConsSection
+        pros={collectItems(t, "proscons", "pro", [
+          "Niedrigste Anschaffungskosten aller WP-Typen",
+          "Keine Erdarbeiten oder Bohrungen nötig",
+          "Schnelle Installation in 1–2 Tagen",
+          "Ideal für Bestandsgebäude und Sanierung",
+          "Keine Genehmigung erforderlich",
+          "Kombination mit PV-Anlage einfach möglich",
+        ])}
+        cons={collectItems(t, "proscons", "con", [
+          "Geringerer COP als Sole- oder Wasser-WP",
+          "Effizienz sinkt bei sehr tiefen Außentemperaturen",
+          "Außengerät verursacht Betriebsgeräusche (35–50 dB)",
+          "Höhere Stromkosten als erdgekoppelte Systeme",
+        ])}
+      />
+
+      {/* Funktionsweise */}
+      <section className="py-20">
         <Container>
           <SectionHeading title={t("function", "title", "Funktionsweise")} subtitle={t("function", "subtitle", "So funktioniert eine Luft-Wasser-Wärmepumpe.")} />
           <div className="mb-12 flex justify-center">
@@ -168,6 +214,80 @@ export default async function LuftWasserPage() {
         </Container>
       </section>
 
+      {/* Costs & Economics */}
+      <CostsEconomics
+        costBreakdown={{
+          device: t("costs", "device", "8.000 – 16.000 €"),
+          installation: t("costs", "installation", "4.000 – 6.000 €"),
+          extras: t("costs", "extras", "1.000 – 3.000 €"),
+          extrasLabel: t("costs", "extrasLabel", "Zubehör & Anpassungen"),
+          total: t("costs", "total", "15.000 – 25.000 €"),
+        }}
+        foerderung={{
+          bpiRate: t("costs", "bpiRate", "30 %"),
+          klimaBonus: t("costs", "klimaBonus", "+ 20 %"),
+          einkommensBonus: t("costs", "einkommensBonus", "+ 30 %"),
+          maxRate: t("costs", "maxRate", "bis 70 %"),
+          exampleSavings: t("costs", "exampleSavings", "Bei 20.000 € Invest → ab 6.000 € Eigenanteil"),
+        }}
+        operating={{
+          stromCostYear: t("costs", "stromCostYear", "800 – 1.200 €"),
+          formula: t("costs", "formula", "20.000 kWh ÷ COP 3,5 × 0,30 €/kWh ≈ 1.700 kWh × 0,30 € ≈ 510 € (Neubau)"),
+        }}
+        amortization={t("costs", "amortization", "8 – 12 Jahre (ohne Förderung), 4 – 7 Jahre (mit Förderung)")}
+      />
+
+      {/* PV Synergy */}
+      <PVSynergySection
+        eigenverbrauchBoost={t("pvSynergy", "eigenverbrauchBoost", "bis zu 30 %")}
+        savingsExample={t("pvSynergy", "savingsExample", "Mit PV-Strom sinken die WP-Betriebskosten um bis zu 50 % — auf ca. 400–600 €/Jahr.")}
+      />
+
+      {/* Installation */}
+      <InstallationProcess
+        duration={t("installation", "duration", "1 – 2 Tage")}
+        steps={[
+          { step: 1, title: t("installation", "step1Title", "Beratung & Planung"), description: t("installation", "step1Desc", "Vor-Ort-Besichtigung, Heizlastberechnung und Angebotserstellung.") },
+          { step: 2, title: t("installation", "step2Title", "Förderantrag"), description: t("installation", "step2Desc", "Wir stellen den BAFA/KfW-Antrag für Sie — vor Baubeginn.") },
+          { step: 3, title: t("installation", "step3Title", "Fundament & Aufstellung"), description: t("installation", "step3Desc", "Außengerät auf Betonfundament oder Schwingungsdämpfer aufstellen.") },
+          { step: 4, title: t("installation", "step4Title", "Hydraulische Anbindung"), description: t("installation", "step4Desc", "Verbindung zum Heizsystem, Pufferspeicher und Warmwasser.") },
+          { step: 5, title: t("installation", "step5Title", "Inbetriebnahme & Einweisung"), description: t("installation", "step5Desc", "Systemtest, Optimierung der Heizkurve und Einweisung in die Bedienung.") },
+        ]}
+      />
+
+      {/* Suitability Check */}
+      <SuitabilityCheck
+        title={t("suitability", "title", "Ist eine Luft-Wasser-Wärmepumpe das Richtige für Sie?")}
+        idealItems={collectItems(t, "suitability", "ideal", [
+          "Sie sanieren ein Bestandsgebäude oder bauen neu",
+          "Ihr Budget für die Heizung ist begrenzt",
+          "Keine Erdarbeiten auf Ihrem Grundstück möglich",
+          "Sie möchten eine schnelle, unkomplizierte Installation",
+          "Kombination mit einer PV-Anlage ist geplant",
+        ])}
+        considerations={collectItems(t, "suitability", "consideration", [
+          "Schallschutzanforderungen der Nachbarn beachten",
+          "Effizienz bei extremer Kälte (< -15°C) etwas geringer",
+          "Stromkosten höher als bei Erdwärme-Systemen",
+          "Außengerät benötigt geeigneten Aufstellort",
+        ])}
+        conclusion={t("suitability", "conclusion", "Die Luft-Wasser-Wärmepumpe ist die beliebteste und vielseitigste Lösung — ideal für die meisten Einfamilienhäuser in Deutschland.")}
+      />
+
+      {/* Heating Cost Chart */}
+      <section className="py-20 bg-muted/30">
+        <Container>
+          <SectionHeading
+            title={t("charts", "title", "Heizkosten im Vergleich")}
+            subtitle={t("charts", "subtitle", "Wärmepumpe vs. konventionelle Heizsysteme — jährliche Kosten im Überblick.")}
+          />
+          <div className="max-w-2xl mx-auto">
+            <HeatingCostChart />
+          </div>
+        </Container>
+      </section>
+
+      {/* FAQ */}
       <section className="py-20">
         <Container className="max-w-3xl">
           <SectionHeading title="Häufige Fragen" />

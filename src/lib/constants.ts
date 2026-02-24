@@ -24,6 +24,7 @@ export const COMPANY = {
     facebook: "https://facebook.com/arvernus",
     instagram: "https://instagram.com/arvernus",
     linkedin: "https://linkedin.com/company/arvernus",
+    twitter: "https://x.com/arvernus",
   },
 } as const;
 

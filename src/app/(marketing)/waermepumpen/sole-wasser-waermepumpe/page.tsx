@@ -9,6 +9,13 @@ import { CTABanner } from "@/components/shared/CTABanner";
 import { TrustBadges, type TrustBadgeItem } from "@/components/shared/TrustBadges";
 import { WPTypeCrossLinks } from "@/components/shared/WPTypeCrossLinks";
 import { FoerderungServiceCallout } from "@/components/shared/FoerderungServiceCallout";
+import { HeatingCostChart } from "@/components/shared/HeatingCostChart";
+import { KeyFactsSummary } from "@/components/sections/waermepumpen/KeyFactsSummary";
+import { ProsConsSection } from "@/components/sections/waermepumpen/ProsConsSection";
+import { CostsEconomics } from "@/components/sections/waermepumpen/CostsEconomics";
+import { PVSynergySection } from "@/components/sections/waermepumpen/PVSynergySection";
+import { InstallationProcess } from "@/components/sections/waermepumpen/InstallationProcess";
+import { SuitabilityCheck } from "@/components/sections/waermepumpen/SuitabilityCheck";
 import { getServices, getPageContent } from "@/lib/dal";
 
 export const metadata: Metadata = {
@@ -23,6 +30,10 @@ const defaultFaq = [
   { question: "Brauche ich eine Genehmigung?", answer: "Für Erdsonden ist in der Regel eine wasserrechtliche Genehmigung erforderlich. Flächenkollektoren sind meist genehmigungsfrei. Wir kümmern uns um alle notwendigen Genehmigungen." },
   { question: "Kann ich im Sommer damit kühlen?", answer: "Ja! Über die Erdwärme-Sonden kann im Sommer passive Kühlung (Natural Cooling) realisiert werden — nahezu kostenlos und ohne zusätzliche Klimaanlage." },
 ];
+
+function collectItems(t: (s: string, f: string, fb: string) => string, section: string, prefix: string, fallbacks: string[]): string[] {
+  return fallbacks.map((fb, i) => t(section, `${prefix}${i + 1}`, fb));
+}
 
 export default async function SoleWasserPage() {
   const [servicesData, pageContent] = await Promise.all([
@@ -82,28 +93,53 @@ export default async function SoleWasserPage() {
         ]}
       />
 
+      {/* Hero */}
       <section className="bg-gradient-to-b from-primary-50 to-white py-16">
         <Container>
-          <div className="max-w-3xl">
-            <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
-              Sole-Wasser-Wärmepumpe
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground">{type.description}</p>
-            <div className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary-50 px-4 py-2 text-sm font-semibold text-primary">
-              COP: {type.cop} &middot; Ideal für: {type.idealFor}
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+            <div>
+              <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
+                Sole-Wasser-Wärmepumpe
+              </h1>
+              <p className="mt-6 text-lg text-muted-foreground">{type.description}</p>
+              <div className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary-50 px-4 py-2 text-sm font-semibold text-primary">
+                COP: {type.cop} &middot; Ideal für: {type.idealFor}
+              </div>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Button href="/waermepumpen-rechner" size="lg">Kosten berechnen</Button>
+                <Button href="/kontakt" variant="outline" size="lg">Beratung anfragen</Button>
+              </div>
             </div>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button href="/waermepumpen-rechner" size="lg">Kosten berechnen</Button>
-              <Button href="/kontakt" variant="outline" size="lg">Beratung anfragen</Button>
+            <div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={t("hero", "image", "/images/wp-outdoor.jpg")}
+                alt="Sole-Wasser-Wärmepumpe mit Erdsondenbohrung"
+                className="rounded-2xl shadow-lg object-cover w-full"
+              />
             </div>
           </div>
         </Container>
       </section>
 
+      {/* Trust Badges */}
       <section className="py-8 border-b border-border">
         <Container><TrustBadges items={wpBadges} /></Container>
       </section>
 
+      {/* Key Facts */}
+      <KeyFactsSummary
+        facts={[
+          { icon: "cop", label: t("keyFacts", "fact1Label", "COP (Effizienz)"), value: t("keyFacts", "fact1Value", "4,0 – 5,0") },
+          { icon: "cost", label: t("keyFacts", "fact2Label", "Investitionskosten"), value: t("keyFacts", "fact2Value", "20.000 – 35.000 €") },
+          { icon: "operating", label: t("keyFacts", "fact3Label", "Betriebskosten/Jahr"), value: t("keyFacts", "fact3Value", "600 – 900 €") },
+          { icon: "permit", label: t("keyFacts", "fact4Label", "Genehmigung"), value: t("keyFacts", "fact4Value", "Teils erforderlich") },
+          { icon: "ideal", label: t("keyFacts", "fact5Label", "Ideal für"), value: t("keyFacts", "fact5Value", "Neubau mit Grundstück") },
+          { icon: "time", label: t("keyFacts", "fact6Label", "Installationszeit"), value: t("keyFacts", "fact6Value", "3 – 5 Tage") },
+        ]}
+      />
+
+      {/* Advantages */}
       <section className="py-20">
         <Container>
           <SectionHeading title={t("advantages", "title", "Vorteile der Sole-Wasser-Wärmepumpe")} />
@@ -122,6 +158,43 @@ export default async function SoleWasserPage() {
         </Container>
       </section>
 
+      {/* Pros & Cons */}
+      <ProsConsSection
+        pros={collectItems(t, "proscons", "pro", [
+          "Höchste Effizienz unter den gängigen WP-Typen (COP 4–5)",
+          "Konstante Leistung unabhängig von der Außentemperatur",
+          "Passive Kühlung im Sommer (Natural Cooling) fast kostenlos",
+          "Sehr leiser Betrieb — kein Außengerät nötig",
+          "Niedrigste Betriebskosten aller WP-Systeme",
+          "Langlebig: Erdsonden halten 50+ Jahre",
+        ])}
+        cons={collectItems(t, "proscons", "con", [
+          "Höhere Anschaffungskosten durch Erdarbeiten",
+          "Genehmigung für Tiefenbohrung erforderlich",
+          "Nicht auf jedem Grundstück realisierbar",
+          "Flächenkollektoren benötigen große unbebaute Fläche",
+        ])}
+      />
+
+      {/* Funktionsweise */}
+      <section className="py-20">
+        <Container>
+          <SectionHeading
+            title={t("function", "title", "Funktionsweise")}
+            subtitle={t("function", "subtitle", "So nutzt eine Sole-Wasser-Wärmepumpe die Erdwärme.")}
+          />
+          <div className="mb-12 flex justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={t("function", "image", "/images/wp-system-diagram.jpg")}
+              alt="Systemdarstellung einer Sole-Wasser-Wärmepumpe mit Erdsonden"
+              className="rounded-2xl shadow-md max-h-96 w-auto object-contain"
+            />
+          </div>
+        </Container>
+      </section>
+
+      {/* Erdsonden vs Kollektoren */}
       <section className="py-20 bg-muted/30">
         <Container>
           <SectionHeading title={t("comparison", "title", "Erdsonden vs. Flächenkollektoren")} />
@@ -154,6 +227,83 @@ export default async function SoleWasserPage() {
         </Container>
       </section>
 
+      {/* Costs & Economics */}
+      <CostsEconomics
+        costBreakdown={{
+          device: t("costs", "device", "10.000 – 15.000 €"),
+          installation: t("costs", "installation", "3.000 – 5.000 €"),
+          extras: t("costs", "extras", "6.000 – 15.000 €"),
+          extrasLabel: t("costs", "extrasLabel", "Erdarbeiten (Sonden/Kollektoren)"),
+          total: t("costs", "total", "20.000 – 35.000 €"),
+        }}
+        foerderung={{
+          bpiRate: t("costs", "bpiRate", "30 %"),
+          klimaBonus: t("costs", "klimaBonus", "+ 20 %"),
+          einkommensBonus: t("costs", "einkommensBonus", "+ 30 %"),
+          maxRate: t("costs", "maxRate", "bis 70 %"),
+          exampleSavings: t("costs", "exampleSavings", "Bei 30.000 € Invest → ab 9.000 € Eigenanteil"),
+        }}
+        operating={{
+          stromCostYear: t("costs", "stromCostYear", "600 – 900 €"),
+          formula: t("costs", "formula", "20.000 kWh ÷ COP 4,5 × 0,30 €/kWh ≈ 4.444 kWh × 0,30 € ≈ 1.333 € (ohne PV)"),
+        }}
+        amortization={t("costs", "amortization", "10 – 15 Jahre (ohne Förderung), 5 – 8 Jahre (mit Förderung)")}
+      />
+
+      {/* PV Synergy */}
+      <PVSynergySection
+        eigenverbrauchBoost={t("pvSynergy", "eigenverbrauchBoost", "bis zu 40 %")}
+        savingsExample={t("pvSynergy", "savingsExample", "Erdwärme + PV: Betriebskosten sinken auf ca. 300–500 €/Jahr — fast autark heizen.")}
+      />
+
+      {/* Installation */}
+      <InstallationProcess
+        duration={t("installation", "duration", "3 – 5 Tage (zzgl. Genehmigungsverfahren)")}
+        steps={[
+          { step: 1, title: t("installation", "step1Title", "Beratung & Standortanalyse"), description: t("installation", "step1Desc", "Geologische Prüfung, Heizlastberechnung und Machbarkeitsanalyse.") },
+          { step: 2, title: t("installation", "step2Title", "Genehmigung einholen"), description: t("installation", "step2Desc", "Wasserrechtliche Genehmigung bei der Unteren Wasserbehörde beantragen.") },
+          { step: 3, title: t("installation", "step3Title", "Förderantrag stellen"), description: t("installation", "step3Desc", "BAFA/KfW-Antrag einreichen — vor Baubeginn zwingend erforderlich.") },
+          { step: 4, title: t("installation", "step4Title", "Erdarbeiten"), description: t("installation", "step4Desc", "Tiefenbohrung (80–100m) oder Verlegung der Flächenkollektoren.") },
+          { step: 5, title: t("installation", "step5Title", "Solekreislauf installieren"), description: t("installation", "step5Desc", "Rohrleitungen verlegen und mit Sole (Wasser-Glykol-Gemisch) befüllen.") },
+          { step: 6, title: t("installation", "step6Title", "Wärmepumpe aufstellen"), description: t("installation", "step6Desc", "Innengerät installieren und an den Solekreislauf anschließen.") },
+          { step: 7, title: t("installation", "step7Title", "Hydraulische Anbindung"), description: t("installation", "step7Desc", "Verbindung zum Heizsystem, Pufferspeicher und Warmwasser.") },
+          { step: 8, title: t("installation", "step8Title", "Inbetriebnahme & Einweisung"), description: t("installation", "step8Desc", "Druckprüfung, Systemtest und Einweisung in die Bedienung.") },
+        ]}
+      />
+
+      {/* Suitability Check */}
+      <SuitabilityCheck
+        title={t("suitability", "title", "Ist eine Sole-Wasser-Wärmepumpe das Richtige für Sie?")}
+        idealItems={collectItems(t, "suitability", "ideal", [
+          "Sie planen einen Neubau mit ausreichend Grundstücksfläche",
+          "Maximale Effizienz und niedrigste Betriebskosten sind Ihnen wichtig",
+          "Sie möchten im Sommer passiv kühlen (Natural Cooling)",
+          "Langfristige Investition mit 50+ Jahren Lebensdauer der Sonden",
+          "Schallschutz ist kritisch — kein Außengerät nötig",
+        ])}
+        considerations={collectItems(t, "suitability", "consideration", [
+          "Höhere Anfangsinvestition als bei Luft-Wasser-WP",
+          "Genehmigungsverfahren kann mehrere Wochen dauern",
+          "Nicht überall geologisch möglich (Bohrtiefenbeschränkung)",
+          "Flächenkollektoren: Gartenfläche darf nicht überbaut werden",
+        ])}
+        conclusion={t("suitability", "conclusion", "Die Sole-Wasser-Wärmepumpe bietet die höchste Effizienz und niedrigsten Betriebskosten — die ideale Wahl für Neubauten mit Grundstück.")}
+      />
+
+      {/* Heating Cost Chart */}
+      <section className="py-20 bg-muted/30">
+        <Container>
+          <SectionHeading
+            title={t("charts", "title", "Heizkosten im Vergleich")}
+            subtitle={t("charts", "subtitle", "Wärmepumpe vs. konventionelle Heizsysteme — jährliche Kosten im Überblick.")}
+          />
+          <div className="max-w-2xl mx-auto">
+            <HeatingCostChart />
+          </div>
+        </Container>
+      </section>
+
+      {/* FAQ */}
       <section className="py-20">
         <Container className="max-w-3xl">
           <SectionHeading title="Häufige Fragen" />

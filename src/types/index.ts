@@ -109,6 +109,7 @@ export interface CompanyData {
     facebook: string;
     instagram: string;
     linkedin: string;
+    twitter?: string;
   };
   legal?: {
     ceo: string;

@@ -115,7 +115,7 @@ export function CompanyForm({ company, action }: CompanyFormProps) {
         {/* Social Media */}
         <section>
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Social Media</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Facebook</label>
               <input name="facebook" defaultValue={company.social.facebook} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
@@ -127,6 +127,10 @@ export function CompanyForm({ company, action }: CompanyFormProps) {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
               <input name="linkedin" defaultValue={company.social.linkedin} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Twitter / X</label>
+              <input name="twitter" defaultValue={company.social.twitter || ""} placeholder="https://x.com/..." className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
             </div>
           </div>
         </section>

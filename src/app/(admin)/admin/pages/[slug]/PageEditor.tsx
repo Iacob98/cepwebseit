@@ -6,6 +6,33 @@ import { PageImageField } from "./PageImageField";
 
 const IMAGE_FIELDS = new Set(["image", "diagramImage"]);
 
+const SECTION_LABELS: Record<string, string> = {
+  hero: "Hero-Bereich",
+  about: "Über uns",
+  howItWorks: "So funktioniert's",
+  foerderungTeaser: "Förderung-Teaser",
+  cta: "Call-to-Action",
+  types: "WP-Typen",
+  benefits: "Vorteile",
+  comparison: "Vergleich",
+  components: "Komponenten",
+  certificates: "Zertifikate",
+  timeline: "Zeitstrahl",
+  team: "Team",
+  overview: "Übersicht",
+  process: "Prozess",
+  keyFacts: "Fakten-Übersicht",
+  proscons: "Vorteile & Nachteile",
+  function: "Funktionsweise",
+  costs: "Kosten & Wirtschaftlichkeit",
+  pvSynergy: "WP + Photovoltaik",
+  installation: "Installation",
+  suitability: "Eignungscheck",
+  charts: "Diagramme",
+  advantages: "Vorteile",
+  requirements: "Voraussetzungen",
+};
+
 interface PageEditorProps {
   slug: string;
   content: Record<string, Record<string, unknown>>;
@@ -24,7 +51,7 @@ export function PageEditor({ slug, content, action }: PageEditorProps) {
         <div className="space-y-6">
           {Object.entries(content).map(([section, fields]) => (
             <div key={section} className="rounded-xl border border-gray-200 bg-white p-4">
-              <h3 className="text-md font-semibold text-gray-900 mb-3 capitalize">{section}</h3>
+              <h3 className="text-md font-semibold text-gray-900 mb-3">{SECTION_LABELS[section] || section}</h3>
               <div className="space-y-3">
                 {Object.entries(fields).map(([field, value]) => {
                   // Skip images field in about section — handled by AboutImagesEditor

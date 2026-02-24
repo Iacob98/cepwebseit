@@ -9,6 +9,13 @@ import { CTABanner } from "@/components/shared/CTABanner";
 import { TrustBadges, type TrustBadgeItem } from "@/components/shared/TrustBadges";
 import { WPTypeCrossLinks } from "@/components/shared/WPTypeCrossLinks";
 import { FoerderungServiceCallout } from "@/components/shared/FoerderungServiceCallout";
+import { HeatingCostChart } from "@/components/shared/HeatingCostChart";
+import { KeyFactsSummary } from "@/components/sections/waermepumpen/KeyFactsSummary";
+import { ProsConsSection } from "@/components/sections/waermepumpen/ProsConsSection";
+import { CostsEconomics } from "@/components/sections/waermepumpen/CostsEconomics";
+import { PVSynergySection } from "@/components/sections/waermepumpen/PVSynergySection";
+import { InstallationProcess } from "@/components/sections/waermepumpen/InstallationProcess";
+import { SuitabilityCheck } from "@/components/sections/waermepumpen/SuitabilityCheck";
 import { getServices, getPageContent } from "@/lib/dal";
 
 export const metadata: Metadata = {
@@ -23,6 +30,10 @@ const defaultFaq = [
   { question: "Was kostet eine Wasser-Wasser-Wärmepumpe?", answer: "Die Gesamtkosten inkl. Brunnenbohrung liegen bei 20.000–40.000 Euro. Nach Abzug der Förderung (bis 70%) reduzieren sich die Kosten erheblich. Die niedrigen Betriebskosten machen sie langfristig sehr wirtschaftlich." },
   { question: "Wie effizient ist eine Wasser-Wasser-Wärmepumpe?", answer: "Mit einem COP von 5,0–6,0 ist sie die effizienteste aller Wärmepumpenarten. Das Grundwasser hat ganzjährig eine konstante Temperatur von 8–12°C, was die hohe Effizienz ermöglicht." },
 ];
+
+function collectItems(t: (s: string, f: string, fb: string) => string, section: string, prefix: string, fallbacks: string[]): string[] {
+  return fallbacks.map((fb, i) => t(section, `${prefix}${i + 1}`, fb));
+}
 
 export default async function WasserWasserPage() {
   const [servicesData, pageContent] = await Promise.all([
@@ -82,28 +93,53 @@ export default async function WasserWasserPage() {
         ]}
       />
 
+      {/* Hero */}
       <section className="bg-gradient-to-b from-primary-50 to-white py-16">
         <Container>
-          <div className="max-w-3xl">
-            <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
-              Wasser-Wasser-Wärmepumpe
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground">{type.description}</p>
-            <div className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary-50 px-4 py-2 text-sm font-semibold text-primary">
-              COP: {type.cop} &middot; Ideal für: {type.idealFor}
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+            <div>
+              <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
+                Wasser-Wasser-Wärmepumpe
+              </h1>
+              <p className="mt-6 text-lg text-muted-foreground">{type.description}</p>
+              <div className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary-50 px-4 py-2 text-sm font-semibold text-primary">
+                COP: {type.cop} &middot; Ideal für: {type.idealFor}
+              </div>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Button href="/waermepumpen-rechner" size="lg">Kosten berechnen</Button>
+                <Button href="/kontakt" variant="outline" size="lg">Beratung anfragen</Button>
+              </div>
             </div>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button href="/waermepumpen-rechner" size="lg">Kosten berechnen</Button>
-              <Button href="/kontakt" variant="outline" size="lg">Beratung anfragen</Button>
+            <div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={t("hero", "image", "/images/wp-indoor-unit.jpg")}
+                alt="Wasser-Wasser-Wärmepumpe Innengerät"
+                className="rounded-2xl shadow-lg object-cover w-full"
+              />
             </div>
           </div>
         </Container>
       </section>
 
+      {/* Trust Badges */}
       <section className="py-8 border-b border-border">
         <Container><TrustBadges items={wpBadges} /></Container>
       </section>
 
+      {/* Key Facts */}
+      <KeyFactsSummary
+        facts={[
+          { icon: "cop", label: t("keyFacts", "fact1Label", "COP (Effizienz)"), value: t("keyFacts", "fact1Value", "5,0 – 6,0") },
+          { icon: "cost", label: t("keyFacts", "fact2Label", "Investitionskosten"), value: t("keyFacts", "fact2Value", "20.000 – 40.000 €") },
+          { icon: "operating", label: t("keyFacts", "fact3Label", "Betriebskosten/Jahr"), value: t("keyFacts", "fact3Value", "500 – 800 €") },
+          { icon: "permit", label: t("keyFacts", "fact4Label", "Genehmigung"), value: t("keyFacts", "fact4Value", "Ja (wasserrechtlich)") },
+          { icon: "ideal", label: t("keyFacts", "fact5Label", "Ideal für"), value: t("keyFacts", "fact5Value", "Grundwasser-Gebiete") },
+          { icon: "time", label: t("keyFacts", "fact6Label", "Installationszeit"), value: t("keyFacts", "fact6Value", "3 – 5 Tage") },
+        ]}
+      />
+
+      {/* Advantages */}
       <section className="py-20">
         <Container>
           <SectionHeading title={t("advantages", "title", "Vorteile der Wasser-Wasser-Wärmepumpe")} />
@@ -122,6 +158,43 @@ export default async function WasserWasserPage() {
         </Container>
       </section>
 
+      {/* Pros & Cons */}
+      <ProsConsSection
+        pros={collectItems(t, "proscons", "pro", [
+          "Höchster COP aller Wärmepumpen-Typen (5,0–6,0)",
+          "Konstante Grundwassertemperatur (8–12°C) ganzjährig",
+          "Effizientes Heizen und Kühlen möglich",
+          "Niedrigste Betriebskosten aller WP-Systeme",
+          "Sehr leiser Betrieb — kein Außengerät",
+          "Unabhängig von Außentemperaturen",
+        ])}
+        cons={collectItems(t, "proscons", "con", [
+          "Höchste Anschaffungskosten (Brunnenbohrung)",
+          "Wasserrechtliche Genehmigung zwingend erforderlich",
+          "Grundwasservorkommen muss vorhanden und geeignet sein",
+          "Wasserqualität muss regelmäßig geprüft werden",
+        ])}
+      />
+
+      {/* Funktionsweise */}
+      <section className="py-20">
+        <Container>
+          <SectionHeading
+            title={t("function", "title", "Funktionsweise")}
+            subtitle={t("function", "subtitle", "So nutzt eine Wasser-Wasser-Wärmepumpe das Grundwasser.")}
+          />
+          <div className="mb-12 flex justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={t("function", "image", "/images/wp-system-diagram.jpg")}
+              alt="Systemdarstellung einer Wasser-Wasser-Wärmepumpe mit Brunnenanlage"
+              className="rounded-2xl shadow-md max-h-96 w-auto object-contain"
+            />
+          </div>
+        </Container>
+      </section>
+
+      {/* Voraussetzungen */}
       <section className="py-20 bg-muted/30">
         <Container>
           <SectionHeading title={t("requirements", "title", "Voraussetzungen")} subtitle={t("requirements", "subtitle", "Was Sie für eine Wasser-Wasser-Wärmepumpe benötigen.")} />
@@ -141,6 +214,83 @@ export default async function WasserWasserPage() {
         </Container>
       </section>
 
+      {/* Costs & Economics */}
+      <CostsEconomics
+        costBreakdown={{
+          device: t("costs", "device", "10.000 – 18.000 €"),
+          installation: t("costs", "installation", "3.000 – 5.000 €"),
+          extras: t("costs", "extras", "7.000 – 17.000 €"),
+          extrasLabel: t("costs", "extrasLabel", "Brunnenbohrung (Förder- & Schluckbrunnen)"),
+          total: t("costs", "total", "20.000 – 40.000 €"),
+        }}
+        foerderung={{
+          bpiRate: t("costs", "bpiRate", "30 %"),
+          klimaBonus: t("costs", "klimaBonus", "+ 20 %"),
+          einkommensBonus: t("costs", "einkommensBonus", "+ 30 %"),
+          maxRate: t("costs", "maxRate", "bis 70 %"),
+          exampleSavings: t("costs", "exampleSavings", "Bei 35.000 € Invest → ab 10.500 € Eigenanteil"),
+        }}
+        operating={{
+          stromCostYear: t("costs", "stromCostYear", "500 – 800 €"),
+          formula: t("costs", "formula", "20.000 kWh ÷ COP 5,5 × 0,30 €/kWh ≈ 3.636 kWh × 0,30 € ≈ 1.091 € (ohne PV)"),
+        }}
+        amortization={t("costs", "amortization", "10 – 14 Jahre (ohne Förderung), 5 – 8 Jahre (mit Förderung)")}
+      />
+
+      {/* PV Synergy */}
+      <PVSynergySection
+        eigenverbrauchBoost={t("pvSynergy", "eigenverbrauchBoost", "bis zu 40 %")}
+        savingsExample={t("pvSynergy", "savingsExample", "Grundwasser-WP + PV: Betriebskosten sinken auf ca. 250–400 €/Jahr — nahezu kostenlos heizen.")}
+      />
+
+      {/* Installation */}
+      <InstallationProcess
+        duration={t("installation", "duration", "3 – 5 Tage (zzgl. Genehmigungsverfahren)")}
+        steps={[
+          { step: 1, title: t("installation", "step1Title", "Beratung & Grundwasseranalyse"), description: t("installation", "step1Desc", "Standortprüfung, Probebohrung und Wasserqualitätstest.") },
+          { step: 2, title: t("installation", "step2Title", "Genehmigung einholen"), description: t("installation", "step2Desc", "Wasserrechtliche Genehmigung bei der Unteren Wasserbehörde beantragen.") },
+          { step: 3, title: t("installation", "step3Title", "Förderantrag stellen"), description: t("installation", "step3Desc", "BAFA/KfW-Antrag einreichen — vor Baubeginn zwingend erforderlich.") },
+          { step: 4, title: t("installation", "step4Title", "Förderbrunnen bohren"), description: t("installation", "step4Desc", "Bohrung des Förderbrunnens zur Grundwasserentnahme (5–15m Tiefe).") },
+          { step: 5, title: t("installation", "step5Title", "Schluckbrunnen bohren"), description: t("installation", "step5Desc", "Bohrung des Schluckbrunnens zur Rückführung des abgekühlten Wassers.") },
+          { step: 6, title: t("installation", "step6Title", "Wärmepumpe aufstellen"), description: t("installation", "step6Desc", "Innengerät installieren und an die Brunnenanlage anschließen.") },
+          { step: 7, title: t("installation", "step7Title", "Hydraulische Anbindung"), description: t("installation", "step7Desc", "Verbindung zum Heizsystem, Pufferspeicher und Warmwasser.") },
+          { step: 8, title: t("installation", "step8Title", "Inbetriebnahme & Einweisung"), description: t("installation", "step8Desc", "Pumptest, Systemoptimierung und Einweisung in die Bedienung.") },
+        ]}
+      />
+
+      {/* Suitability Check */}
+      <SuitabilityCheck
+        title={t("suitability", "title", "Ist eine Wasser-Wasser-Wärmepumpe das Richtige für Sie?")}
+        idealItems={collectItems(t, "suitability", "ideal", [
+          "Grundwasser ist auf Ihrem Grundstück in 5–15m Tiefe erreichbar",
+          "Maximale Effizienz und niedrigste Betriebskosten sind Priorität",
+          "Sie möchten im Sommer effizient kühlen",
+          "Langfristige Investition mit bestem Kosten-Nutzen-Verhältnis",
+          "Ihr Grundstück bietet Platz für zwei Brunnen",
+        ])}
+        considerations={collectItems(t, "suitability", "consideration", [
+          "Höchste Investitionskosten aller WP-Typen",
+          "Grundwasservorkommen muss vorhanden und geeignet sein",
+          "Genehmigungsverfahren dauert mehrere Wochen",
+          "Regelmäßige Wasserqualitätsprüfung erforderlich",
+        ])}
+        conclusion={t("suitability", "conclusion", "Die Wasser-Wasser-Wärmepumpe erreicht den höchsten Wirkungsgrad aller Typen — die beste Wahl wenn Grundwasser verfügbar ist.")}
+      />
+
+      {/* Heating Cost Chart */}
+      <section className="py-20 bg-muted/30">
+        <Container>
+          <SectionHeading
+            title={t("charts", "title", "Heizkosten im Vergleich")}
+            subtitle={t("charts", "subtitle", "Wärmepumpe vs. konventionelle Heizsysteme — jährliche Kosten im Überblick.")}
+          />
+          <div className="max-w-2xl mx-auto">
+            <HeatingCostChart />
+          </div>
+        </Container>
+      </section>
+
+      {/* FAQ */}
       <section className="py-20">
         <Container className="max-w-3xl">
           <SectionHeading title="Häufige Fragen" />

@@ -11,6 +11,9 @@ import { TrustBadges } from "@/components/shared/TrustBadges";
 import { PartnersSection } from "@/components/shared/PartnersSection";
 import { FoerderungServiceCallout } from "@/components/shared/FoerderungServiceCallout";
 import { TrustBadgeItem } from "@/components/shared/TrustBadges";
+import { HeatingCostChart } from "@/components/shared/HeatingCostChart";
+import { COPComparisonChart } from "@/components/shared/COPComparisonChart";
+import { ComparisonTable } from "@/components/shared/ComparisonTable";
 import { getServices, getFAQ, getPartners, getPageContent } from "@/lib/dal";
 
 export const metadata: Metadata = {
@@ -160,65 +163,44 @@ export default async function WaermepumpenPage() {
             title={t("comparison", "title", "Wärmepumpen im Vergleich")}
             subtitle={t("comparison", "subtitle", "Finden Sie den passenden Typ für Ihre Anforderungen.")}
           />
-          <div className="overflow-x-auto -mx-4 px-4">
-            <table className="w-full min-w-[640px] border-collapse text-sm">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="py-3 px-4 text-left font-semibold text-foreground" />
-                  {waermepumpenTypes.map((type) => (
-                    <th key={type.slug} className="py-3 px-4 text-left font-semibold text-foreground">
-                      <Link href={`/waermepumpen/${type.slug}`} className="hover:text-primary transition-colors">
-                        {type.title.replace("-Wärmepumpe", "")}
-                      </Link>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                <tr>
-                  <td className="py-3 px-4 font-medium text-foreground">COP</td>
-                  <td className="py-3 px-4 text-muted-foreground">3,0–4,5</td>
-                  <td className="py-3 px-4 text-muted-foreground">4,0–5,0</td>
-                  <td className="py-3 px-4 text-muted-foreground">5,0–6,0</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-medium text-foreground">Installationszeit</td>
-                  <td className="py-3 px-4 text-muted-foreground">1–2 Tage</td>
-                  <td className="py-3 px-4 text-muted-foreground">3–5 Tage</td>
-                  <td className="py-3 px-4 text-muted-foreground">3–5 Tage</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-medium text-foreground">Kosten (ca.)</td>
-                  <td className="py-3 px-4 text-muted-foreground">15.000–25.000 &euro;</td>
-                  <td className="py-3 px-4 text-muted-foreground">20.000–35.000 &euro;</td>
-                  <td className="py-3 px-4 text-muted-foreground">20.000–40.000 &euro;</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-medium text-foreground">Erdarbeiten</td>
-                  <td className="py-3 px-4 text-muted-foreground">Keine</td>
-                  <td className="py-3 px-4 text-muted-foreground">Ja (Bohrung/Kollektor)</td>
-                  <td className="py-3 px-4 text-muted-foreground">Ja (Brunnen)</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-medium text-foreground">Genehmigung</td>
-                  <td className="py-3 px-4 text-muted-foreground">Nein</td>
-                  <td className="py-3 px-4 text-muted-foreground">Teils erforderlich</td>
-                  <td className="py-3 px-4 text-muted-foreground">Ja</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-medium text-foreground">Kühlung möglich</td>
-                  <td className="py-3 px-4 text-muted-foreground">Bedingt</td>
-                  <td className="py-3 px-4 text-muted-foreground">Ja (passiv)</td>
-                  <td className="py-3 px-4 text-muted-foreground">Ja</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 font-medium text-foreground">Ideal für</td>
-                  <td className="py-3 px-4 text-muted-foreground">Bestand &amp; Neubau</td>
-                  <td className="py-3 px-4 text-muted-foreground">Neubau + Grundstück</td>
-                  <td className="py-3 px-4 text-muted-foreground">Grundwasser-Gebiete</td>
-                </tr>
-              </tbody>
-            </table>
+          <ComparisonTable
+            types={waermepumpenTypes.map((wp) => ({
+              slug: wp.slug,
+              label: wp.title.replace("-Wärmepumpe", ""),
+            }))}
+            rows={[
+              { label: "COP", values: ["3,0–4,5", "4,0–5,0", "5,0–6,0"] },
+              { label: "Installationszeit", values: ["1–2 Tage", "3–5 Tage", "3–5 Tage"] },
+              { label: "Kosten (ca.)", values: ["15.000–25.000 €", "20.000–35.000 €", "20.000–40.000 €"] },
+              { label: "Erdarbeiten", values: ["Keine", "Ja (Bohrung/Kollektor)", "Ja (Brunnen)"] },
+              { label: "Genehmigung", values: ["Nein", "Teils erforderlich", "Ja"] },
+              { label: "Kühlung möglich", values: ["Bedingt", "Ja (passiv)", "Ja"] },
+              { label: "Ideal für", values: ["Bestand & Neubau", "Neubau + Grundstück", "Grundwasser-Gebiete"] },
+            ]}
+          />
+        </Container>
+      </section>
+
+      {/* Heizkosten im Vergleich */}
+      <section className="py-20">
+        <Container>
+          <SectionHeading
+            title={t("charts", "title", "Heizkosten im Vergleich")}
+            subtitle={t("charts", "subtitle", "Sehen Sie auf einen Blick, wie viel Sie mit einer Wärmepumpe sparen können.")}
+          />
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+            <Card>
+              <CardTitle className="text-lg mb-4">Jährliche Heizkosten nach Heizsystem</CardTitle>
+              <CardContent>
+                <HeatingCostChart />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardTitle className="text-lg mb-4">COP &amp; Kosten nach Wärmepumpen-Typ</CardTitle>
+              <CardContent>
+                <COPComparisonChart />
+              </CardContent>
+            </Card>
           </div>
         </Container>
       </section>
