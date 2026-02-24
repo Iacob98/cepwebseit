@@ -181,6 +181,21 @@ export const pageSectionSchema = z.object({
 export const pageContentSchema = z.record(z.string(), pageSectionSchema);
 export const pagesSchema = z.record(z.string(), pageContentSchema);
 
+// Email settings
+export const emailSettingsSchema = z.object({
+  subject: z.string().min(1),
+  logo: z.string().optional(),
+  headerTitle: z.string().min(1),
+  headerSubtitle: z.string().optional(),
+  greeting: z.string().min(1),
+  bodyText: z.string().min(1),
+  contactPhone: z.string().optional(),
+  contactEmail: z.string().optional(),
+  closing: z.string().min(1),
+  footerText: z.string().optional(),
+  headerColor: z.string().min(1),
+});
+
 // Export types
 export type CompanyData = z.infer<typeof companySchema>;
 export type TestimonialData = z.infer<typeof testimonialSchema>;
@@ -197,6 +212,7 @@ export type WaermepumpenTypeData = z.infer<typeof waermepumpenTypeSchema>;
 export type ServicesData = z.infer<typeof servicesDataSchema>;
 export type PageContent = z.infer<typeof pageContentSchema>;
 export type PagesData = z.infer<typeof pagesSchema>;
+export type EmailSettingsData = z.infer<typeof emailSettingsSchema>;
 
 // Contact submission
 export const contactSubmissionSchema = z.object({

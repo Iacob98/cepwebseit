@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { getEmailSettings } from "@/lib/dal";
 
 function createTransporter() {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
@@ -40,6 +41,24 @@ export async function sendAutoReply(
   if (!transporter) return;
 
   const from = process.env.SMTP_FROM || process.env.SMTP_USER!;
+  const s = await getEmailSettings();
+
+  const logoHtml = s.logo
+    ? `<img src="${s.logo}" alt="${s.headerTitle}" style="max-height:48px;margin:0 auto 12px;display:block" />`
+    : "";
+
+  const contactRows = [
+    s.contactPhone ? `<tr><td style="padding:6px 16px 6px 0;color:#666;font-size:14px">Telefon:</td><td style="padding:6px 0;font-size:14px;font-weight:600;color:#333">${s.contactPhone}</td></tr>` : "",
+    s.contactEmail ? `<tr><td style="padding:6px 16px 6px 0;color:#666;font-size:14px">E-Mail:</td><td style="padding:6px 0;font-size:14px;font-weight:600;color:#333">${s.contactEmail}</td></tr>` : "",
+  ].filter(Boolean).join("");
+
+  const contactBlock = contactRows
+    ? `<p style="color:#333;font-size:15px;line-height:1.6;margin:0 0 24px">In der Zwischenzeit können Sie uns jederzeit erreichen:</p><table cellpadding="0" cellspacing="0" style="margin:0 0 24px">${contactRows}</table>`
+    : "";
+
+  const footerHtml = s.footerText
+    ? `<tr><td style="background:#f8f9fa;padding:24px 40px;border-top:1px solid #e9ecef"><p style="color:#999;font-size:12px;margin:0;text-align:center">${s.footerText}</p></td></tr>`
+    : "";
 
   const html = `
 <!DOCTYPE html>
@@ -49,51 +68,23 @@ export async function sendAutoReply(
     <tr>
       <td align="center">
         <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
-          <!-- Header -->
           <tr>
-            <td style="background:#1a7ab5;padding:32px 40px;text-align:center">
-              <h1 style="color:#ffffff;margin:0;font-size:24px;font-weight:700">Arvernus GmbH</h1>
-              <p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:14px">Ihre Experten für Wärmepumpen & Photovoltaik</p>
+            <td style="background:${s.headerColor};padding:32px 40px;text-align:center">
+              ${logoHtml}
+              <h1 style="color:#ffffff;margin:0;font-size:24px;font-weight:700">${s.headerTitle}</h1>
+              ${s.headerSubtitle ? `<p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:14px">${s.headerSubtitle}</p>` : ""}
             </td>
           </tr>
-          <!-- Body -->
           <tr>
             <td style="padding:40px">
-              <h2 style="color:#1a7ab5;margin:0 0 16px;font-size:20px">Vielen Dank für Ihre Anfrage!</h2>
-              <p style="color:#333;font-size:15px;line-height:1.6;margin:0 0 16px">
-                Guten Tag ${customerName},
-              </p>
-              <p style="color:#333;font-size:15px;line-height:1.6;margin:0 0 16px">
-                wir haben Ihre Anfrage erhalten und bedanken uns für Ihr Interesse. Unser Team wird sich
-                <strong>innerhalb von 24 Stunden</strong> bei Ihnen melden, um alles Weitere zu besprechen.
-              </p>
-              <p style="color:#333;font-size:15px;line-height:1.6;margin:0 0 24px">
-                In der Zwischenzeit können Sie uns jederzeit erreichen:
-              </p>
-              <table cellpadding="0" cellspacing="0" style="margin:0 0 24px">
-                <tr>
-                  <td style="padding:6px 16px 6px 0;color:#666;font-size:14px">Telefon:</td>
-                  <td style="padding:6px 0;font-size:14px;font-weight:600;color:#333">+49 7621 9156-0</td>
-                </tr>
-                <tr>
-                  <td style="padding:6px 16px 6px 0;color:#666;font-size:14px">E-Mail:</td>
-                  <td style="padding:6px 0;font-size:14px;font-weight:600;color:#333">info@cep-energie.com</td>
-                </tr>
-              </table>
-              <p style="color:#333;font-size:15px;line-height:1.6;margin:0">
-                Mit freundlichen Grüßen,<br>
-                <strong>Ihr Arvernus-Team</strong>
-              </p>
+              <h2 style="color:${s.headerColor};margin:0 0 16px;font-size:20px">${s.greeting}</h2>
+              <p style="color:#333;font-size:15px;line-height:1.6;margin:0 0 16px">Guten Tag ${customerName},</p>
+              <p style="color:#333;font-size:15px;line-height:1.6;margin:0 0 16px">${s.bodyText}</p>
+              ${contactBlock}
+              <p style="color:#333;font-size:15px;line-height:1.6;margin:0">Mit freundlichen Grüßen,<br><strong>${s.closing}</strong></p>
             </td>
           </tr>
-          <!-- Footer -->
-          <tr>
-            <td style="background:#f8f9fa;padding:24px 40px;border-top:1px solid #e9ecef">
-              <p style="color:#999;font-size:12px;margin:0;text-align:center">
-                Diese E-Mail wurde automatisch generiert. Bitte antworten Sie nicht direkt auf diese Nachricht.
-              </p>
-            </td>
-          </tr>
+          ${footerHtml}
         </table>
       </td>
     </tr>
@@ -105,7 +96,7 @@ export async function sendAutoReply(
     await transporter.sendMail({
       from,
       to: toEmail,
-      subject: "Wir haben Ihre Anfrage erhalten — Arvernus GmbH",
+      subject: s.subject,
       html,
     });
   } catch (error) {

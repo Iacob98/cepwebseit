@@ -16,6 +16,7 @@ import type {
   ContactSubmissionData,
   RechnerSubmissionData,
   PartnerSubmissionData,
+  EmailSettingsData,
 } from "./dal-schemas";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
@@ -237,4 +238,30 @@ export async function getPartnerSubmissions(): Promise<PartnerSubmissionData[]> 
 
 export async function savePartnerSubmissions(data: PartnerSubmissionData[]): Promise<void> {
   await writeJSON("partner-submissions.json", data);
+}
+
+// ─── Email Settings ──────────────────────────────────────────
+
+const DEFAULT_EMAIL_SETTINGS: EmailSettingsData = {
+  subject: "Wir haben Ihre Anfrage erhalten — Arvernus GmbH",
+  logo: "",
+  headerTitle: "Arvernus GmbH",
+  headerSubtitle: "Ihre Experten für Wärmepumpen & Photovoltaik",
+  greeting: "Vielen Dank für Ihre Anfrage!",
+  bodyText: "wir haben Ihre Anfrage erhalten und bedanken uns für Ihr Interesse. Unser Team wird sich innerhalb von 24 Stunden bei Ihnen melden, um alles Weitere zu besprechen.",
+  contactPhone: "+49 7621 9156-0",
+  contactEmail: "info@cep-energie.com",
+  closing: "Ihr Arvernus-Team",
+  footerText: "Diese E-Mail wurde automatisch generiert. Bitte antworten Sie nicht direkt auf diese Nachricht.",
+  headerColor: "#1a7ab5",
+};
+
+export async function getEmailSettings(): Promise<EmailSettingsData> {
+  const data = await readJSON<EmailSettingsData>("email-settings.json");
+  if (data) return data;
+  return DEFAULT_EMAIL_SETTINGS;
+}
+
+export async function saveEmailSettings(data: EmailSettingsData): Promise<void> {
+  await writeJSON("email-settings.json", data);
 }
