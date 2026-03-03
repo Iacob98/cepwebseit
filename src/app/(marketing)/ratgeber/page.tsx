@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { BreadcrumbNav } from "@/components/shared/BreadcrumbNav";
 import { CTABanner } from "@/components/shared/CTABanner";
-import { getArticles } from "@/lib/dal";
+import { getArticles, getPageContent } from "@/lib/dal";
 
 export const metadata: Metadata = {
   title: "Ratgeber — Wärmepumpen, Photovoltaik & Förderung",
@@ -20,7 +20,9 @@ const categoryVariants: Record<string, "primary" | "secondary" | "default"> = {
 };
 
 export default async function RatgeberPage() {
-  const articles = await getArticles();
+  const [articles, pageContent] = await Promise.all([getArticles(), getPageContent("ratgeber")]);
+  const t = (section: string, field: string, fallback: string) =>
+    (pageContent?.[section] as Record<string, string>)?.[field] || fallback;
   const featured = articles.filter((a) => a.featured);
   const categories = [...new Set(articles.map((a) => a.category))];
 
@@ -32,11 +34,10 @@ export default async function RatgeberPage() {
         <Container>
           <div className="max-w-3xl">
             <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
-              Ratgeber
+              {t("hero", "title", "Ratgeber")}
             </h1>
             <p className="mt-6 text-lg text-muted-foreground">
-              Expertenwissen rund um Wärmepumpen, Photovoltaik, Förderung und Energiesparen.
-              Informieren Sie sich mit unseren aktuellen Artikeln.
+              {t("hero", "description", "Expertenwissen rund um Wärmepumpen, Photovoltaik, Förderung und Energiesparen. Informieren Sie sich mit unseren aktuellen Artikeln.")}
             </p>
           </div>
         </Container>
@@ -126,8 +127,8 @@ export default async function RatgeberPage() {
       </section>
 
       <CTABanner
-        title="Haben Sie Fragen?"
-        description="Unsere Experten beraten Sie kostenlos und unverbindlich zu Wärmepumpen, Photovoltaik und Fördermöglichkeiten."
+        title={t("cta", "title", "Haben Sie Fragen?")}
+        description={t("cta", "description", "Unsere Experten beraten Sie kostenlos und unverbindlich zu Wärmepumpen, Photovoltaik und Fördermöglichkeiten.")}
       />
     </>
   );

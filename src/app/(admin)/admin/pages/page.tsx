@@ -13,6 +13,8 @@ const slugLabels: Record<string, string> = {
   "sole-wasser-waermepumpe": "Sole-Wasser-Wärmepumpe",
   "wasser-wasser-waermepumpe": "Wasser-Wasser-Wärmepumpe",
   referenzen: "Referenzen",
+  "energie-rechner": "Energie-Rechner",
+  ratgeber: "Ratgeber",
   "partner-werden": "Partner werden",
 };
 

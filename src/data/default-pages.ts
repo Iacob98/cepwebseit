@@ -371,6 +371,22 @@ export const defaultPages: PagesData = {
       description: "Wir ermitteln kostenlos Ihre individuelle Fördersumme und unterstützen Sie bei der Antragstellung.",
     },
   },
+  "energie-rechner": {
+    hero: {
+      title: "Energie-Rechner",
+      description: "Berechnen Sie in nur 5 Schritten die Kosten und Fördermöglichkeiten für Solar, Wärmepumpen und Speicher — kostenlos und unverbindlich.",
+    },
+  },
+  ratgeber: {
+    hero: {
+      title: "Ratgeber",
+      description: "Expertenwissen rund um Wärmepumpen, Photovoltaik, Förderung und Energiesparen. Informieren Sie sich mit unseren aktuellen Artikeln.",
+    },
+    cta: {
+      title: "Haben Sie Fragen?",
+      description: "Unsere Experten beraten Sie kostenlos und unverbindlich zu Wärmepumpen, Photovoltaik und Fördermöglichkeiten.",
+    },
+  },
   "partner-werden": {
     hero: {
       title: "Partner werden",
