@@ -1,6 +1,7 @@
 "use client";
 
 import { AdminForm } from "@/components/admin/AdminForm";
+import { AdminImageUpload } from "@/components/admin/AdminImageUpload";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import type { Service, WaermepumpenType } from "@/types";
@@ -32,6 +33,9 @@ export function ServicesEditor({ data, action }: ServicesEditorProps) {
                 </div>
                 <div className="md:col-span-2">
                   <Textarea name={`service_features_${i}`} label="Features (eine pro Zeile)" defaultValue={service.features.join("\n")} rows={3} />
+                </div>
+                <div className="md:col-span-2">
+                  <AdminImageUpload name={`service_image_${i}`} currentImage={service.image} label="Bild" />
                 </div>
               </div>
             </div>

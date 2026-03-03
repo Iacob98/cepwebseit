@@ -17,6 +17,7 @@ import type {
   RechnerSubmissionData,
   PartnerSubmissionData,
   EmailSettingsData,
+  SiteSettingsData,
 } from "./dal-schemas";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
@@ -295,6 +296,20 @@ export async function getEmailSettings(): Promise<EmailSettingsData> {
 
 export async function saveEmailSettings(data: EmailSettingsData): Promise<void> {
   await writeJSON("email-settings.json", data);
+}
+
+// ─── Site Settings ──────────────────────────────────────────
+
+const DEFAULT_SITE_SETTINGS: SiteSettingsData = { hiddenPages: [] };
+
+export async function getSiteSettings(): Promise<SiteSettingsData> {
+  const data = await readJSON<SiteSettingsData>("site-settings.json");
+  if (data) return data;
+  return DEFAULT_SITE_SETTINGS;
+}
+
+export async function saveSiteSettings(data: SiteSettingsData): Promise<void> {
+  await writeJSON("site-settings.json", data);
 }
 
 // ─── Atomic Append Helpers (lock-protected read→push→write) ──

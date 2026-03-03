@@ -4,41 +4,44 @@ export const services: Service[] = [
   {
     title: "Photovoltaik",
     description:
-      "Erzeugen Sie Ihren eigenen Strom mit einer modernen Solaranlage. Von der Planung bis zur Installation — alles aus einer Hand.",
+      "Strom vom eigenen Dach — ab 5 ct/kWh statt 37 ct aus dem Netz. Wir planen und installieren Ihre Solaranlage schlüsselfertig, inklusive Anmeldung und Förderantrag.",
     href: "/photovoltaik",
     icon: "sun",
     features: [
-      "Eigenen Strom erzeugen",
-      "Stromkosten senken",
-      "Einspeisevergütung erhalten",
-      "Unabhängigkeit vom Stromnetz",
+      "Strom ab 5 ct/kWh erzeugen",
+      "0% Mehrwertsteuer seit 2023",
+      "25+ Jahre Modulgarantie*",
+      "Schlüsselfertig in 1–3 Tagen",
     ],
+    image: "/images/pv-roof-close.jpg",
   },
   {
     title: "Energiespeicher",
     description:
-      "Speichern Sie Ihren Solarstrom für die Nutzung rund um die Uhr. Moderne Batteriespeicher maximieren Ihren Eigenverbrauch.",
+      "Solarstrom rund um die Uhr nutzen. Mit einem Batteriespeicher steigern Sie Ihren Eigenverbrauch auf bis zu 80% — auch abends und nachts.",
     href: "/energiespeicher",
     icon: "battery",
     features: [
       "Eigenverbrauch auf 70–80%* steigern",
-      "Unabhängigkeit von Strompreisen",
-      "Notstromfähig",
-      "Kompakt & wartungsarm",
+      "Notstromversorgung optional",
+      "LFP-Technologie: 10.000+ Zyklen",
+      "Nachrüstbar zu bestehender PV",
     ],
+    image: "/images/pv-house-full.jpg",
   },
   {
-    title: "Wärmepumpen",
+    title: "Förderung",
     description:
-      "Effiziente Wärmepumpen für Ihr Zuhause. Luft-Wasser-Wärmepumpen für maximale Energieeinsparung.",
-    href: "/waermepumpen",
-    icon: "flame",
+      "Bis zu 70% staatliche Förderung für Ihre Energiewende. Wir übernehmen die Antragstellung bei KfW und BAFA — damit Sie den maximalen Zuschuss erhalten.",
+    href: "/foerderung",
+    icon: "piggy-bank",
     features: [
-      "Bis zu 75% Heizkosten sparen*",
-      "Staatliche Förderung bis 70%*",
-      "Umweltfreundlich & leise",
-      "Wartungsarm & langlebig",
+      "Bis zu 70% KfW-Zuschuss für Wärmepumpen*",
+      "0% MwSt. auf PV-Anlagen seit 2023",
+      "Komplette Antragstellung durch uns",
+      "Kostenlose Fördermittelberechnung",
     ],
+    image: "/images/pv-roof-close.jpg",
   },
 ];
 

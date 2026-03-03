@@ -14,7 +14,7 @@ interface TrustSignalsProps {
   foundedYear?: number;
 }
 
-export function TrustSignals({ stats, foundedYear = 2014 }: TrustSignalsProps) {
+export function TrustSignals({ stats, foundedYear = 2018 }: TrustSignalsProps) {
   const yearsExperience = new Date().getFullYear() - foundedYear;
 
   const items = [

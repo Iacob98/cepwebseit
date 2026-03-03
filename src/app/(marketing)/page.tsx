@@ -32,6 +32,7 @@ export default async function HomePage() {
     ]);
 
   const hero = pageContent?.hero as Record<string, string> | undefined;
+  const services = pageContent?.services as Record<string, string> | undefined;
   const about = pageContent?.about as Record<string, string> | undefined;
   const foerderung = pageContent?.foerderung as Record<string, string> | undefined;
   const cta = pageContent?.cta as Record<string, string> | undefined;
@@ -50,7 +51,7 @@ export default async function HomePage() {
     <>
       <HeroSection content={hero} slides={heroSlides} />
       <TrustSignals stats={company.stats} foundedYear={company.foundedYear} />
-      <ServicesOverview services={servicesData.services} />
+      <ServicesOverview services={servicesData.services} content={services} />
       <AboutTeaser content={about} />
       <FoerderungTeaser content={foerderung} />
 

@@ -10,6 +10,7 @@ export interface Service {
   href: string;
   icon: string;
   features: string[];
+  image?: string;
 }
 
 export interface WaermepumpenType {

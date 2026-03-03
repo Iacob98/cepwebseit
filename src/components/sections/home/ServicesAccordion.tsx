@@ -7,27 +7,26 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import type { Service } from "@/types";
 
-const serviceImages: Record<string, string> = {
-  "/photovoltaik": "/images/pv-roof-close.jpg",
-  "/energiespeicher": "/images/pv-house-full.jpg",
-  "/waermepumpen": "/images/wp-outdoor.jpg",
-};
-
 interface ServicesAccordionProps {
   services: Service[];
+  label?: string;
+  title?: string;
+  highlightedTitle?: string;
 }
 
-export function ServicesAccordion({ services }: ServicesAccordionProps) {
+export function ServicesAccordion({ services, label, title, highlightedTitle }: ServicesAccordionProps) {
   const [openIndex, setOpenIndex] = useState(0);
+
+  const headingTitle = (title || highlightedTitle)
+    ? <>{title || "Ganzheitliche"} <span className="text-primary">{highlightedTitle || "Energielösungen"}</span></>
+    : <>Ganzheitliche <span className="text-primary">Energielösungen</span></>;
 
   return (
     <section className="py-20 bg-white">
       <Container>
         <SectionHeading
-          label="Unsere Leistungen"
-          title={
-            <>Ganzheitliche <span className="text-primary">Energielösungen</span></>
-          }
+          label={label || "Unsere Leistungen"}
+          title={headingTitle}
           centered={false}
         />
         <ScrollReveal>
@@ -35,7 +34,7 @@ export function ServicesAccordion({ services }: ServicesAccordionProps) {
             {services.map((service, i) => {
               const isOpen = openIndex === i;
               const number = String(i + 1).padStart(2, "0");
-              const image = serviceImages[service.href] || "/images/pv-roof-close.jpg";
+              const image = service.image || "/images/pv-roof-close.jpg";
 
               return (
                 <div key={service.href} className="border-b border-border">

@@ -10,6 +10,39 @@ export const mainNavigation: NavItem[] = [
   { label: "Wärmepumpen", href: "/waermepumpen" },
 ];
 
+function isHidden(href: string, hiddenSlugs: string[]): boolean {
+  // href like "/waermepumpen" or "/waermepumpen/luft-wasser-waermepumpe"
+  // slug like "waermepumpen"
+  return hiddenSlugs.some(
+    (slug) => href === `/${slug}` || href.startsWith(`/${slug}/`)
+  );
+}
+
+export function filterHiddenPages(hiddenSlugs: string[]) {
+  if (hiddenSlugs.length === 0) {
+    return { mainNav: mainNavigation, footerNav: footerNavigation };
+  }
+
+  const filterItems = (items: NavItem[]) =>
+    items
+      .filter((item) => !isHidden(item.href, hiddenSlugs))
+      .map((item) =>
+        item.children
+          ? { ...item, children: item.children.filter((c) => !isHidden(c.href, hiddenSlugs)) }
+          : item
+      );
+
+  return {
+    mainNav: filterItems(mainNavigation),
+    footerNav: {
+      services: filterItems(footerNavigation.services),
+      company: filterItems(footerNavigation.company),
+      resources: filterItems(footerNavigation.resources),
+      legal: filterItems(footerNavigation.legal),
+    },
+  };
+}
+
 export const footerNavigation = {
   services: [
     { label: "Photovoltaik", href: "/photovoltaik" },

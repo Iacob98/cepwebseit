@@ -38,4 +38,5 @@ export const STATS = {
   dailyInstallations: 2,
   montageTeams: 4,
   locations: 1,
+  mwInstalled: 5,
 } as const;

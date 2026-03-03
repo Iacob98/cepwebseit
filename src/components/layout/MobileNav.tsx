@@ -13,6 +13,7 @@ import {
   SheetTitle,
 } from "@/components/ui/Sheet";
 import { ChevronDown, Phone } from "lucide-react";
+import type { NavItem } from "@/types";
 
 interface MobileNavProps {
   open: boolean;
@@ -20,10 +21,12 @@ interface MobileNavProps {
   phone?: string;
   phoneDisplay?: string;
   logo?: string;
+  navItems?: NavItem[];
 }
 
-export function MobileNav({ open, onClose, phone, phoneDisplay, logo }: MobileNavProps) {
+export function MobileNav({ open, onClose, phone, phoneDisplay, logo, navItems }: MobileNavProps) {
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const items = navItems ?? mainNavigation;
 
   return (
     <Sheet open={open} onOpenChange={(v) => !v && onClose()}>
@@ -35,7 +38,7 @@ export function MobileNav({ open, onClose, phone, phoneDisplay, logo }: MobileNa
         </SheetHeader>
 
         <nav className="flex-1 overflow-y-auto p-4 space-y-1">
-          {mainNavigation.map((item) => (
+          {items.map((item) => (
             <div key={item.href}>
               {item.children ? (
                 <>

@@ -157,6 +157,7 @@ export const serviceSchema = z.object({
   href: z.string().min(1),
   icon: z.string().min(1),
   features: z.array(z.string()),
+  image: z.string().optional(),
 });
 
 // Waermepumpen type
@@ -195,6 +196,11 @@ export const emailSettingsSchema = z.object({
   headerColor: z.string().min(1),
 });
 
+// Site settings (hidden pages, etc.)
+export const siteSettingsSchema = z.object({
+  hiddenPages: z.array(z.string()),
+});
+
 // Export types
 export type CompanyData = z.infer<typeof companySchema>;
 export type TestimonialData = z.infer<typeof testimonialSchema>;
@@ -212,6 +218,7 @@ export type ServicesData = z.infer<typeof servicesDataSchema>;
 export type PageContent = z.infer<typeof pageContentSchema>;
 export type PagesData = z.infer<typeof pagesSchema>;
 export type EmailSettingsData = z.infer<typeof emailSettingsSchema>;
+export type SiteSettingsData = z.infer<typeof siteSettingsSchema>;
 
 // Contact submission
 export const contactSubmissionSchema = z.object({

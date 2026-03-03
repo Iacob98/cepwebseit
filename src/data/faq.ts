@@ -4,12 +4,12 @@ export const generalFAQ: FAQItem[] = [
   {
     question: "Was kostet eine Photovoltaikanlage?",
     answer:
-      "Eine schlüsselfertige PV-Anlage kostet aktuell ca. 1.300–1.600 € pro kWp (netto, inkl. Installation). Für ein typisches Einfamilienhaus mit 10 kWp sind das rund 13.000–16.000 €. Seit 2023 entfällt die Mehrwertsteuer auf PV-Anlagen bis 30 kWp vollständig.",
+      "Eine schlüsselfertige PV-Anlage kostet aktuell ca. 1.200–1.800 €* pro kWp (netto, inkl. Installation). Für ein typisches Einfamilienhaus mit 10 kWp sind das rund 12.000–18.000 €. Seit 2023 entfällt die Mehrwertsteuer vollständig — Sie zahlen den Nettopreis.",
   },
   {
     question: "Lohnt sich Photovoltaik in 2026 noch?",
     answer:
-      "Ja — sogar mehr denn je. Solarstrom kostet nur 6–14 ct/kWh, Netzstrom dagegen durchschnittlich 37 ct/kWh. Mit 0% Mehrwertsteuer und Einkommensteuerbefreiung amortisiert sich eine Anlage oft schon nach 4–8 Jahren bei einer Lebensdauer von 25+ Jahren.",
+      "Mehr denn je. Solarstrom kostet 5–14 ct/kWh, Netzstrom über 37 ct/kWh. Mit 0% MwSt. und steuerfreien Erträgen amortisiert sich eine Anlage in 7–12 Jahren* — bei einer Lebensdauer von 25–30 Jahren. Die Einspeisevergütung gibt zusätzliche Sicherheit.",
   },
   {
     question: "Wie groß sollte meine Solaranlage sein?",
@@ -65,7 +65,7 @@ export const photovoltaikFAQ: FAQItem[] = [
   {
     question: "Was kostet eine PV-Anlage mit Speicher?",
     answer:
-      "Eine 10-kWp-Anlage mit 10-kWh-Speicher kostet aktuell ca. 17.000–23.000 € (netto). Dank 0% Mehrwertsteuer zahlen Sie keine zusätzliche Steuer. Die Amortisation liegt bei 9–15 Jahren, die Lebensdauer der Module bei 25+ Jahren.",
+      "Eine 10-kWp-Anlage mit 10-kWh-Speicher liegt aktuell bei ca. 20.000–25.000 €* (netto, 0% MwSt.). Die Amortisation liegt bei 8–14 Jahren, die Lebensdauer der Module bei 25–30 Jahren.",
   },
   {
     question: "Wie lange hält eine Photovoltaikanlage?",

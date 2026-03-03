@@ -8,6 +8,7 @@ const IMAGE_FIELDS = new Set(["image", "diagramImage"]);
 
 const SECTION_LABELS: Record<string, string> = {
   hero: "Hero-Bereich",
+  services: "Leistungen-Sektion",
   about: "Über uns",
   howItWorks: "So funktioniert's",
   foerderungTeaser: "Förderung-Teaser",

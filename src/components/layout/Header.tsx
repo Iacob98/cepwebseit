@@ -7,15 +7,17 @@ import { mainNavigation } from "@/data/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { MobileNav } from "./MobileNav";
-import type { CompanyData } from "@/types";
+import type { CompanyData, NavItem } from "@/types";
 
 interface HeaderProps {
   company: CompanyData;
+  navItems?: NavItem[];
 }
 
-export function Header({ company }: HeaderProps) {
+export function Header({ company, navItems }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const items = navItems ?? mainNavigation;
 
   return (
     <>
@@ -36,7 +38,7 @@ export function Header({ company }: HeaderProps) {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1" role="navigation">
-            {mainNavigation.map((item) => (
+            {items.map((item) => (
               <div
                 key={item.href}
                 className="relative"
@@ -100,7 +102,7 @@ export function Header({ company }: HeaderProps) {
       </Container>
     </header>
 
-    <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} phone={company.phone} phoneDisplay={company.phoneDisplay} logo={company.logo} />
+    <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} phone={company.phone} phoneDisplay={company.phoneDisplay} logo={company.logo} navItems={items} />
   </>
   );
 }

@@ -9,6 +9,11 @@ export const defaultPages: PagesData = {
       primaryButton: "Kostenlos berechnen",
       secondaryButton: "Beratung anfragen",
     },
+    services: {
+      label: "Unsere Leistungen",
+      title: "Ganzheitliche",
+      highlightedTitle: "Energielösungen",
+    },
     about: {
       label: "Über uns",
       title: "Ihre regionalen Energieexperten — seit 2018",

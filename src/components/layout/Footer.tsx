@@ -1,15 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
-import { footerNavigation } from "@/data/navigation";
+import { footerNavigation, filterHiddenPages } from "@/data/navigation";
 import { LegalDisclaimer } from "@/components/shared/LegalDisclaimer";
 import type { CompanyData } from "@/types";
 
 interface FooterProps {
   company: CompanyData;
+  hiddenPages?: string[];
 }
 
-export function Footer({ company }: FooterProps) {
+export function Footer({ company, hiddenPages = [] }: FooterProps) {
+  const { footerNav } = filterHiddenPages(hiddenPages);
   return (
     <footer className="bg-gray-900 text-gray-400">
       <Container>
@@ -42,7 +44,7 @@ export function Footer({ company }: FooterProps) {
                 Leistungen
               </h3>
               <ul className="space-y-3">
-                {footerNavigation.services.map((item) => (
+                {footerNav.services.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
@@ -61,7 +63,7 @@ export function Footer({ company }: FooterProps) {
                 Unternehmen
               </h3>
               <ul className="space-y-3">
-                {footerNavigation.company.map((item) => (
+                {footerNav.company.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
@@ -88,7 +90,7 @@ export function Footer({ company }: FooterProps) {
                 Rechtliches
               </h3>
               <ul className="space-y-3">
-                {footerNavigation.legal.map((item) => (
+                {footerNav.legal.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}

@@ -25,4 +25,28 @@ export const testimonials: Testimonial[] = [
     service: "Sole-Wasser-Wärmepumpe",
     date: "2023",
   },
+  {
+    name: "Familie Hartmann",
+    location: "Velten",
+    rating: 5,
+    text: "10,4 kWp Anlage mit 10 kWh Speicher — wir erzeugen jetzt über 80% unseres Stroms selbst. Die Installation hat nur 2 Tage gedauert. Super Team!",
+    service: "Photovoltaik mit Speicher",
+    date: "2025",
+  },
+  {
+    name: "Herr Krause",
+    location: "Birkenwerder",
+    rating: 5,
+    text: "Dank CEP Energie haben wir 40% KfW-Förderung für unsere Wärmepumpe erhalten. Von der Antragstellung bis zur Inbetriebnahme alles aus einer Hand.",
+    service: "Luft-Wasser-Wärmepumpe",
+    date: "2025",
+  },
+  {
+    name: "Familie Petersen",
+    location: "Hohen Neuendorf",
+    rating: 5,
+    text: "Erst PV, ein Jahr später den Speicher nachgerüstet. Beides reibungslos. Unsere Stromrechnung hat sich um 70% reduziert.",
+    service: "PV-Nachrüstung Speicher",
+    date: "2025",
+  },
 ];
