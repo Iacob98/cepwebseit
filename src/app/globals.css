@@ -1,22 +1,32 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 :root {
   --background: #ffffff;
-  --foreground: #1a202c;
-  --primary: #1a7ab5;
-  --primary-dark: #155e8a;
-  --primary-light: #2d9fd4;
-  --primary-50: #eef7fc;
-  --primary-100: #d4ecf7;
-  --secondary: #e8a020;
-  --secondary-dark: #cc8a10;
-  --secondary-light: #f0b840;
-  --accent: #e8a020;
-  --muted: #f3f4f6;
+  --foreground: #1a1a2e;
+  --primary: #fe7f00;
+  --primary-dark: #e06e00;
+  --primary-light: #ffab4d;
+  --primary-50: #fff7ed;
+  --primary-100: #ffedd5;
+  --primary-foreground: #ffffff;
+  --secondary: #0071bd;
+  --secondary-dark: #005a97;
+  --secondary-light: #3399d6;
+  --secondary-foreground: #ffffff;
+  --accent: #fe7f00;
+  --accent-foreground: #ffffff;
+  --muted: #f8f9fa;
   --muted-foreground: #6b7280;
+  --card: #ffffff;
+  --card-foreground: #1a1a2e;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a2e;
   --border: #e5e7eb;
-  --ring: #1a7ab5;
+  --input: #e5e7eb;
+  --ring: #fe7f00;
   --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
   --radius: 0.75rem;
 }
 
@@ -28,15 +38,24 @@
   --color-primary-light: var(--primary-light);
   --color-primary-50: var(--primary-50);
   --color-primary-100: var(--primary-100);
+  --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-dark: var(--secondary-dark);
   --color-secondary-light: var(--secondary-light);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-border: var(--border);
+  --color-input: var(--input);
   --color-ring: var(--ring);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --radius: var(--radius);
   --font-sans: var(--font-inter);
 }
@@ -74,6 +93,33 @@ html {
 
 .animate-modal-in {
   animation: modal-in 0.2s ease-out;
+}
+
+/* Radix accordion animations */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+.animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+
+.animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
 }
 
 /* Partner logos marquee */

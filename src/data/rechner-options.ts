@@ -64,11 +64,26 @@ export const warmwasserOptionen = [
   { value: "solar", label: "Solarthermie" },
 ];
 
+export const interesseOptionen = [
+  { value: "photovoltaik", label: "Photovoltaik (Solaranlage)" },
+  { value: "waermepumpe", label: "Wärmepumpe" },
+  { value: "speicher", label: "Energiespeicher" },
+  { value: "kombi", label: "Kombiniertes System (Solar + WP + Speicher)" },
+  { value: "beratung", label: "Umfassende Beratung gewünscht" },
+];
+
 export const waermepumpenTypOptionen = [
   { value: "luft-wasser", label: "Luft-Wasser-Wärmepumpe" },
   { value: "sole-wasser", label: "Sole-Wasser-Wärmepumpe" },
   { value: "wasser-wasser", label: "Wasser-Wasser-Wärmepumpe" },
   { value: "beratung", label: "Noch unsicher — Beratung gewünscht" },
+];
+
+export const speicherOptionen = [
+  { value: "ja", label: "Ja, Speicher gewünscht" },
+  { value: "vorhanden", label: "Bereits vorhanden" },
+  { value: "nein", label: "Nein, kein Speicher" },
+  { value: "beratung", label: "Beratung gewünscht" },
 ];
 
 export const photovoltaikOptionen = [

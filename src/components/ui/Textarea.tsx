@@ -1,18 +1,22 @@
+import * as React from "react";
 import { cn } from "@/lib/utils";
-import { forwardRef } from "react";
 
-interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;
 }
 
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ label, error, className, id, ...props }, ref) => {
     const textareaId = id || props.name;
     return (
       <div className="space-y-1">
         {label && (
-          <label htmlFor={textareaId} className="block text-sm font-medium text-foreground">
+          <label
+            htmlFor={textareaId}
+            className="block text-sm font-medium text-foreground"
+          >
             {label}
           </label>
         )}
@@ -20,8 +24,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           id={textareaId}
           className={cn(
-            "w-full rounded-lg border border-border bg-white px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-colors resize-y min-h-[120px]",
-            error && "border-destructive focus:border-destructive focus:ring-destructive/20",
+            "flex min-h-[120px] w-full rounded-lg border border-input bg-background px-4 py-3 text-base text-foreground transition-colors placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 resize-y",
+            error &&
+              "border-destructive focus-visible:border-destructive focus-visible:ring-destructive/20",
             className,
           )}
           {...props}
@@ -31,5 +36,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
   },
 );
-
 Textarea.displayName = "Textarea";
+
+export { Textarea };

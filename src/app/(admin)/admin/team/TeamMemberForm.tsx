@@ -1,6 +1,8 @@
 "use client";
 
 import { AdminForm } from "@/components/admin/AdminForm";
+import { Input } from "@/components/ui/Input";
+import { Textarea } from "@/components/ui/Textarea";
 import type { TeamMember } from "@/types";
 
 interface TeamMemberFormProps {
@@ -14,19 +16,10 @@ export function TeamMemberForm({ action, member }: TeamMemberFormProps) {
       {member?.id && <input type="hidden" name="id" value={member.id} />}
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-            <input name="name" defaultValue={member?.name} required className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Rolle</label>
-            <input name="role" defaultValue={member?.role} required className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-          </div>
+          <Input name="name" label="Name" defaultValue={member?.name} required />
+          <Input name="role" label="Rolle" defaultValue={member?.role} required />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Beschreibung</label>
-          <textarea name="description" defaultValue={member?.description} required rows={4} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-        </div>
+        <Textarea name="description" label="Beschreibung" defaultValue={member?.description} required rows={4} />
       </div>
     </AdminForm>
   );

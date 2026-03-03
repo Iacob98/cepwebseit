@@ -18,24 +18,23 @@ export function TrustSignals({ stats, foundedYear = 2014 }: TrustSignalsProps) {
   const yearsExperience = new Date().getFullYear() - foundedYear;
 
   const items = [
-    { target: stats?.projectsCompleted ?? 1000, suffix: "+", label: "Installationen" },
-    { target: stats?.pvCustomers ?? 15000, suffix: "+", label: "PV Kunden" },
-    { target: stats?.satisfactionRate ?? 98, suffix: "%", label: "Zufriedenheit" },
+    { target: stats?.projectsCompleted ?? 350, suffix: "+", label: "PV-Anlagen installiert" },
+    { target: stats?.satisfactionRate ?? 97, suffix: "%", label: "Kundenzufriedenheit" },
     { target: yearsExperience, suffix: "+", label: "Jahre Erfahrung" },
-    { target: stats?.maxFoerderung ?? 70, suffix: "%", label: "Max. Förderung" },
+    { target: 0, suffix: "%", label: "MwSt. auf PV-Anlagen" },
   ];
 
   return (
-    <section className="py-20 bg-gray-900 text-white">
+    <section className="py-16 bg-white">
       <Container>
         <ScrollReveal>
-          <div className="grid grid-cols-2 gap-8 lg:grid-cols-5">
+          <div className="flex flex-col sm:flex-row items-center justify-center sm:divide-x divide-border">
             {items.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-4xl font-bold text-primary-light sm:text-5xl">
+              <div key={stat.label} className="text-center px-10 lg:px-14 py-4 sm:py-0">
+                <div className="text-5xl lg:text-6xl font-bold text-foreground">
                   <AnimatedCounter target={stat.target} suffix={stat.suffix} />
                 </div>
-                <p className="mt-2 text-gray-400">{stat.label}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
               </div>
             ))}
           </div>

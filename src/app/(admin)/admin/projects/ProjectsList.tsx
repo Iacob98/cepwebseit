@@ -5,9 +5,10 @@ import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog";
 import type { Project } from "@/types";
 
 const categoryLabels: Record<string, string> = {
-  waermepumpe: "Wärmepumpe",
   photovoltaik: "Photovoltaik",
-  kombiniert: "Kombiniert",
+  energiespeicher: "Energiespeicher",
+  kombiniert: "PV + Speicher",
+  waermepumpe: "Wärmepumpe",
 };
 
 interface ProjectsListProps {

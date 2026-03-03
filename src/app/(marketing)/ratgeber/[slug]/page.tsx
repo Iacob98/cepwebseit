@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!article) return {};
 
   return {
-    title: article.metaTitle || `${article.title} | Arvernus Ratgeber`,
+    title: article.metaTitle || `${article.title} | CEP Energie Ratgeber`,
     description: article.metaDescription || article.excerpt,
     openGraph: {
       title: article.metaTitle || article.title,
@@ -163,7 +163,7 @@ export default async function ArticlePage({ params }: PageProps) {
       </article>
 
       {related.length > 0 && (
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-muted/30">
           <Container>
             <h2 className="text-2xl font-bold text-foreground mb-8">Weitere Artikel</h2>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -171,7 +171,7 @@ export default async function ArticlePage({ params }: PageProps) {
                 <Link
                   key={r.id}
                   href={`/ratgeber/${r.slug}`}
-                  className="group rounded-xl border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow"
+                  className="group rounded-xl border border-border bg-background p-6 hover:shadow-md transition-shadow"
                 >
                   <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
                     {r.title}

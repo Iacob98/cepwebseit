@@ -1,72 +1,84 @@
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "white";
-type ButtonSize = "sm" | "md" | "lg";
+const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50 disabled:pointer-events-none cursor-pointer",
+  {
+    variants: {
+      variant: {
+        primary: "bg-primary text-primary-foreground hover:bg-primary-dark shadow-sm",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary-dark shadow-sm",
+        outline: "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground",
+        ghost: "text-foreground hover:bg-muted",
+        white: "bg-white text-primary hover:bg-muted/50 shadow-sm",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
+      },
+      size: {
+        sm: "px-4 py-2 text-sm",
+        md: "px-6 py-3 text-base",
+        lg: "px-8 py-4 text-lg",
+        icon: "h-10 w-10",
+      },
+    },
+    defaultVariants: {
+      variant: "primary",
+      size: "md",
+    },
+  },
+);
 
 type ButtonAsButton = {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  className?: string;
-  children: React.ReactNode;
   href?: never;
-} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children" | "className">;
+  asChild?: boolean;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 type ButtonAsLink = {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  className?: string;
-  children: React.ReactNode;
   href: string;
+  asChild?: never;
+  onClick?: React.MouseEventHandler;
+  target?: string;
+  rel?: string;
 };
 
-type ButtonProps = ButtonAsButton | ButtonAsLink;
+type ButtonProps = (ButtonAsButton | ButtonAsLink) &
+  VariantProps<typeof buttonVariants> & {
+    className?: string;
+    children: React.ReactNode;
+  };
 
-const variantClasses: Record<ButtonVariant, string> = {
-  primary:
-    "bg-primary text-white hover:bg-primary-dark shadow-sm",
-  secondary:
-    "bg-secondary text-white hover:bg-secondary-dark shadow-sm",
-  outline:
-    "border-2 border-primary text-primary hover:bg-primary hover:text-white",
-  ghost:
-    "text-foreground hover:bg-muted",
-  white:
-    "bg-white text-primary hover:bg-gray-50 shadow-sm",
-};
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, children, ...props }, ref) => {
+    const classes = cn(buttonVariants({ variant, size, className }));
 
-const sizeClasses: Record<ButtonSize, string> = {
-  sm: "px-4 py-2 text-sm",
-  md: "px-6 py-3 text-base",
-  lg: "px-8 py-4 text-lg",
-};
+    if ("href" in props && props.href) {
+      const { href, ...rest } = props;
+      return (
+        <Link href={href} className={classes} {...rest}>
+          {children}
+        </Link>
+      );
+    }
 
-export function Button({
-  variant = "primary",
-  size = "md",
-  className,
-  children,
-  ...props
-}: ButtonProps) {
-  const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50 disabled:pointer-events-none cursor-pointer",
-    variantClasses[variant],
-    sizeClasses[size],
-    className,
-  );
+    const { asChild, ...buttonProps } = props as ButtonAsButton;
 
-  if ("href" in props && props.href) {
+    if (asChild) {
+      return (
+        <Slot className={classes} ref={ref} {...buttonProps}>
+          {children}
+        </Slot>
+      );
+    }
+
     return (
-      <Link href={props.href} className={classes}>
+      <button className={classes} ref={ref} {...buttonProps}>
         {children}
-      </Link>
+      </button>
     );
-  }
+  },
+);
+Button.displayName = "Button";
 
-  const { href: _, ...buttonProps } = props as ButtonAsButton;
-  return (
-    <button className={classes} {...buttonProps}>
-      {children}
-    </button>
-  );
-}
+export { Button, buttonVariants };

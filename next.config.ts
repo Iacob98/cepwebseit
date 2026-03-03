@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["arvernus-energie.com"],
+  allowedDevOrigins: ["cep-energie.com"],
   serverExternalPackages: ["sharp"],
   images: {
     unoptimized: true,
@@ -9,8 +9,17 @@ const nextConfig: NextConfig = {
   experimental: {
     serverActions: {
       bodySizeLimit: "10mb",
-      allowedOrigins: ["arvernus-energie.com"],
+      allowedOrigins: ["cep-energie.com"],
     },
+  },
+  async redirects() {
+    return [
+      {
+        source: "/waermepumpen-rechner",
+        destination: "/energie-rechner",
+        permanent: true,
+      },
+    ];
   },
 };
 

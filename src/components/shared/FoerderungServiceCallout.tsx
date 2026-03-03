@@ -11,7 +11,7 @@ export function FoerderungServiceCallout() {
   return (
     <section className="py-16">
       <Container>
-        <div className="rounded-2xl bg-primary-50 px-6 py-10 sm:px-10 sm:py-12">
+        <div className="rounded-2xl bg-muted/30 border border-border px-6 py-10 sm:px-10 sm:py-12">
           <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
             Wir übernehmen die Förderanträge für Sie
           </h2>
@@ -25,7 +25,7 @@ export function FoerderungServiceCallout() {
             {steps.map((s) => (
               <div
                 key={s.step}
-                className="flex items-start gap-3 rounded-xl bg-white/70 px-4 py-3"
+                className="flex items-start gap-3 rounded-xl bg-white px-4 py-3 border border-border"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-white">
                   {s.step}

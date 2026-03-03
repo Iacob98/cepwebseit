@@ -1,24 +1,38 @@
 import nodemailer from "nodemailer";
+import type Mail from "nodemailer/lib/mailer";
 import { getEmailSettings } from "@/lib/dal";
 
-function createTransporter() {
+// Singleton pooled transport — reused across all sends
+let _transporter: Mail | null | undefined;
+
+function getTransporter(): Mail | null {
+  if (_transporter !== undefined) return _transporter;
+
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
 
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return null;
+  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
+    _transporter = null;
+    return null;
+  }
 
-  return nodemailer.createTransport({
+  _transporter = nodemailer.createTransport({
     host: SMTP_HOST,
     port: Number(SMTP_PORT) || 587,
     secure: Number(SMTP_PORT) === 465,
     auth: { user: SMTP_USER, pass: SMTP_PASS },
+    pool: true,
+    maxConnections: 5,
+    maxMessages: Infinity,
   });
+
+  return _transporter;
 }
 
 export async function sendNotificationEmail(
   subject: string,
   htmlBody: string
 ): Promise<void> {
-  const transporter = createTransporter();
+  const transporter = getTransporter();
   if (!transporter) {
     console.warn("[Email] SMTP not configured — skipping email send");
     return;
@@ -37,7 +51,7 @@ export async function sendAutoReply(
   toEmail: string,
   customerName: string
 ): Promise<void> {
-  const transporter = createTransporter();
+  const transporter = getTransporter();
   if (!transporter) return;
 
   const from = process.env.SMTP_FROM || process.env.SMTP_USER!;

@@ -3,16 +3,16 @@ import type { PagesData } from "@/lib/dal-schemas";
 export const defaultPages: PagesData = {
   home: {
     hero: {
-      badge: "Zertifizierter Fachbetrieb · Seit 2014",
-      title: "Ihre Experten für Wärmepumpen & Photovoltaik",
-      subtitle: "Von der Beratung bis zur Installation — alles aus einer Hand. Profitieren Sie von bis zu 70%* staatlicher Förderung und senken Sie Ihre Energiekosten nachhaltig.",
+      badge: "Zertifizierter Fachbetrieb · Seit 2018",
+      title: "Ihre Experten für Photovoltaik & Energiespeicher",
+      subtitle: "Von der Beratung bis zur Installation — alles aus einer Hand. Senken Sie Ihre Energiekosten nachhaltig mit Solarenergie.",
       primaryButton: "Kostenlos berechnen",
       secondaryButton: "Beratung anfragen",
     },
     about: {
       label: "Über uns",
-      title: "Meisterbetrieb mit Leidenschaft — seit 2014",
-      description: "Als inhabergeführter Meisterbetrieb stehen wir seit über einem Jahrzehnt für höchste Qualität bei der Installation von Wärmepumpen und Photovoltaikanlagen. Unser erfahrenes Team aus zertifizierten Fachkräften begleitet Sie von der ersten Beratung bis zur fertigen Anlage — persönlich, zuverlässig und mit echtem Engagement.",
+      title: "Ihr Energiepartner in Brandenburg — seit 2018",
+      description: "Als CEP Clever Energie Power GmbH stehen wir für höchste Qualität bei der Installation von Photovoltaikanlagen und Energiespeichern. Unser erfahrenes Team aus zertifizierten Fachkräften in Hennigsdorf begleitet Sie von der ersten Beratung bis zur fertigen Anlage — persönlich, zuverlässig und mit echtem Engagement.",
       description2: "Was uns antreibt? Die Überzeugung, dass nachhaltige Energie für jeden zugänglich sein sollte. Deshalb setzen wir auf faire Preise, modernste Technik und einen Service, der keine Wünsche offen lässt.",
       buttonLabel: "Mehr über uns",
       buttonHref: "/ueber-uns",
@@ -20,9 +20,9 @@ export const defaultPages: PagesData = {
     },
     howItWorks: {
       title: "So einfach geht's",
-      subtitle: "In vier Schritten zu Ihrer neuen Wärmepumpe oder Photovoltaikanlage.",
+      subtitle: "In vier Schritten zu Ihrer neuen Energielösung.",
       step1Title: "Anfrage stellen",
-      step1Desc: "Nutzen Sie unseren Rechner oder das Kontaktformular für eine unverbindliche Anfrage.",
+      step1Desc: "Nutzen Sie unseren Energie-Rechner oder das Kontaktformular für eine unverbindliche Anfrage.",
       step2Title: "Beratung vor Ort",
       step2Desc: "Unsere Experten besichtigen Ihr Objekt und analysieren die optimale Lösung.",
       step3Title: "Individuelles Angebot",
@@ -32,7 +32,7 @@ export const defaultPages: PagesData = {
     },
     foerderungTeaser: {
       label: "Staatliche Förderung",
-      title: "Bis zu 70%* Zuschuss für Ihre Wärmepumpe",
+      title: "Bis zu 70%* Zuschuss für Ihre Energiewende",
       description: "Die Bundesregierung fördert den Umstieg auf erneuerbare Energien großzügig. Über die BEG-Förderung (BAFA/KfW) können Sie erhebliche Zuschüsse erhalten.",
       bullet1: "30%* Grundförderung für alle Wärmepumpen",
       bullet2: "20%* Klimageschwindigkeitsbonus",
@@ -41,7 +41,7 @@ export const defaultPages: PagesData = {
       exampleTitle: "Rechenbeispiel Einfamilienhaus",
     },
     cta: {
-      title: "Bereit für Ihre neue Wärmepumpe?",
+      title: "Bereit für Ihre Energiewende?",
       description: "Lassen Sie sich kostenlos und unverbindlich beraten. Wir finden die optimale Lösung für Ihr Zuhause.",
     },
   },
@@ -256,6 +256,38 @@ export const defaultPages: PagesData = {
       conclusion: "Die Wasser-Wasser-Wärmepumpe erreicht den höchsten Wirkungsgrad aller Typen — die beste Wahl wenn Grundwasser verfügbar ist.",
     },
   },
+  energiespeicher: {
+    hero: {
+      title: "Energiespeicher — Solarstrom rund um die Uhr",
+      description: "Mit einem modernen Batteriespeicher nutzen Sie Ihren Solarstrom auch abends und nachts. Steigern Sie Ihren Eigenverbrauch auf bis zu 80% und machen Sie sich unabhängig von steigenden Strompreisen.",
+    },
+    benefits: {
+      title: "Vorteile eines Energiespeichers",
+      subtitle: "Warum sich ein Batteriespeicher für Sie lohnt.",
+      benefit1Title: "Eigenverbrauch maximieren", benefit1Desc: "Steigern Sie Ihren Eigenverbrauch von ca. 30% auf bis zu 70–80% — so nutzen Sie Ihren Solarstrom optimal.",
+      benefit2Title: "Stromkosten senken", benefit2Desc: "Weniger Strom aus dem Netz bedeutet geringere Stromkosten — auch bei steigenden Energiepreisen.",
+      benefit3Title: "Notstromversorgung", benefit3Desc: "Viele Speichersysteme bieten eine Notstromfunktion — Ihr Zuhause bleibt auch bei Stromausfall versorgt.",
+      benefit4Title: "Unabhängigkeit", benefit4Desc: "Machen Sie sich unabhängig von Energieversorgern und steigenden Netzentgelten.",
+      benefit5Title: "Netzentlastung", benefit5Desc: "Ihr Speicher entlastet das Stromnetz und unterstützt die Energiewende aktiv.",
+      benefit6Title: "Nachrüstbar", benefit6Desc: "Batteriespeicher können auch nachträglich zu einer bestehenden PV-Anlage ergänzt werden.",
+    },
+    technology: {
+      title: "Moderne Speichertechnologie",
+      subtitle: "Zuverlässige Technik für Ihr Zuhause.",
+      tech1Title: "Lithium-Eisenphosphat (LFP)", tech1Desc: "Sichere und langlebige Batterietechnologie mit über 10.000 Ladezyklen und 15–20 Jahren Lebensdauer.",
+      tech2Title: "Hybridwechselrichter", tech2Desc: "Kombiniert PV-Wechselrichter und Batteriemanagement in einem Gerät — effizient und platzsparend.",
+      tech3Title: "Smart Energy Management", tech3Desc: "Intelligente Steuerung optimiert Lade- und Entladezyklen automatisch für maximalen Eigenverbrauch.",
+      tech4Title: "Modulare Erweiterung", tech4Desc: "Viele Systeme sind modular erweiterbar — passen Sie die Kapazität an Ihren wachsenden Bedarf an.",
+    },
+    combo: {
+      title: "Perfekte Kombination: PV + Speicher",
+      subtitle: "Gemeinsam noch wirtschaftlicher.",
+    },
+    cta: {
+      title: "Interesse an einem Energiespeicher?",
+      description: "Lassen Sie sich kostenlos beraten — wir finden den passenden Speicher für Ihre Anlage.",
+    },
+  },
   photovoltaik: {
     hero: {
       title: "Photovoltaik — Erzeugen Sie Ihren eigenen Strom",
@@ -289,7 +321,7 @@ export const defaultPages: PagesData = {
   referenzen: {
     hero: {
       title: "Unsere Referenzen",
-      description: "Über 1.000 erfolgreich realisierte Projekte* seit 2014. Hier zeigen wir Ihnen eine Auswahl unserer Arbeiten.",
+      description: "Über 350 erfolgreich realisierte Projekte* seit 2018. Hier zeigen wir Ihnen eine Auswahl unserer Arbeiten.",
     },
     cta: {
       title: "Ihr Projekt könnte das nächste sein",
@@ -298,14 +330,14 @@ export const defaultPages: PagesData = {
   },
   "ueber-uns": {
     hero: {
-      title: "Über Arvernus",
-      description: "Seit 2014 sind wir Ihr verlässlicher Partner für Wärmepumpen und Photovoltaik. Mit über 1.000 realisierten Projekten* und einem erfahrenen Team stehen wir für Qualität, Zuverlässigkeit und Innovation.",
+      title: "Über CEP Energie",
+      description: "Seit 2018 sind wir Ihr verlässlicher Partner für Photovoltaik und Energiespeicher in Hennigsdorf und Brandenburg. Mit über 350 realisierten Projekten* und einem erfahrenen Team stehen wir für Qualität, Zuverlässigkeit und Innovation.",
     },
     timeline: { title: "Unsere Geschichte", subtitle: "Von der Gründung bis heute." },
-    team: { title: "Unser Team", subtitle: "Die Menschen hinter Arvernus." },
+    team: { title: "Unser Team", subtitle: "Die Menschen hinter CEP Energie." },
     certificates: {
       title: "Zertifikate", subtitle: "Qualität, der Sie vertrauen können.",
-      cert1: "Meisterbetrieb SHK", cert2: "BAFA-zertifiziert", cert3: "KfW-Partnerunternehmen", cert4: "Offizieller Bosch Partner",
+      cert1: "BAFA-zertifiziert", cert2: "KfW-Partnerunternehmen", cert3: "Zertifizierter Fachbetrieb", cert4: "Qualitätsgeprüft",
     },
     cta: {
       title: "Lassen Sie sich von uns beraten",
@@ -320,8 +352,8 @@ export const defaultPages: PagesData = {
   },
   foerderung: {
     hero: {
-      title: "Bis zu 70%* Förderung für Ihre Wärmepumpe",
-      description: "Die Bundesregierung unterstützt den Umstieg auf erneuerbare Energien mit großzügigen Förderprogrammen. Wir helfen Ihnen, die maximale Förderung zu erhalten.",
+      title: "Förderung für Photovoltaik & Energiespeicher",
+      description: "0% Mehrwertsteuer auf PV-Anlagen, regionale Speicher-Förderung und Einspeisevergütung — wir helfen Ihnen, alle Fördermöglichkeiten auszuschöpfen.",
     },
     overview: {
       title: "BEG-Förderung im Überblick",
@@ -345,12 +377,12 @@ export const defaultPages: PagesData = {
       description: "Sie sind Fachbetrieb im Bereich Heizung, Solar oder Elektro? Werden Sie Teil unseres Partnernetzwerks und profitieren Sie von einer starken Zusammenarbeit.",
     },
     stats: {
-      title: "Arvernus in Zahlen",
-      description: "Als einer der führenden Anbieter für Wärmepumpen und Photovoltaik in Deutschland setzen wir auf Qualität, Wachstum und starke Partnerschaften.",
-      employees: "400",
-      dailyInstallations: "20",
-      montageTeams: "80",
-      locations: "6",
+      title: "CEP Energie in Zahlen",
+      description: "Als Ihr regionaler Partner für Photovoltaik, Wärmepumpen und Energiespeicher in Brandenburg setzen wir auf Qualität, Wachstum und starke Partnerschaften.",
+      employees: "25",
+      dailyInstallations: "3",
+      montageTeams: "6",
+      locations: "1",
     },
     benefits: {
       title: "Ihre Vorteile als Partner",

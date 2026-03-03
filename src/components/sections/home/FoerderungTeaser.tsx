@@ -10,14 +10,17 @@ interface FoerderungTeaserProps {
 
 export function FoerderungTeaser({ content }: FoerderungTeaserProps) {
   return (
-    <section className="py-20 bg-primary-50 overflow-x-clip">
+    <section className="py-20 bg-muted/30 overflow-x-clip">
       <Container>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <ScrollReveal direction="left">
             <div>
-              <span className="text-sm font-bold uppercase tracking-wider text-primary">
-                {content?.label || "Staatliche Förderung"}
-              </span>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-muted-foreground">
+                  // {content?.label || "Staatliche Förderung"}
+                </span>
+                <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[FÖRDERUNG]</span>
+              </div>
               <h2 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">
                 {content?.title || "Bis zu 70% Zuschuss für Ihre Wärmepumpe"}
               </h2>
@@ -41,14 +44,14 @@ export function FoerderungTeaser({ content }: FoerderungTeaserProps) {
               </ul>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button href="/foerderung">Förderung erfahren</Button>
-                <Button href="/waermepumpen-rechner" variant="outline">
+                <Button href="/energie-rechner" variant="outline">
                   Förderung berechnen
                 </Button>
               </div>
             </div>
           </ScrollReveal>
           <ScrollReveal direction="right">
-            <div className="rounded-2xl bg-white p-8 shadow-lg border border-border">
+            <div className="rounded-2xl bg-white p-8 shadow-sm border border-border">
               <h3 className="text-xl font-semibold text-foreground mb-6">
                 {content?.exampleTitle || "Rechenbeispiel Einfamilienhaus"}*
               </h3>
@@ -69,7 +72,7 @@ export function FoerderungTeaser({ content }: FoerderungTeaserProps) {
                   <span className="text-muted-foreground">Einkommensbonus (30%)</span>
                   <span className="font-semibold text-primary">- 9.000 €</span>
                 </div>
-                <div className="flex justify-between py-3 bg-primary-50 rounded-lg px-3 -mx-3">
+                <div className="flex justify-between py-3 bg-muted/30 rounded-lg px-3 -mx-3">
                   <span className="font-bold text-foreground">Ihre Kosten (ab)*</span>
                   <span className="font-bold text-2xl text-primary">6.000 €</span>
                 </div>

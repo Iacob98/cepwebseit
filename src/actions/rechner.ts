@@ -1,7 +1,7 @@
 "use server";
 
 import { rechnerFullSchema } from "@/lib/schemas";
-import { getRechnerSubmissions, saveRechnerSubmissions } from "@/lib/dal";
+import { appendRechnerSubmission } from "@/lib/dal";
 import { sendNotificationEmail, sendAutoReply } from "@/lib/email";
 import {
   gebaeudetypen,
@@ -13,7 +13,9 @@ import {
   aktuelleHeizungOptionen,
   heizungsalterOptionen,
   warmwasserOptionen,
+  interesseOptionen,
   waermepumpenTypOptionen,
+  speicherOptionen,
   photovoltaikOptionen,
   zeitrahmenOptionen,
 } from "@/data/rechner-options";
@@ -43,8 +45,10 @@ export async function submitRechner(data: RechnerFormData) {
     aktuelleHeizung: d.aktuelleHeizung,
     heizungsalter: d.heizungsalter,
     warmwasser: d.warmwasser,
-    waermepumpentyp: d.waermepumpentyp,
-    photovoltaik: d.photovoltaik,
+    interesse: d.interesse,
+    waermepumpentyp: d.waermepumpentyp || "",
+    speicher: d.speicher || "",
+    photovoltaik: d.photovoltaik || "",
     zeitrahmen: d.zeitrahmen,
     anrede: d.anrede,
     vorname: d.vorname,
@@ -59,9 +63,7 @@ export async function submitRechner(data: RechnerFormData) {
     read: false,
   };
 
-  const submissions = await getRechnerSubmissions();
-  submissions.push(submission);
-  await saveRechnerSubmissions(submissions);
+  await appendRechnerSubmission(submission);
 
   const rows = [
     ["Gebäudetyp", getLabel(gebaeudetypen, d.gebaeudetyp)],
@@ -73,8 +75,10 @@ export async function submitRechner(data: RechnerFormData) {
     ["Aktuelle Heizung", getLabel(aktuelleHeizungOptionen, d.aktuelleHeizung)],
     ["Heizungsalter", getLabel(heizungsalterOptionen, d.heizungsalter)],
     ["Warmwasser", getLabel(warmwasserOptionen, d.warmwasser)],
-    ["Wärmepumpentyp", getLabel(waermepumpenTypOptionen, d.waermepumpentyp)],
-    ["Photovoltaik", getLabel(photovoltaikOptionen, d.photovoltaik)],
+    ["Interesse", getLabel(interesseOptionen, d.interesse)],
+    ...(d.waermepumpentyp ? [["Wärmepumpentyp", getLabel(waermepumpenTypOptionen, d.waermepumpentyp)]] : []),
+    ...(d.speicher ? [["Energiespeicher", getLabel(speicherOptionen, d.speicher)]] : []),
+    ...(d.photovoltaik ? [["Photovoltaik", getLabel(photovoltaikOptionen, d.photovoltaik)]] : []),
     ["Zeitrahmen", getLabel(zeitrahmenOptionen, d.zeitrahmen)],
     ["Name", `${d.anrede} ${d.vorname} ${d.nachname}`],
     ["E-Mail", d.email],
@@ -92,8 +96,8 @@ export async function submitRechner(data: RechnerFormData) {
 
   await Promise.all([
     sendNotificationEmail(
-      `Neue Rechner-Anfrage von ${d.vorname} ${d.nachname}`,
-      `<h2>Neue Wärmepumpen-Rechner Anfrage</h2>
+      `Neue Energie-Rechner Anfrage von ${d.vorname} ${d.nachname}`,
+      `<h2>Neue Energie-Rechner Anfrage</h2>
       <table style="border-collapse:collapse;width:100%;max-width:600px">${tableRows}</table>`
     ),
     sendAutoReply(d.email, `${d.anrede} ${d.vorname} ${d.nachname}`),

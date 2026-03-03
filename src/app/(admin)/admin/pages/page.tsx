@@ -3,15 +3,16 @@ import { getPages } from "@/lib/dal";
 
 const slugLabels: Record<string, string> = {
   home: "Startseite",
+  photovoltaik: "Photovoltaik",
+  energiespeicher: "Energiespeicher",
+  foerderung: "Förderung",
+  "ueber-uns": "Über uns",
+  kontakt: "Kontakt",
   waermepumpen: "Wärmepumpen",
   "luft-wasser-waermepumpe": "Luft-Wasser-Wärmepumpe",
   "sole-wasser-waermepumpe": "Sole-Wasser-Wärmepumpe",
   "wasser-wasser-waermepumpe": "Wasser-Wasser-Wärmepumpe",
-  photovoltaik: "Photovoltaik",
   referenzen: "Referenzen",
-  "ueber-uns": "Über uns",
-  kontakt: "Kontakt",
-  foerderung: "Förderung",
   "partner-werden": "Partner werden",
 };
 

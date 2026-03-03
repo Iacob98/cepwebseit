@@ -121,7 +121,7 @@ export function PartnersSection({ compact = false, partners: partnersProp }: Par
               {featuredPartners.map((partner) => (
                   <div
                     key={partner.id}
-                    className="rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary-50 to-white p-8 text-center shadow-sm"
+                    className="rounded-2xl border-2 border-primary/20 bg-muted/30 border-border p-8 text-center shadow-sm"
                   >
                     <span className="inline-block rounded-full bg-primary px-4 py-1 text-xs font-bold uppercase tracking-wider text-white mb-4">
                       {partner.badge ?? "Partner"}
@@ -171,7 +171,7 @@ export function PartnersSection({ compact = false, partners: partnersProp }: Par
 
         {/* Partner werden CTA */}
         <ScrollReveal>
-          <div className="mt-16 rounded-2xl bg-primary-50 px-8 py-10 text-center">
+          <div className="mt-16 rounded-2xl bg-muted/30 border border-border px-8 py-10 text-center">
             <h3 className="text-xl font-semibold text-foreground">
               Partner werden?
             </h3>

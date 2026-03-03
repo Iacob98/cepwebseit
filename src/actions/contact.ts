@@ -1,7 +1,7 @@
 "use server";
 
 import { contactFormSchema } from "@/lib/schemas";
-import { getContactSubmissions, saveContactSubmissions } from "@/lib/dal";
+import { appendContactSubmission } from "@/lib/dal";
 import { sendNotificationEmail, sendAutoReply } from "@/lib/email";
 import type { ContactFormData } from "@/types";
 
@@ -26,9 +26,7 @@ export async function submitContact(data: ContactFormData) {
     read: false,
   };
 
-  const submissions = await getContactSubmissions();
-  submissions.push(submission);
-  await saveContactSubmissions(submissions);
+  await appendContactSubmission(submission);
 
   await Promise.all([
     sendNotificationEmail(

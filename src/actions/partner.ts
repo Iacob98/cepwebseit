@@ -1,7 +1,7 @@
 "use server";
 
 import { partnerFormSchema } from "@/lib/schemas";
-import { getPartnerSubmissions, savePartnerSubmissions } from "@/lib/dal";
+import { appendPartnerSubmission } from "@/lib/dal";
 import { sendNotificationEmail } from "@/lib/email";
 import type { PartnerFormData } from "@/types";
 
@@ -28,9 +28,7 @@ export async function submitPartnerForm(data: PartnerFormData) {
     read: false,
   };
 
-  const submissions = await getPartnerSubmissions();
-  submissions.push(submission);
-  await savePartnerSubmissions(submissions);
+  await appendPartnerSubmission(submission);
 
   await sendNotificationEmail(
     `Neue Partneranfrage von ${firmenname}`,

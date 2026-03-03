@@ -17,7 +17,7 @@ No test framework is configured. Playwright is installed as a devDependency but 
 
 ## Architecture
 
-**Next.js 16 App Router** site for Arvernus GmbH (German heat pump & solar company). German-language UI throughout.
+**Next.js 16 App Router** site for CEP Clever Energie Power GmbH (German solar, heat pump & energy storage company in Hennigsdorf, Brandenburg). German-language UI throughout.
 
 ### Data Layer — JSON Files, No Database
 
@@ -57,7 +57,7 @@ Image uploads go to `public/uploads/` (max 10MB, JPEG/PNG/WebP).
 
 - Path alias: `@/*` maps to `./src/*`
 - Tailwind CSS 4 (CSS-native `@import "tailwindcss"`) with CSS custom properties in `globals.css`
-- Design tokens: `--primary: #1a7ab5`, `--secondary: #e8a020`, `--accent: #e8a020`
+- Design tokens: `--primary: #0071bd` (blue), `--secondary: #fe7f00` (orange), `--accent: #fe7f00`
 - Server Components by default; `"use client"` only for interactive pieces (forms, nav, animations, consent)
 - Zod 4 for both content schemas (`dal-schemas.ts`) and form validation (`schemas.ts`)
 - Featured partners: max 4 allowed, enforced in partner actions

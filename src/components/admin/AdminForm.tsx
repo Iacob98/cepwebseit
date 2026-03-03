@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 
 interface AdminFormProps {
   action: (prevState: { success?: boolean; error?: string } | null, formData: FormData) => Promise<{ success?: boolean; error?: string }>;
@@ -29,19 +29,12 @@ export function AdminForm({ action, backHref, submitLabel = "Speichern", childre
       {children}
 
       <div className="flex items-center gap-3 pt-4 border-t border-gray-200">
-        <button
-          type="submit"
-          disabled={pending}
-          className="rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-primary-dark disabled:opacity-50 transition-colors cursor-pointer"
-        >
+        <Button type="submit" disabled={pending} size="sm">
           {pending ? "Wird gespeichert..." : submitLabel}
-        </button>
-        <Link
-          href={backHref}
-          className="rounded-lg border border-gray-300 px-6 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-        >
+        </Button>
+        <Button variant="outline" href={backHref} size="sm" className="border border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-700 border-1">
           Abbrechen
-        </Link>
+        </Button>
       </div>
     </form>
   );

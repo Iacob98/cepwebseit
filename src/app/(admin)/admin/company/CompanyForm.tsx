@@ -2,6 +2,7 @@
 
 import { AdminForm } from "@/components/admin/AdminForm";
 import { AdminImageUpload } from "@/components/admin/AdminImageUpload";
+import { Input } from "@/components/ui/Input";
 import type { CompanyData } from "@/types";
 
 interface CompanyFormProps {
@@ -20,22 +21,12 @@ export function CompanyForm({ company, action }: CompanyFormProps) {
             <AdminImageUpload name="logo" currentImage={company.logo} label="Firmenlogo" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Firmenname (kurz)</label>
-              <input name="name" defaultValue={company.name} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Firmenname (voll)</label>
-              <input name="fullName" defaultValue={company.fullName} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
+            <Input name="name" label="Firmenname (kurz)" defaultValue={company.name} />
+            <Input name="fullName" label="Firmenname (voll)" defaultValue={company.fullName} />
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Tagline</label>
-              <input name="tagline" defaultValue={company.tagline} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
+              <Input name="tagline" label="Tagline" defaultValue={company.tagline} />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Gründungsjahr</label>
-              <input name="foundedYear" type="number" defaultValue={company.foundedYear} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
+            <Input name="foundedYear" label="Gründungsjahr" type="number" defaultValue={company.foundedYear} />
           </div>
         </section>
 
@@ -43,26 +34,11 @@ export function CompanyForm({ company, action }: CompanyFormProps) {
         <section>
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Kontakt</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
-              <input name="phone" defaultValue={company.phone} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Telefon (Anzeige)</label>
-              <input name="phoneDisplay" defaultValue={company.phoneDisplay} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">E-Mail</label>
-              <input name="email" type="email" defaultValue={company.email} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">WhatsApp</label>
-              <input name="whatsapp" defaultValue={company.whatsapp} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
-              <input name="website" defaultValue={company.website} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
+            <Input name="phone" label="Telefon" defaultValue={company.phone} />
+            <Input name="phoneDisplay" label="Telefon (Anzeige)" defaultValue={company.phoneDisplay} />
+            <Input name="email" label="E-Mail" type="email" defaultValue={company.email} />
+            <Input name="whatsapp" label="WhatsApp" defaultValue={company.whatsapp} />
+            <Input name="website" label="Website" defaultValue={company.website} />
           </div>
         </section>
 
@@ -71,25 +47,12 @@ export function CompanyForm({ company, action }: CompanyFormProps) {
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Adresse</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Straße</label>
-              <input name="street" defaultValue={company.address.street} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
+              <Input name="street" label="Straße" defaultValue={company.address.street} />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">PLZ</label>
-              <input name="zip" defaultValue={company.address.zip} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Stadt</label>
-              <input name="city" defaultValue={company.address.city} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Bundesland</label>
-              <input name="state" defaultValue={company.address.state} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Land</label>
-              <input name="country" defaultValue={company.address.country} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
+            <Input name="zip" label="PLZ" defaultValue={company.address.zip} />
+            <Input name="city" label="Stadt" defaultValue={company.address.city} />
+            <Input name="state" label="Bundesland" defaultValue={company.address.state} />
+            <Input name="country" label="Land" defaultValue={company.address.country} />
           </div>
         </section>
 
@@ -97,18 +60,9 @@ export function CompanyForm({ company, action }: CompanyFormProps) {
         <section>
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Öffnungszeiten</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Werktags</label>
-              <input name="weekdays" defaultValue={company.hours.weekdays} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Samstag</label>
-              <input name="saturday" defaultValue={company.hours.saturday} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Sonntag</label>
-              <input name="sunday" defaultValue={company.hours.sunday} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
+            <Input name="weekdays" label="Werktags" defaultValue={company.hours.weekdays} />
+            <Input name="saturday" label="Samstag" defaultValue={company.hours.saturday} />
+            <Input name="sunday" label="Sonntag" defaultValue={company.hours.sunday} />
           </div>
         </section>
 
@@ -116,22 +70,10 @@ export function CompanyForm({ company, action }: CompanyFormProps) {
         <section>
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Social Media</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Facebook</label>
-              <input name="facebook" defaultValue={company.social.facebook} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Instagram</label>
-              <input name="instagram" defaultValue={company.social.instagram} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
-              <input name="linkedin" defaultValue={company.social.linkedin} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Twitter / X</label>
-              <input name="twitter" defaultValue={company.social.twitter || ""} placeholder="https://x.com/..." className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
+            <Input name="facebook" label="Facebook" defaultValue={company.social.facebook} />
+            <Input name="instagram" label="Instagram" defaultValue={company.social.instagram} />
+            <Input name="linkedin" label="LinkedIn" defaultValue={company.social.linkedin} />
+            <Input name="twitter" label="Twitter / X" defaultValue={company.social.twitter || ""} placeholder="https://x.com/..." />
           </div>
         </section>
 
@@ -142,10 +84,7 @@ export function CompanyForm({ company, action }: CompanyFormProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[0, 1, 2, 3].map((i) => (
               <div key={i} className="rounded-lg border border-gray-200 p-4 space-y-3">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Zertifikat {i + 1} — Name</label>
-                  <input name={`cert_name_${i}`} defaultValue={company.certificates?.[i]?.name || ""} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" placeholder="z.B. Meisterbetrieb SHK" />
-                </div>
+                <Input name={`cert_name_${i}`} label={`Zertifikat ${i + 1} — Name`} defaultValue={company.certificates?.[i]?.name || ""} placeholder="z.B. Meisterbetrieb SHK" />
                 <AdminImageUpload name={`cert_image_${i}`} currentImage={company.certificates?.[i]?.image} label={`Zertifikat ${i + 1} — Logo`} />
               </div>
             ))}
@@ -156,22 +95,10 @@ export function CompanyForm({ company, action }: CompanyFormProps) {
         <section>
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Rechtliche Angaben (Impressum)</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Geschäftsführer</label>
-              <input name="ceo" defaultValue={company.legal?.ceo || ""} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" placeholder="z.B. Thomas Berger" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Registergericht</label>
-              <input name="registergericht" defaultValue={company.legal?.registergericht || ""} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" placeholder="z.B. Amtsgericht München" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Registernummer</label>
-              <input name="registernummer" defaultValue={company.legal?.registernummer || ""} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" placeholder="z.B. HRB 12345" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Umsatzsteuer-ID</label>
-              <input name="ustId" defaultValue={company.legal?.ustId || ""} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" placeholder="z.B. DE 123456789" />
-            </div>
+            <Input name="ceo" label="Geschäftsführer" defaultValue={company.legal?.ceo || ""} placeholder="z.B. Thomas Berger" />
+            <Input name="registergericht" label="Registergericht" defaultValue={company.legal?.registergericht || ""} placeholder="z.B. Amtsgericht München" />
+            <Input name="registernummer" label="Registernummer" defaultValue={company.legal?.registernummer || ""} placeholder="z.B. HRB 12345" />
+            <Input name="ustId" label="Umsatzsteuer-ID" defaultValue={company.legal?.ustId || ""} placeholder="z.B. DE 123456789" />
           </div>
         </section>
 
@@ -179,18 +106,9 @@ export function CompanyForm({ company, action }: CompanyFormProps) {
         <section>
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Statistiken</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Projekte abgeschlossen</label>
-              <input name="projectsCompleted" type="number" defaultValue={company.stats.projectsCompleted} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Zufriedenheitsrate (%)</label>
-              <input name="satisfactionRate" type="number" defaultValue={company.stats.satisfactionRate} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Max. Förderung (%)</label>
-              <input name="maxFoerderung" type="number" defaultValue={company.stats.maxFoerderung} className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" />
-            </div>
+            <Input name="projectsCompleted" label="Projekte abgeschlossen" type="number" defaultValue={company.stats.projectsCompleted} />
+            <Input name="satisfactionRate" label="Zufriedenheitsrate (%)" type="number" defaultValue={company.stats.satisfactionRate} />
+            <Input name="maxFoerderung" label="Max. Förderung (%)" type="number" defaultValue={company.stats.maxFoerderung} />
           </div>
         </section>
 

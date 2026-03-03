@@ -6,7 +6,7 @@ export function RechnerResult() {
     <section className="py-20">
       <Container className="max-w-2xl">
         <div className="rounded-xl border border-border bg-white p-8 sm:p-12 text-center shadow-sm">
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary-50">
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-muted/30">
             <svg className="h-10 w-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
@@ -17,7 +17,7 @@ export function RechnerResult() {
           <p className="mt-4 text-lg text-muted-foreground">
             Wir haben Ihre Daten erhalten und werden uns innerhalb von 24 Stunden bei Ihnen melden.
           </p>
-          <div className="mt-8 rounded-lg bg-primary-50 p-6">
+          <div className="mt-8 rounded-lg bg-muted/30 p-6">
             <h3 className="font-semibold text-foreground">So geht es weiter:</h3>
             <ol className="mt-3 space-y-2 text-left text-muted-foreground">
               <li className="flex items-start gap-3">

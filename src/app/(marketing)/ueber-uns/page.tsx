@@ -6,20 +6,18 @@ import { Card, CardTitle, CardContent } from "@/components/ui/Card";
 import { BreadcrumbNav } from "@/components/shared/BreadcrumbNav";
 import { TrustBadges } from "@/components/shared/TrustBadges";
 import { CTABanner } from "@/components/shared/CTABanner";
-import { PartnersSection } from "@/components/shared/PartnersSection";
-import { getTeam, getTimeline, getPartners, getCompany, getPageContent } from "@/lib/dal";
+import { getTeam, getTimeline, getCompany, getPageContent } from "@/lib/dal";
 
 export const metadata: Metadata = {
-  title: "Über uns — Seit 2014 Ihr Experte für Wärmepumpen",
+  title: "Über uns — Seit 2018 Ihr Energiepartner in Brandenburg",
   description:
-    "Arvernus GmbH: Seit 2014 Ihr zertifizierter Fachbetrieb für Wärmepumpen und Photovoltaik. Über 1.000 Projekte. Lernen Sie unser Team kennen.",
+    "CEP Clever Energie Power GmbH: Seit 2018 Ihr zertifizierter Fachbetrieb für Photovoltaik, Wärmepumpen und Energiespeicher in Hennigsdorf. Lernen Sie unser Team kennen.",
 };
 
 export default async function UeberUnsPage() {
-  const [team, timeline, partners, company, pageContent] = await Promise.all([
+  const [team, timeline, company, pageContent] = await Promise.all([
     getTeam(),
     getTimeline(),
-    getPartners(),
     getCompany(),
     getPageContent("ueber-uns"),
   ]);
@@ -30,20 +28,21 @@ export default async function UeberUnsPage() {
     <>
       <BreadcrumbNav items={[{ label: "Über uns" }]} />
 
-      <section className="bg-gradient-to-b from-primary-50 to-white py-16">
+      <section className="bg-white py-16">
         <Container>
           <div className="max-w-3xl">
-            <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
-              {t("hero", "title", "Über Arvernus")}
+            <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[ÜBER UNS]</span>
+            <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
+              {t("hero", "title", "Über CEP Energie")}
             </h1>
             <p className="mt-6 text-lg text-muted-foreground">
-              {t("hero", "description", "Seit 2014 sind wir Ihr verlässlicher Partner für Wärmepumpen und Photovoltaik. Mit über 1.000 realisierten Projekten und einem erfahrenen Team stehen wir für Qualität, Zuverlässigkeit und Innovation.")}
+              {t("hero", "description", "Seit 2018 sind wir Ihr verlässlicher Partner für Photovoltaik, Wärmepumpen und Energiespeicher in Hennigsdorf und Brandenburg. Mit über 350 realisierten Projekten und einem erfahrenen Team stehen wir für Qualität, Zuverlässigkeit und Innovation.")}
             </p>
           </div>
         </Container>
       </section>
 
-      <section className="py-8 border-b border-border">
+      <section className="py-8">
         <Container>
           <TrustBadges stats={company.stats} foundedYear={company.foundedYear} />
         </Container>
@@ -52,7 +51,7 @@ export default async function UeberUnsPage() {
       {/* Timeline */}
       <section className="py-20">
         <Container>
-          <SectionHeading title={t("timeline", "title", "Unsere Geschichte")} subtitle={t("timeline", "subtitle", "Von der Gründung bis heute.")} />
+          <SectionHeading title={t("timeline", "title", "Unsere Geschichte")} subtitle={t("timeline", "subtitle", "Von der Gründung bis heute.")} tag="HISTORIE" />
           <div className="max-w-3xl mx-auto">
             <div className="relative border-l-2 border-primary/20 ml-4 space-y-10">
               {timeline.map((event) => (
@@ -71,7 +70,7 @@ export default async function UeberUnsPage() {
       {/* Team */}
       <section className="py-20 bg-muted/30">
         <Container>
-          <SectionHeading title={t("team", "title", "Unser Team")} subtitle={t("team", "subtitle", "Die Menschen hinter Arvernus.")} />
+          <SectionHeading title={t("team", "title", "Unser Team")} subtitle={t("team", "subtitle", "Die Menschen hinter CEP Energie.")} tag="TEAM" />
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((member) => (
               <Card key={member.id} className="text-center">
@@ -95,16 +94,16 @@ export default async function UeberUnsPage() {
       {(company.certificates?.length ?? 0) > 0 && (
       <section className="py-20">
         <Container>
-          <SectionHeading title={t("certificates", "title", "Zertifikate")} subtitle={t("certificates", "subtitle", "Qualität, der Sie vertrauen können.")} />
+          <SectionHeading title={t("certificates", "title", "Zertifikate")} subtitle={t("certificates", "subtitle", "Qualität, der Sie vertrauen können.")} tag="QUALITÄT" />
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 max-w-3xl mx-auto">
             {(company.certificates ?? []).map((cert, i) => (
-              <div key={i} className="flex flex-col items-center p-6 rounded-xl border border-border bg-white text-center">
+              <div key={i} className="flex flex-col items-center p-6 rounded-xl border border-border bg-background text-center">
                 {cert.image ? (
                   <div className="h-16 w-16 flex items-center justify-center mb-3">
                     <Image src={cert.image} alt={cert.name} width={64} height={64} className="h-14 w-auto object-contain" />
                   </div>
                 ) : (
-                  <div className="h-12 w-12 rounded-full bg-primary-50 flex items-center justify-center mb-3">
+                  <div className="h-12 w-12 rounded-full bg-muted/50 flex items-center justify-center mb-3">
                     <svg className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                     </svg>
@@ -117,9 +116,6 @@ export default async function UeberUnsPage() {
         </Container>
       </section>
       )}
-
-      {/* Partners */}
-      <PartnersSection partners={partners} />
 
       <CTABanner
         title={t("cta", "title", "Lassen Sie sich von uns beraten")}

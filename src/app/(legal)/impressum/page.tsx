@@ -4,7 +4,7 @@ import { getCompany } from "@/lib/dal";
 
 export const metadata: Metadata = {
   title: "Impressum",
-  description: "Impressum der Arvernus GmbH gemäß § 5 TMG.",
+  description: "Impressum der CEP Clever Energie Power GmbH gemäß § 5 TMG.",
 };
 
 export default async function ImpressumPage() {
@@ -54,13 +54,6 @@ export default async function ImpressumPage() {
             </p>
           </>
         )}
-
-        <h2>Berufsbezeichnung und berufsrechtliche Regelungen</h2>
-        <p>
-          Berufsbezeichnung: Meisterbetrieb für Sanitär, Heizung und Klimatechnik (SHK)<br />
-          Zuständige Kammer: Handwerkskammer für {company.address.state}<br />
-          Verliehen in: Deutschland
-        </p>
 
         <h2>Streitschlichtung</h2>
         <p>

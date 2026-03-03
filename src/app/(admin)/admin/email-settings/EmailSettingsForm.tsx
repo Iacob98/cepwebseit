@@ -1,6 +1,9 @@
 "use client";
 
 import { useActionState, useState, useRef } from "react";
+import { Input } from "@/components/ui/Input";
+import { Textarea } from "@/components/ui/Textarea";
+import { Button } from "@/components/ui/Button";
 import type { EmailSettingsData } from "@/lib/dal-schemas";
 
 interface Props {
@@ -54,7 +57,7 @@ export function EmailSettingsForm({ settings, action }: Props) {
         )}
 
         {/* Subject */}
-        <Field label="Betreff" name="subject" value={subject} onChange={setSubject} />
+        <Input label="Betreff" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
 
         {/* Header */}
         <div className="bg-white rounded-xl border border-gray-200 p-5 space-y-4">
@@ -62,7 +65,7 @@ export function EmailSettingsForm({ settings, action }: Props) {
 
           {/* Logo */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Logo</label>
+            <label className="block text-sm font-medium text-foreground mb-2">Logo</label>
             <div className="flex items-start gap-4">
               {logoPreview && (
                 <div className="relative h-16 w-40 rounded-lg overflow-hidden border border-gray-200 flex-shrink-0 bg-white p-1">
@@ -81,7 +84,7 @@ export function EmailSettingsForm({ settings, action }: Props) {
                 />
                 <p className="text-xs text-gray-500">JPEG, PNG oder WebP. Max 10MB.</p>
                 {logoPreview && (
-                  <button type="button" onClick={handleLogoRemove} className="text-xs text-red-600 hover:text-red-800">
+                  <button type="button" onClick={handleLogoRemove} className="text-xs text-red-600 hover:text-red-800 cursor-pointer">
                     Logo entfernen
                   </button>
                 )}
@@ -93,25 +96,25 @@ export function EmailSettingsForm({ settings, action }: Props) {
             {logoRemoved && <input type="hidden" name="logo_remove" value="1" />}
           </div>
 
-          <Field label="Titel" name="headerTitle" value={headerTitle} onChange={setHeaderTitle} />
-          <Field label="Untertitel" name="headerSubtitle" value={headerSubtitle} onChange={setHeaderSubtitle} />
+          <Input label="Titel" name="headerTitle" value={headerTitle} onChange={(e) => setHeaderTitle(e.target.value)} />
+          <Input label="Untertitel" name="headerSubtitle" value={headerSubtitle} onChange={(e) => setHeaderSubtitle(e.target.value)} />
 
           {/* Color picker */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Farbe</label>
+            <label className="block text-sm font-medium text-foreground mb-1">Farbe</label>
             <div className="flex items-center gap-3">
               <input
                 type="color"
                 name="headerColor"
                 value={headerColor}
                 onChange={(e) => setHeaderColor(e.target.value)}
-                className="h-10 w-14 cursor-pointer rounded border border-gray-300"
+                className="h-10 w-14 cursor-pointer rounded border border-input"
               />
               <input
                 type="text"
                 value={headerColor}
                 onChange={(e) => setHeaderColor(e.target.value)}
-                className="w-28 rounded-lg border border-gray-300 px-3 py-2 text-sm font-mono"
+                className="w-28 h-11 rounded-lg border border-input bg-background px-3 py-2 text-sm font-mono text-foreground focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:outline-none"
               />
             </div>
           </div>
@@ -120,35 +123,28 @@ export function EmailSettingsForm({ settings, action }: Props) {
         {/* Body */}
         <div className="bg-white rounded-xl border border-gray-200 p-5 space-y-4">
           <h3 className="text-sm font-semibold text-gray-900">Inhalt</h3>
-          <Field label="Begrüßung (Überschrift)" name="greeting" value={greeting} onChange={setGreeting} />
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nachrichtentext</label>
-            <textarea
-              name="bodyText"
-              value={bodyText}
-              onChange={(e) => setBodyText(e.target.value)}
-              rows={4}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
-            />
-          </div>
-          <Field label="Telefon" name="contactPhone" value={contactPhone} onChange={setContactPhone} />
-          <Field label="E-Mail" name="contactEmail" value={contactEmail} onChange={setContactEmail} />
-          <Field label="Abschluss" name="closing" value={closing} onChange={setClosing} />
+          <Input label="Begrüßung (Überschrift)" name="greeting" value={greeting} onChange={(e) => setGreeting(e.target.value)} />
+          <Textarea
+            label="Nachrichtentext"
+            name="bodyText"
+            value={bodyText}
+            onChange={(e) => setBodyText(e.target.value)}
+            rows={4}
+          />
+          <Input label="Telefon" name="contactPhone" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} />
+          <Input label="E-Mail" name="contactEmail" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} />
+          <Input label="Abschluss" name="closing" value={closing} onChange={(e) => setClosing(e.target.value)} />
         </div>
 
         {/* Footer */}
         <div className="bg-white rounded-xl border border-gray-200 p-5 space-y-4">
           <h3 className="text-sm font-semibold text-gray-900">Fußzeile</h3>
-          <Field label="Fußzeilen-Text" name="footerText" value={footerText} onChange={setFooterText} />
+          <Input label="Fußzeilen-Text" name="footerText" value={footerText} onChange={(e) => setFooterText(e.target.value)} />
         </div>
 
-        <button
-          type="submit"
-          disabled={pending}
-          className="w-full rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white hover:bg-primary/90 disabled:opacity-50 transition-colors"
-        >
+        <Button type="submit" disabled={pending} className="w-full">
           {pending ? "Wird gespeichert..." : "Speichern"}
-        </button>
+        </Button>
       </div>
 
       {/* Right: Live Preview */}
@@ -210,30 +206,5 @@ export function EmailSettingsForm({ settings, action }: Props) {
         </div>
       </div>
     </form>
-  );
-}
-
-function Field({
-  label,
-  name,
-  value,
-  onChange,
-}: {
-  label: string;
-  name: string;
-  value: string;
-  onChange: (v: string) => void;
-}) {
-  return (
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-      <input
-        type="text"
-        name={name}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary"
-      />
-    </div>
   );
 }

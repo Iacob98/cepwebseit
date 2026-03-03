@@ -1,42 +1,98 @@
 import { HeroSection } from "@/components/sections/home/HeroSection";
-import { BenefitsStrip } from "@/components/sections/home/BenefitsStrip";
 import { ServicesOverview } from "@/components/sections/home/ServicesOverview";
 import { AboutTeaser } from "@/components/sections/home/AboutTeaser";
-import { HowItWorks } from "@/components/sections/home/HowItWorks";
-import { FoerderungTeaser } from "@/components/sections/home/FoerderungTeaser";
-import { TestimonialsSection } from "@/components/sections/home/TestimonialsSection";
 import { TrustSignals } from "@/components/sections/home/TrustSignals";
-import { CTABanner } from "@/components/shared/CTABanner";
+import { FoerderungTeaser } from "@/components/sections/home/FoerderungTeaser";
+import { TestimonialCard } from "@/components/shared/TestimonialCard";
 import { PartnersSection } from "@/components/shared/PartnersSection";
-import { getTestimonials, getPartners, getServices, getPageContent, getHeroSlides, getCompany } from "@/lib/dal";
+import { FAQAccordion } from "@/components/shared/FAQAccordion";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Container } from "@/components/ui/Container";
+import { CTABanner } from "@/components/shared/CTABanner";
+import {
+  getServices,
+  getPageContent,
+  getHeroSlides,
+  getCompany,
+  getTestimonials,
+  getPartners,
+  getFAQ,
+} from "@/lib/dal";
 
 export default async function HomePage() {
-  const [testimonials, partners, servicesData, pageContent, heroSlides, company] = await Promise.all([
-    getTestimonials(),
-    getPartners(),
-    getServices(),
-    getPageContent("home"),
-    getHeroSlides(),
-    getCompany(),
-  ]);
+  const [servicesData, pageContent, heroSlides, company, testimonials, partners, faqData] =
+    await Promise.all([
+      getServices(),
+      getPageContent("home"),
+      getHeroSlides(),
+      getCompany(),
+      getTestimonials(),
+      getPartners(),
+      getFAQ(),
+    ]);
 
   const hero = pageContent?.hero as Record<string, string> | undefined;
   const about = pageContent?.about as Record<string, string> | undefined;
-  const howItWorks = pageContent?.howItWorks as Record<string, string> | undefined;
-  const foerderung = pageContent?.foerderungTeaser as Record<string, string> | undefined;
+  const foerderung = pageContent?.foerderung as Record<string, string> | undefined;
   const cta = pageContent?.cta as Record<string, string> | undefined;
+
+  const topTestimonials = testimonials
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 3);
+
+  const homeFAQ = [
+    ...faqData.general,
+    ...faqData.photovoltaik,
+    ...faqData.foerderung,
+  ].slice(0, 6);
 
   return (
     <>
       <HeroSection content={hero} slides={heroSlides} />
-      <BenefitsStrip stats={company.stats} foundedYear={company.foundedYear} />
-      <AboutTeaser content={about} />
-      <ServicesOverview services={servicesData.services} />
-      <HowItWorks content={howItWorks} />
-      <FoerderungTeaser content={foerderung} />
-      <TestimonialsSection testimonials={testimonials} pvCustomers={company.stats.pvCustomers} />
-      <PartnersSection partners={partners} />
       <TrustSignals stats={company.stats} foundedYear={company.foundedYear} />
+      <ServicesOverview services={servicesData.services} />
+      <AboutTeaser content={about} />
+      <FoerderungTeaser content={foerderung} />
+
+      {/* Kundenstimmen */}
+      {topTestimonials.length > 0 && (
+        <section className="py-20">
+          <Container>
+            <SectionHeading
+              label="Kundenstimmen"
+              title="Das sagen unsere Kunden"
+              subtitle="Über 350 zufriedene Kunden in Brandenburg und Berlin vertrauen auf CEP Energie."
+              tag="REFERENZEN"
+            />
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {topTestimonials.map((t) => (
+                <TestimonialCard key={t.id ?? t.name} testimonial={t} />
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* Partner */}
+      <PartnersSection compact partners={partners} />
+
+      {/* FAQ */}
+      {homeFAQ.length > 0 && (
+        <section className="py-20 bg-muted/30">
+          <Container>
+            <SectionHeading
+              label="FAQ"
+              title="Häufige Fragen"
+              subtitle="Die wichtigsten Antworten rund um Photovoltaik, Energiespeicher und Förderung."
+              tag="FAQ"
+            />
+            <div className="mx-auto max-w-3xl">
+              <FAQAccordion items={homeFAQ} />
+            </div>
+          </Container>
+        </section>
+      )}
+
       <CTABanner
         title={cta?.title}
         description={cta?.description}

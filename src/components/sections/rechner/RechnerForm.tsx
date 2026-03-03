@@ -46,7 +46,9 @@ const initialData: RechnerFormData = {
   aktuelleHeizung: "",
   heizungsalter: "",
   warmwasser: "",
+  interesse: "",
   waermepumpentyp: "",
+  speicher: "",
   photovoltaik: "",
   zeitrahmen: "",
   anrede: "",
@@ -119,7 +121,7 @@ export function RechnerForm() {
         </div>
 
         {/* Steps */}
-        <div className="rounded-xl border border-border bg-white p-6 sm:p-8 shadow-sm">
+        <div className="rounded-xl border border-border bg-background p-6 sm:p-8 shadow-sm">
           {form.currentStep === 0 && (
             <RechnerStep1 data={form.data} errors={form.errors} updateField={form.updateField} />
           )}

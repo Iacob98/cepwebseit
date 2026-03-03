@@ -21,6 +21,24 @@ import type {
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
+// ─── Per-file async mutex ─────────────────────────────────
+// Prevents concurrent read-modify-write races within the same process.
+const fileLocks = new Map<string, Promise<void>>();
+
+export async function withFileLock<T>(filename: string, fn: () => Promise<T>): Promise<T> {
+  const prev = fileLocks.get(filename) ?? Promise.resolve();
+  let resolve: () => void;
+  const next = new Promise<void>((r) => { resolve = r; });
+  fileLocks.set(filename, next);
+
+  await prev;
+  try {
+    return await fn();
+  } finally {
+    resolve!();
+  }
+}
+
 // Atomic write: write to tmp then rename
 async function writeJSON(filename: string, data: unknown): Promise<void> {
   const filePath = path.join(CONTENT_DIR, filename);
@@ -91,7 +109,7 @@ export async function saveProjects(data: ProjectData[]): Promise<void> {
 export async function getFAQ(): Promise<FAQData> {
   const data = await readJSON<FAQData>("faq.json");
   if (data) return data;
-  const { generalFAQ, waermepumpenFAQ, photovoltaikFAQ, foerderungFAQ } =
+  const { generalFAQ, waermepumpenFAQ, photovoltaikFAQ, foerderungFAQ, energiespeicherFAQ } =
     await import("@/data/faq");
   const addIds = (items: { question: string; answer: string }[]) =>
     items.map((item, i) => ({ ...item, id: String(i + 1), order: i }));
@@ -100,6 +118,7 @@ export async function getFAQ(): Promise<FAQData> {
     waermepumpen: addIds(waermepumpenFAQ),
     photovoltaik: addIds(photovoltaikFAQ),
     foerderung: addIds(foerderungFAQ),
+    energiespeicher: addIds(energiespeicherFAQ),
   };
 }
 
@@ -255,17 +274,17 @@ export async function savePartnerSubmissions(data: PartnerSubmissionData[]): Pro
 // ─── Email Settings ──────────────────────────────────────────
 
 const DEFAULT_EMAIL_SETTINGS: EmailSettingsData = {
-  subject: "Wir haben Ihre Anfrage erhalten — Arvernus GmbH",
+  subject: "Wir haben Ihre Anfrage erhalten — CEP Clever Energie Power GmbH",
   logo: "",
-  headerTitle: "Arvernus GmbH",
-  headerSubtitle: "Ihre Experten für Wärmepumpen & Photovoltaik",
+  headerTitle: "CEP Clever Energie Power GmbH",
+  headerSubtitle: "Ihre Experten für Solar, Wärmepumpen & Energiespeicher",
   greeting: "Vielen Dank für Ihre Anfrage!",
   bodyText: "wir haben Ihre Anfrage erhalten und bedanken uns für Ihr Interesse. Unser Team wird sich innerhalb von 24 Stunden bei Ihnen melden, um alles Weitere zu besprechen.",
-  contactPhone: "+49 7621 9156-0",
+  contactPhone: "+49 3302 2296968",
   contactEmail: "info@cep-energie.com",
-  closing: "Ihr Arvernus-Team",
+  closing: "Ihr CEP Energie-Team",
   footerText: "Diese E-Mail wurde automatisch generiert. Bitte antworten Sie nicht direkt auf diese Nachricht.",
-  headerColor: "#1a7ab5",
+  headerColor: "#0071bd",
 };
 
 export async function getEmailSettings(): Promise<EmailSettingsData> {
@@ -276,4 +295,30 @@ export async function getEmailSettings(): Promise<EmailSettingsData> {
 
 export async function saveEmailSettings(data: EmailSettingsData): Promise<void> {
   await writeJSON("email-settings.json", data);
+}
+
+// ─── Atomic Append Helpers (lock-protected read→push→write) ──
+
+export async function appendContactSubmission(item: ContactSubmissionData): Promise<void> {
+  await withFileLock("contact-submissions.json", async () => {
+    const list = await getContactSubmissions();
+    list.push(item);
+    await saveContactSubmissions(list);
+  });
+}
+
+export async function appendRechnerSubmission(item: RechnerSubmissionData): Promise<void> {
+  await withFileLock("rechner-submissions.json", async () => {
+    const list = await getRechnerSubmissions();
+    list.push(item);
+    await saveRechnerSubmissions(list);
+  });
+}
+
+export async function appendPartnerSubmission(item: PartnerSubmissionData): Promise<void> {
+  await withFileLock("partner-submissions.json", async () => {
+    const list = await getPartnerSubmissions();
+    list.push(item);
+    await savePartnerSubmissions(list);
+  });
 }

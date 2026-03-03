@@ -8,7 +8,7 @@ import { getPageContent } from "@/lib/dal";
 export const metadata: Metadata = {
   title: "Partner werden — Gemeinsam die Energiewende gestalten",
   description:
-    "Werden Sie Partner von Arvernus. Profitieren Sie von unserer Expertise in Wärmepumpen und Photovoltaik — für gemeinsames Wachstum.",
+    "Werden Sie Partner von CEP Energie. Profitieren Sie von unserer Expertise in Photovoltaik, Wärmepumpen und Energiespeicher — für gemeinsames Wachstum.",
 };
 
 const benefits = [
@@ -66,10 +66,11 @@ export default async function PartnerWerdenPage() {
     <>
       <BreadcrumbNav items={[{ label: "Partner werden" }]} />
 
-      <section className="bg-gradient-to-b from-primary-50 to-white py-16">
+      <section className="bg-white py-16">
         <Container>
           <div className="max-w-3xl">
-            <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
+            <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[PARTNER]</span>
+            <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
               {t("hero", "title", "Partner werden")}
             </h1>
             <p className="mt-6 text-lg text-muted-foreground">
@@ -79,12 +80,12 @@ export default async function PartnerWerdenPage() {
         </Container>
       </section>
 
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-background">
         <Container>
           <ScrollReveal>
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
-                {t("stats", "title", "Arvernus in Zahlen")}
+                {t("stats", "title", "CEP Energie in Zahlen")}
               </h2>
               <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
                 {t("stats", "description", "Als einer der führenden Anbieter für Wärmepumpen und Photovoltaik in Deutschland setzen wir auf Qualität, Wachstum und starke Partnerschaften.")}
@@ -95,7 +96,7 @@ export default async function PartnerWerdenPage() {
               {statsConfig.map((stat) => (
                 <div
                   key={stat.key}
-                  className="rounded-2xl border border-primary/20 bg-primary-50/50 p-8 text-center"
+                  className="rounded-2xl border border-border bg-muted/30 p-8 text-center"
                 >
                   <div className="text-4xl font-extrabold text-primary sm:text-5xl">
                     {t("stats", stat.key, "0")}{stat.suffix}
@@ -120,9 +121,9 @@ export default async function PartnerWerdenPage() {
               {benefits.map((b) => (
                 <div
                   key={b.title}
-                  className="rounded-xl border border-border bg-white p-6 text-center shadow-sm"
+                  className="rounded-xl border border-border bg-background p-6 text-center shadow-sm"
                 >
-                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary-50 text-primary">
+                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-muted/50 text-primary">
                     {b.icon}
                   </div>
                   <h3 className="text-lg font-semibold text-foreground">{b.title}</h3>

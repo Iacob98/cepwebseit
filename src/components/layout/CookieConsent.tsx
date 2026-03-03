@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -28,7 +29,7 @@ export function CookieConsent() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-[60px] left-0 right-0 z-[60] bg-white border-t border-border shadow-2xl p-4 sm:p-6 lg:bottom-6 lg:left-6 lg:right-auto lg:max-w-md lg:rounded-xl lg:border">
+    <div className="fixed bottom-[60px] left-0 right-0 z-[60] bg-background border-t border-border shadow-2xl p-4 sm:p-6 lg:bottom-6 lg:left-6 lg:right-auto lg:max-w-md lg:rounded-xl lg:border">
       <div className="space-y-4">
         <div>
           <h3 className="text-base font-semibold text-foreground">Cookie-Einstellungen</h3>
@@ -41,18 +42,12 @@ export function CookieConsent() {
           </p>
         </div>
         <div className="flex gap-3">
-          <button
-            onClick={handleDecline}
-            className="flex-1 rounded-lg border border-border px-4 py-2.5 text-sm font-semibold text-foreground hover:bg-muted transition-colors cursor-pointer"
-          >
+          <Button onClick={handleDecline} variant="outline" size="sm" className="flex-1">
             Ablehnen
-          </button>
-          <button
-            onClick={handleAccept}
-            className="flex-1 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary-dark transition-colors cursor-pointer"
-          >
+          </Button>
+          <Button onClick={handleAccept} size="sm" className="flex-1">
             Akzeptieren
-          </button>
+          </Button>
         </div>
       </div>
     </div>

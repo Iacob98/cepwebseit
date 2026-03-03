@@ -51,7 +51,7 @@ export function ComparisonTable({ types, rows }: ComparisonTableProps) {
           {rows.map((row, i) => (
             <motion.tr
               key={row.label}
-              className="transition-colors hover:bg-primary-50/50"
+              className="transition-colors hover:bg-muted/30"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}

@@ -14,9 +14,9 @@ interface TrustBadgesProps {
   items?: TrustBadgeItem[];
 }
 
-export function TrustBadges({ stats, foundedYear = 2014, items }: TrustBadgesProps) {
+export function TrustBadges({ stats, foundedYear = 2018, items }: TrustBadgesProps) {
   const yearsFounded = new Date().getFullYear() - foundedYear;
-  const projectsCompleted = stats?.projectsCompleted ?? 1000;
+  const projectsCompleted = stats?.projectsCompleted ?? 350;
   const maxFoerderung = stats?.maxFoerderung ?? 70;
 
   const badges: TrustBadgeItem[] = items ?? [
@@ -59,14 +59,16 @@ export function TrustBadges({ stats, foundedYear = 2014, items }: TrustBadgesPro
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+    <div className="flex flex-col sm:flex-row items-center justify-center sm:divide-x divide-border">
       {badges.map((badge) => (
-        <div key={badge.label} className="flex flex-col items-center text-center p-4">
-          <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-primary-50 text-primary">
+        <div key={badge.label} className="flex items-center gap-3 px-6 lg:px-8 py-3 sm:py-0">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted/50 text-primary flex-shrink-0">
             {badge.icon}
           </div>
-          <span className="text-lg font-bold text-foreground">{badge.label}</span>
-          <span className="text-sm text-muted-foreground">{badge.sublabel}</span>
+          <div>
+            <span className="text-lg font-bold text-foreground">{badge.label}</span>
+            <span className="block text-xs text-muted-foreground">{badge.sublabel}</span>
+          </div>
         </div>
       ))}
     </div>

@@ -58,7 +58,7 @@ export function KeyFactsSummary({ facts, title = "Das Wichtigste in Kürze" }: K
     <section className="py-12">
       <ScrollReveal>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl bg-primary-50 p-8">
+          <div className="rounded-2xl bg-muted/30 border border-border p-8">
             <h2 className="mb-6 text-2xl font-bold text-foreground">{title}</h2>
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
               {facts.map((fact) => (

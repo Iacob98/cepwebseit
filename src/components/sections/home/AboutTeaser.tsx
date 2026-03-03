@@ -27,24 +27,43 @@ export function AboutTeaser({ content }: AboutTeaserProps) {
     return () => clearInterval(timer);
   }, [imageList.length, next]);
 
+  const stats = [
+    { value: "350+", label: "Projekte" },
+    { value: "5 MW+", label: "Installiert" },
+    { value: "8+", label: "Jahre Erfahrung" },
+  ];
+
   return (
     <section className="py-20 overflow-x-clip">
       <Container>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <ScrollReveal direction="left">
             <div>
-              <span className="text-sm font-bold uppercase tracking-wider text-primary">
-                {content?.label || "Über uns"}
-              </span>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-muted-foreground">
+                  // {content?.label || "Über uns"}
+                </span>
+                <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[ÜBER UNS]</span>
+              </div>
               <h2 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">
-                {content?.title || "Meisterbetrieb mit Leidenschaft — seit 2014"}
+                {content?.title || "Ihr lokaler Photovoltaik-Partner in Hennigsdorf"}
               </h2>
               <p className="mt-4 text-lg text-muted-foreground">
-                {content?.description || "Als inhabergeführter Meisterbetrieb stehen wir seit über einem Jahrzehnt für höchste Qualität bei der Installation von Wärmepumpen und Photovoltaikanlagen. Unser erfahrenes Team aus zertifizierten Fachkräften begleitet Sie von der ersten Beratung bis zur fertigen Anlage — persönlich, zuverlässig und mit echtem Engagement."}
+                {content?.description || "Seit 2018 installieren wir Photovoltaikanlagen und Energiespeicher in Hennigsdorf und der Region Brandenburg. Unser erfahrenes Team begleitet Sie von der ersten Beratung bis zur fertigen Anlage — alles aus einer Hand."}
               </p>
               <p className="mt-4 text-lg text-muted-foreground">
-                {content?.description2 || "Was uns antreibt? Die Überzeugung, dass nachhaltige Energie für jeden zugänglich sein sollte. Deshalb setzen wir auf faire Preise, modernste Technik und einen Service, der keine Wünsche offen lässt."}
+                {content?.description2 || "Solarstrom ab 6 ct/kWh gegenüber Netzstrom von 37 ct/kWh — mit einer eigenen PV-Anlage senken Sie Ihre Stromkosten um bis zu 80%.* Wir kümmern uns um Planung, Förderanträge und Installation."}
               </p>
+
+              <div className="mt-8 flex flex-wrap gap-8">
+                {stats.map((stat) => (
+                  <div key={stat.label}>
+                    <div className="text-2xl sm:text-3xl font-bold text-foreground">{stat.value}</div>
+                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
               <div className="mt-8">
                 <Button href={content?.buttonHref || "/ueber-uns"}>
                   {content?.buttonLabel || "Mehr über uns"}
@@ -53,7 +72,7 @@ export function AboutTeaser({ content }: AboutTeaserProps) {
             </div>
           </ScrollReveal>
           <ScrollReveal direction="right">
-            <div className="relative overflow-hidden rounded-2xl shadow-lg">
+            <div className="relative overflow-hidden rounded-2xl shadow-sm">
               {imageList.map((src, i) => (
                 <div
                   key={src}
@@ -67,7 +86,7 @@ export function AboutTeaser({ content }: AboutTeaserProps) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={src}
-                    alt={content?.imageAlt || "Arvernus Team bei der Arbeit"}
+                    alt={content?.imageAlt || "CEP Energie Team bei der Arbeit"}
                     className="h-auto w-full object-cover"
                     loading={i === 0 ? "eager" : "lazy"}
                   />

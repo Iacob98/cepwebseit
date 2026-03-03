@@ -4,7 +4,7 @@ import { getCompany } from "@/lib/dal";
 
 export const metadata: Metadata = {
   title: "Datenschutzerklärung",
-  description: "Datenschutzerklärung der Arvernus GmbH gemäß DSGVO.",
+  description: "Datenschutzerklärung der CEP Clever Energie Power GmbH gemäß DSGVO.",
 };
 
 export default async function DatenschutzPage() {
@@ -111,7 +111,7 @@ export default async function DatenschutzPage() {
 
         <h2>6. Aktualität und Änderung dieser Datenschutzerklärung</h2>
         <p>
-          Diese Datenschutzerklärung ist aktuell gültig und hat den Stand Januar 2025. Durch die
+          Diese Datenschutzerklärung ist aktuell gültig und hat den Stand März 2026. Durch die
           Weiterentwicklung unserer Website und Angebote darüber oder aufgrund geänderter gesetzlicher
           beziehungsweise behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern.
         </p>

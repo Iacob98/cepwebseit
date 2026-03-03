@@ -5,9 +5,10 @@ import { FAQList } from "./FAQList";
 
 const categoryLabels: Record<string, string> = {
   general: "Allgemein",
-  waermepumpen: "Wärmepumpen",
   photovoltaik: "Photovoltaik",
+  energiespeicher: "Energiespeicher",
   foerderung: "Förderung",
+  waermepumpen: "Wärmepumpen",
 };
 
 export default async function FAQPage() {

@@ -80,15 +80,15 @@ export function CostsEconomics({
               <CardTitle className="text-lg">Förderung (BEG)</CardTitle>
               <CardContent>
                 <div className="mt-4 space-y-3">
-                  <div className="flex items-center justify-between rounded-lg bg-primary-50 px-3 py-2 text-sm">
+                  <div className="flex items-center justify-between rounded-lg bg-muted/30 px-3 py-2 text-sm">
                     <span className="text-muted-foreground">Grundförderung</span>
                     <span className="font-semibold text-primary">{foerderung.bpiRate}</span>
                   </div>
-                  <div className="flex items-center justify-between rounded-lg bg-primary-50 px-3 py-2 text-sm">
+                  <div className="flex items-center justify-between rounded-lg bg-muted/30 px-3 py-2 text-sm">
                     <span className="text-muted-foreground">Klimageschw.-Bonus</span>
                     <span className="font-semibold text-primary">{foerderung.klimaBonus}</span>
                   </div>
-                  <div className="flex items-center justify-between rounded-lg bg-primary-50 px-3 py-2 text-sm">
+                  <div className="flex items-center justify-between rounded-lg bg-muted/30 px-3 py-2 text-sm">
                     <span className="text-muted-foreground">Einkommens-Bonus</span>
                     <span className="font-semibold text-primary">{foerderung.einkommensBonus}</span>
                   </div>

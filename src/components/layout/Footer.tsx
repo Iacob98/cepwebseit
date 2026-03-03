@@ -11,18 +11,18 @@ interface FooterProps {
 
 export function Footer({ company }: FooterProps) {
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-gray-900 text-gray-400">
       <Container>
         <div className="py-16">
           <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
             {/* Company Info */}
             <div className="space-y-4">
               <Link href="/" className="inline-block">
-                <Image src={company.logo || "/logo-horizontal.png"} alt="Arvernus" width={160} height={44} className="h-10 w-auto brightness-0 invert" />
+                <Image src={company.logo || "/logo-horizontal.png"} alt="CEP Energie" width={160} height={44} className="h-10 w-auto brightness-0 invert" />
               </Link>
               <p className="text-sm leading-relaxed">
                 {company.tagline}. Seit {company.foundedYear} Ihr verlässlicher Partner für
-                energieeffiziente Heizsysteme und Solaranlagen.
+                Photovoltaik und Energiespeicher in Brandenburg.
               </p>
               <div className="space-y-2 text-sm">
                 <p>{company.address.street}</p>

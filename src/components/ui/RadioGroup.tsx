@@ -1,5 +1,7 @@
 "use client";
 
+import * as React from "react";
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { cn } from "@/lib/utils";
 
 interface RadioOption {
@@ -18,7 +20,7 @@ interface RadioGroupProps {
   columns?: 1 | 2 | 3;
 }
 
-export function RadioGroup({
+function RadioGroup({
   name,
   label,
   options,
@@ -34,7 +36,10 @@ export function RadioGroup({
           {label}
         </legend>
       )}
-      <div
+      <RadioGroupPrimitive.Root
+        name={name}
+        value={value}
+        onValueChange={onChange}
         className={cn(
           "grid gap-3",
           columns === 1 && "grid-cols-1",
@@ -48,38 +53,35 @@ export function RadioGroup({
             className={cn(
               "flex items-center gap-3 rounded-lg border-2 p-4 cursor-pointer transition-colors",
               value === option.value
-                ? "border-primary bg-primary-50"
+                ? "border-primary bg-primary/10"
                 : "border-border hover:border-primary/30",
             )}
           >
-            <input
-              type="radio"
-              name={name}
+            <RadioGroupPrimitive.Item
               value={option.value}
-              checked={value === option.value}
-              onChange={() => onChange(option.value)}
-              className="sr-only"
-            />
-            <div
               className={cn(
-                "h-5 w-5 rounded-full border-2 flex items-center justify-center flex-shrink-0",
+                "h-5 w-5 rounded-full border-2 flex items-center justify-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20",
                 value === option.value ? "border-primary" : "border-border",
               )}
             >
-              {value === option.value && (
+              <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
                 <div className="h-2.5 w-2.5 rounded-full bg-primary" />
-              )}
-            </div>
+              </RadioGroupPrimitive.Indicator>
+            </RadioGroupPrimitive.Item>
             <div>
               <span className="font-medium text-foreground">{option.label}</span>
               {option.description && (
-                <p className="text-sm text-muted-foreground mt-0.5">{option.description}</p>
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  {option.description}
+                </p>
               )}
             </div>
           </label>
         ))}
-      </div>
+      </RadioGroupPrimitive.Root>
       {error && <p className="text-sm text-destructive">{error}</p>}
     </fieldset>
   );
 }
+
+export { RadioGroup };

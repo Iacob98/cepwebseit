@@ -10,7 +10,7 @@ interface TestimonialCardProps {
 export function TestimonialCard({ testimonial, onClick }: TestimonialCardProps) {
   return (
     <Card
-      className="h-full flex flex-col cursor-pointer transition-shadow hover:shadow-lg"
+      className="h-full flex flex-col cursor-pointer transition-shadow hover:shadow-sm"
       onClick={onClick}
     >
       <div className="flex gap-1 mb-3">

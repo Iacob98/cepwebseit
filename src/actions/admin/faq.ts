@@ -6,7 +6,7 @@ import { getFAQ, saveFAQ } from "@/lib/dal";
 import type { FAQData } from "@/lib/dal-schemas";
 
 type FAQCategory = keyof FAQData;
-const validCategories: FAQCategory[] = ["general", "waermepumpen", "photovoltaik", "foerderung"];
+const validCategories: FAQCategory[] = ["general", "photovoltaik", "energiespeicher", "foerderung", "waermepumpen"];
 
 export async function createFAQAction(
   _prevState: { success?: boolean; error?: string } | null,
@@ -16,7 +16,7 @@ export async function createFAQAction(
     const category = formData.get("category") as FAQCategory;
     if (!validCategories.includes(category)) return { error: "Ungültige Kategorie" };
     const faq = await getFAQ();
-    const items = faq[category];
+    const items = faq[category] ?? [];
     const maxId = items.reduce((max, item) => Math.max(max, Number(item.id) || 0), 0);
     items.push({
       id: String(maxId + 1),
@@ -42,7 +42,7 @@ export async function updateFAQAction(
     const category = formData.get("category") as FAQCategory;
     if (!validCategories.includes(category)) return { error: "Ungültige Kategorie" };
     const faq = await getFAQ();
-    const items = faq[category];
+    const items = faq[category] ?? [];
     const index = items.findIndex((item) => item.id === id);
     if (index === -1) return { error: "Nicht gefunden" };
     items[index] = {
@@ -63,7 +63,7 @@ export async function deleteFAQAction(id: string, category: string): Promise<voi
   const faq = await getFAQ();
   const cat = category as FAQCategory;
   if (!validCategories.includes(cat)) return;
-  faq[cat] = faq[cat].filter((item) => item.id !== id);
+  faq[cat] = (faq[cat] ?? []).filter((item) => item.id !== id);
   await saveFAQ(faq);
   revalidatePath("/", "layout");
   redirect("/admin/faq");

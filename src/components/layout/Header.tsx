@@ -19,14 +19,14 @@ export function Header({ company }: HeaderProps) {
 
   return (
     <>
-    <header className="sticky top-0 z-50 border-b border-border bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <Container>
         <div className="flex h-16 items-center justify-between lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
               src={company.logo || "/logo-horizontal.png"}
-              alt="Arvernus Meisterbetrieb"
+              alt="CEP Energie"
               width={180}
               height={48}
               className="h-10 w-auto lg:h-12"
@@ -56,7 +56,7 @@ export function Header({ company }: HeaderProps) {
                 </Link>
                 {item.children && openDropdown === item.href && (
                   <div className="absolute left-0 top-full pt-1">
-                    <div className="rounded-xl border border-border bg-white p-2 shadow-lg min-w-[250px]">
+                    <div className="rounded-xl border border-border bg-background p-2 shadow-sm min-w-[250px]">
                       {item.children.map((child) => (
                         <Link
                           key={child.href}
@@ -81,7 +81,7 @@ export function Header({ company }: HeaderProps) {
             >
               {company.phoneDisplay}
             </a>
-            <Button href="/waermepumpen-rechner" size="sm">
+            <Button href="/energie-rechner" size="sm">
               Kostenlos berechnen
             </Button>
           </div>

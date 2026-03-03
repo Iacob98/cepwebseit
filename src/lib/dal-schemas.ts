@@ -67,7 +67,7 @@ export const projectSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
   description: z.string().min(1),
-  category: z.enum(["waermepumpe", "photovoltaik", "kombiniert"]),
+  category: z.enum(["waermepumpe", "photovoltaik", "kombiniert", "energiespeicher"]),
   location: z.string().min(1),
   year: z.number().int().min(2000),
   specs: z.array(z.string()),
@@ -89,6 +89,7 @@ export const faqSchema = z.object({
   waermepumpen: z.array(faqItemSchema),
   photovoltaik: z.array(faqItemSchema),
   foerderung: z.array(faqItemSchema),
+  energiespeicher: z.array(faqItemSchema).optional(),
 });
 
 // Partner
@@ -237,7 +238,9 @@ export const rechnerSubmissionSchema = z.object({
   aktuelleHeizung: z.string(),
   heizungsalter: z.string(),
   warmwasser: z.string(),
+  interesse: z.string().optional(),
   waermepumpentyp: z.string(),
+  speicher: z.string().optional(),
   photovoltaik: z.string(),
   zeitrahmen: z.string(),
   anrede: z.string(),

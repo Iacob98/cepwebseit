@@ -2,19 +2,6 @@ import type { Service } from "@/types";
 
 export const services: Service[] = [
   {
-    title: "Wärmepumpen",
-    description:
-      "Effiziente Wärmepumpen für Ihr Zuhause. Wir installieren Luft-Wasser-, Sole-Wasser- und Wasser-Wasser-Wärmepumpen für maximale Energieeinsparung.",
-    href: "/waermepumpen",
-    icon: "flame",
-    features: [
-      "Bis zu 75% Heizkosten sparen*",
-      "Staatliche Förderung bis 70%*",
-      "Umweltfreundlich & leise",
-      "Wartungsarm & langlebig",
-    ],
-  },
-  {
     title: "Photovoltaik",
     description:
       "Erzeugen Sie Ihren eigenen Strom mit einer modernen Solaranlage. Von der Planung bis zur Installation — alles aus einer Hand.",
@@ -25,6 +12,32 @@ export const services: Service[] = [
       "Stromkosten senken",
       "Einspeisevergütung erhalten",
       "Unabhängigkeit vom Stromnetz",
+    ],
+  },
+  {
+    title: "Energiespeicher",
+    description:
+      "Speichern Sie Ihren Solarstrom für die Nutzung rund um die Uhr. Moderne Batteriespeicher maximieren Ihren Eigenverbrauch.",
+    href: "/energiespeicher",
+    icon: "battery",
+    features: [
+      "Eigenverbrauch auf 70–80%* steigern",
+      "Unabhängigkeit von Strompreisen",
+      "Notstromfähig",
+      "Kompakt & wartungsarm",
+    ],
+  },
+  {
+    title: "Wärmepumpen",
+    description:
+      "Effiziente Wärmepumpen für Ihr Zuhause. Luft-Wasser-Wärmepumpen für maximale Energieeinsparung.",
+    href: "/waermepumpen",
+    icon: "flame",
+    features: [
+      "Bis zu 75% Heizkosten sparen*",
+      "Staatliche Förderung bis 70%*",
+      "Umweltfreundlich & leise",
+      "Wartungsarm & langlebig",
     ],
   },
 ];

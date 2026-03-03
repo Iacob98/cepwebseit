@@ -1,42 +1,28 @@
 import type { NavItem } from "@/types";
 
 export const mainNavigation: NavItem[] = [
-  {
-    label: "Wärmepumpen",
-    href: "/waermepumpen",
-    children: [
-      { label: "Luft-Wasser-Wärmepumpe", href: "/waermepumpen/luft-wasser-waermepumpe" },
-      { label: "Sole-Wasser-Wärmepumpe", href: "/waermepumpen/sole-wasser-waermepumpe" },
-      { label: "Wasser-Wasser-Wärmepumpe", href: "/waermepumpen/wasser-wasser-waermepumpe" },
-    ],
-  },
   { label: "Photovoltaik", href: "/photovoltaik" },
+  { label: "Energiespeicher", href: "/energiespeicher" },
   { label: "Förderung", href: "/foerderung" },
-  { label: "Ratgeber", href: "/ratgeber" },
-  { label: "Referenzen", href: "/referenzen" },
   { label: "Über uns", href: "/ueber-uns" },
-  { label: "Partner werden", href: "/partner-werden" },
+  { label: "Ratgeber", href: "/ratgeber" },
   { label: "Kontakt", href: "/kontakt" },
+  { label: "Wärmepumpen", href: "/waermepumpen" },
 ];
 
 export const footerNavigation = {
   services: [
-    { label: "Wärmepumpen", href: "/waermepumpen" },
-    { label: "Luft-Wasser-Wärmepumpe", href: "/waermepumpen/luft-wasser-waermepumpe" },
-    { label: "Sole-Wasser-Wärmepumpe", href: "/waermepumpen/sole-wasser-waermepumpe" },
-    { label: "Wasser-Wasser-Wärmepumpe", href: "/waermepumpen/wasser-wasser-waermepumpe" },
     { label: "Photovoltaik", href: "/photovoltaik" },
+    { label: "Energiespeicher", href: "/energiespeicher" },
+    { label: "Wärmepumpen", href: "/waermepumpen" },
   ],
   company: [
     { label: "Über uns", href: "/ueber-uns" },
-    { label: "Referenzen", href: "/referenzen" },
     { label: "Förderung", href: "/foerderung" },
-    { label: "Partner werden", href: "/partner-werden" },
     { label: "Kontakt", href: "/kontakt" },
   ],
   resources: [
-    { label: "Wärmepumpen-Rechner", href: "/waermepumpen-rechner" },
-    { label: "Förderungsrechner", href: "/foerderung" },
+    { label: "Energie-Rechner", href: "/energie-rechner" },
     { label: "Ratgeber", href: "/ratgeber" },
   ],
   legal: [

@@ -64,10 +64,10 @@ export function SuitabilityCheck({
             </ScrollReveal>
           </div>
           <ScrollReveal>
-            <div className="mt-8 rounded-xl bg-primary-50 p-6 text-center">
+            <div className="mt-8 rounded-xl bg-muted/30 border border-border p-6 text-center">
               <p className="text-foreground">{conclusion}</p>
               <div className="mt-4">
-                <Button href="/waermepumpen-rechner">
+                <Button href="/energie-rechner">
                   Jetzt Kosten berechnen
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

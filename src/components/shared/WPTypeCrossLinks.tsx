@@ -31,7 +31,7 @@ export function WPTypeCrossLinks({ currentSlug }: WPTypeCrossLinksProps) {
                 </CardTitle>
                 <CardContent>
                   <p className="mt-2 text-sm">{type.description}</p>
-                  <div className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary-50 px-3 py-1.5 text-sm font-semibold text-primary">
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-lg bg-muted/50 border border-border px-3 py-1.5 text-sm font-semibold text-primary">
                     COP: {type.cop}
                   </div>
                   <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-primary">

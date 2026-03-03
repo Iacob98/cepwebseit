@@ -12,15 +12,13 @@ import { getFAQ, getCompany, getPageContent } from "@/lib/dal";
 export const metadata: Metadata = {
   title: "Photovoltaik — Eigenen Strom erzeugen",
   description:
-    "Photovoltaikanlagen von Arvernus: Professionelle Planung und Installation Ihrer Solaranlage. Stromkosten senken und unabhängig werden.",
+    "Photovoltaikanlagen von CEP Energie: Professionelle Planung und Installation Ihrer Solaranlage. Stromkosten senken und unabhängig werden.",
 };
 
 export default async function PhotovoltaikPage() {
   const [faq, company, pageContent] = await Promise.all([getFAQ(), getCompany(), getPageContent("photovoltaik")]);
   const t = (section: string, field: string, fallback: string) =>
     (pageContent?.[section] as Record<string, string>)?.[field] || fallback;
-
-  const pvCustomers = company.stats.pvCustomers ?? 15000;
 
   const pvBadges: TrustBadgeItem[] = [
     {
@@ -29,17 +27,17 @@ export default async function PhotovoltaikPage() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
       ),
-      label: `${pvCustomers.toLocaleString("de-DE")}+*`,
+      label: `${company.stats.projectsCompleted ?? 350}+*`,
       sublabel: "PV-Anlagen installiert",
     },
     {
       icon: (
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
-      label: "Bis 80%*",
-      sublabel: "Eigenversorgung möglich",
+      label: "0% MwSt.",
+      sublabel: "Auf PV-Anlagen bis 30 kWp",
     },
     {
       icon: (
@@ -53,11 +51,11 @@ export default async function PhotovoltaikPage() {
     {
       icon: (
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       ),
-      label: `Bis ${company.stats.maxFoerderung}%*`,
-      sublabel: "Staatliche Förderung",
+      label: "4–8 J.*",
+      sublabel: "Amortisationszeit",
     },
   ];
 
@@ -65,11 +63,12 @@ export default async function PhotovoltaikPage() {
     <>
       <BreadcrumbNav items={[{ label: "Photovoltaik" }]} />
 
-      <section className="bg-gradient-to-b from-primary-50 to-white py-16">
+      <section className="bg-white py-16">
         <Container>
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
             <div>
-              <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
+              <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[PHOTOVOLTAIK]</span>
+              <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
                 {t("hero", "title", "Photovoltaik — Erzeugen Sie Ihren eigenen Strom")}
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">
@@ -77,7 +76,7 @@ export default async function PhotovoltaikPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button href="/kontakt" size="lg">Angebot anfragen</Button>
-                <Button href="/waermepumpen-rechner" variant="outline" size="lg">Kombiniert mit Wärmepumpe</Button>
+                <Button href="/energie-rechner" variant="outline" size="lg">Ersparnisse berechnen</Button>
               </div>
             </div>
             <div className="relative">
@@ -85,14 +84,14 @@ export default async function PhotovoltaikPage() {
               <img
                 src={t("hero", "image", "/images/pv-house-full.jpg")}
                 alt="Photovoltaikanlage auf einem Einfamilienhaus"
-                className="rounded-2xl shadow-lg object-cover w-full"
+                className="rounded-2xl shadow-sm object-cover w-full"
               />
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="py-8 border-b border-border">
+      <section className="py-8">
         <Container>
           <TrustBadges items={pvBadges} />
         </Container>
@@ -103,6 +102,7 @@ export default async function PhotovoltaikPage() {
           <SectionHeading
             title={t("benefits", "title", "Vorteile einer Photovoltaikanlage")}
             subtitle={t("benefits", "subtitle", "Warum sich Photovoltaik für Sie lohnt.")}
+            tag="VORTEILE"
           />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -127,6 +127,7 @@ export default async function PhotovoltaikPage() {
           <SectionHeading
             title={t("components", "title", "Komponenten Ihrer Solaranlage")}
             subtitle={t("components", "subtitle", "Hochwertige Technik für maximale Erträge.")}
+            tag="TECHNIK"
           />
           <div className="mb-12 overflow-hidden rounded-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -152,9 +153,45 @@ export default async function PhotovoltaikPage() {
         </Container>
       </section>
 
+      {/* Kosten & Wirtschaftlichkeit */}
       <section className="py-20">
+        <Container>
+          <SectionHeading
+            title="Kosten & Wirtschaftlichkeit"
+            subtitle="Was kostet eine PV-Anlage — und was bringt sie?"
+            tag="WIRTSCHAFTLICHKEIT"
+          />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
+            <div className="rounded-xl border border-border bg-background p-6 text-center">
+              <div className="text-sm text-muted-foreground mb-1">Systempreis pro kWp*</div>
+              <div className="text-2xl font-bold text-foreground">1.300–1.600 €</div>
+              <div className="text-xs text-muted-foreground mt-1">netto, inkl. Installation</div>
+            </div>
+            <div className="rounded-xl border border-border bg-background p-6 text-center">
+              <div className="text-sm text-muted-foreground mb-1">Solarstrom-Kosten*</div>
+              <div className="text-2xl font-bold text-primary">6–14 ct/kWh</div>
+              <div className="text-xs text-muted-foreground mt-1">vs. 37 ct/kWh Netzstrom</div>
+            </div>
+            <div className="rounded-xl border-2 border-primary bg-muted/30 p-6 text-center">
+              <div className="text-sm text-muted-foreground mb-1">Einspeisevergütung*</div>
+              <div className="text-2xl font-bold text-primary">7,78 ct/kWh</div>
+              <div className="text-xs text-muted-foreground mt-1">Teileinspeisung bis 10 kWp</div>
+            </div>
+            <div className="rounded-xl border border-border bg-background p-6 text-center">
+              <div className="text-sm text-muted-foreground mb-1">Amortisation*</div>
+              <div className="text-2xl font-bold text-foreground">4–8 Jahre</div>
+              <div className="text-xs text-muted-foreground mt-1">bei 25+ Jahren Laufzeit</div>
+            </div>
+          </div>
+          <p className="mt-6 text-center text-xs text-muted-foreground">
+            * Richtwerte Stand 2026. Tatsächliche Kosten und Erträge abhängig von Anlagengröße, Dachausrichtung, Standort und Verbrauchsprofil. Einspeisevergütung ab Feb. 2026, Degression -1% halbjährlich.
+          </p>
+        </Container>
+      </section>
+
+      <section className="py-20 bg-muted/30">
         <Container className="max-w-3xl">
-          <SectionHeading title="Häufige Fragen zur Photovoltaik" />
+          <SectionHeading title="Häufige Fragen zur Photovoltaik" tag="FAQ" />
           <FAQAccordion items={faq.photovoltaik} />
         </Container>
       </section>

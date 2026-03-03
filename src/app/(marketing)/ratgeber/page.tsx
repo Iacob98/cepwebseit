@@ -9,7 +9,7 @@ import { getArticles } from "@/lib/dal";
 export const metadata: Metadata = {
   title: "Ratgeber — Wärmepumpen, Photovoltaik & Förderung",
   description:
-    "Expertenwissen rund um Wärmepumpen, Photovoltaik, Förderung und Energiesparen. Aktuelle Artikel und Tipps von Arvernus.",
+    "Expertenwissen rund um Photovoltaik, Wärmepumpen, Energiespeicher und Förderung. Aktuelle Artikel und Tipps von CEP Energie.",
 };
 
 const categoryVariants: Record<string, "primary" | "secondary" | "default"> = {
@@ -28,10 +28,11 @@ export default async function RatgeberPage() {
     <>
       <BreadcrumbNav items={[{ label: "Ratgeber" }]} />
 
-      <section className="bg-gradient-to-b from-primary-50 to-white py-16">
+      <section className="bg-white py-16">
         <Container>
           <div className="max-w-3xl">
-            <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
+            <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[RATGEBER]</span>
+            <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
               Ratgeber
             </h1>
             <p className="mt-6 text-lg text-muted-foreground">
@@ -51,7 +52,7 @@ export default async function RatgeberPage() {
                 <Link
                   key={article.id}
                   href={`/ratgeber/${article.slug}`}
-                  className="group rounded-xl border border-gray-200 bg-white overflow-hidden hover:shadow-lg transition-shadow"
+                  className="group rounded-xl border border-border bg-background overflow-hidden hover:shadow-sm transition-shadow"
                 >
                   {article.image ? (
                     <div className="aspect-video overflow-hidden">
@@ -89,7 +90,7 @@ export default async function RatgeberPage() {
         </section>
       )}
 
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-muted/30">
         <Container>
           {categories.map((category) => {
             const categoryArticles = articles.filter((a) => a.category === category);
@@ -101,7 +102,7 @@ export default async function RatgeberPage() {
                     <Link
                       key={article.id}
                       href={`/ratgeber/${article.slug}`}
-                      className="group rounded-xl border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow"
+                      className="group rounded-xl border border-border bg-background p-6 hover:shadow-md transition-shadow"
                     >
                       <div className="flex items-center gap-2 mb-3">
                         <Badge variant={categoryVariants[article.category] || "default"}>

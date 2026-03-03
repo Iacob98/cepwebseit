@@ -1,5 +1,8 @@
 "use client";
 
+import * as React from "react";
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
+import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CheckboxProps {
@@ -11,34 +14,31 @@ interface CheckboxProps {
   className?: string;
 }
 
-export function Checkbox({ name, label, checked, onChange, error, className }: CheckboxProps) {
+function Checkbox({ name, label, checked, onChange, error, className }: CheckboxProps) {
   return (
     <div className={cn("space-y-1", className)}>
-      <label className="flex items-start gap-3 cursor-pointer">
-        <div className="relative mt-0.5">
-          <input
-            type="checkbox"
-            name={name}
-            checked={checked}
-            onChange={(e) => onChange(e.target.checked)}
-            className="sr-only"
-          />
-          <div
-            className={cn(
-              "h-5 w-5 rounded border-2 flex items-center justify-center transition-colors",
-              checked ? "bg-primary border-primary" : "border-border",
-            )}
-          >
-            {checked && (
-              <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-            )}
-          </div>
-        </div>
-        <span className="text-sm text-muted-foreground">{label}</span>
-      </label>
+      <div className="flex items-start gap-3">
+        <CheckboxPrimitive.Root
+          id={name}
+          name={name}
+          checked={checked}
+          onCheckedChange={(v) => onChange(v === true)}
+          className={cn(
+            "mt-0.5 h-5 w-5 shrink-0 rounded border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer",
+            checked ? "border-primary bg-primary" : "border-border",
+          )}
+        >
+          <CheckboxPrimitive.Indicator className="flex items-center justify-center text-primary-foreground">
+            <Check className="h-3 w-3" strokeWidth={3} />
+          </CheckboxPrimitive.Indicator>
+        </CheckboxPrimitive.Root>
+        <label htmlFor={name} className="text-sm text-muted-foreground cursor-pointer">
+          {label}
+        </label>
+      </div>
       {error && <p className="text-sm text-destructive">{error}</p>}
     </div>
   );
 }
+
+export { Checkbox };

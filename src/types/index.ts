@@ -37,7 +37,7 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  category: "waermepumpe" | "photovoltaik" | "kombiniert";
+  category: "waermepumpe" | "photovoltaik" | "kombiniert" | "energiespeicher";
   location: string;
   year: number;
   specs: string[];
@@ -143,7 +143,9 @@ export interface RechnerFormData {
   heizungsalter: string;
   warmwasser: string;
   // Step 4
+  interesse: string;
   waermepumpentyp: string;
+  speicher: string;
   photovoltaik: string;
   zeitrahmen: string;
   // Step 5

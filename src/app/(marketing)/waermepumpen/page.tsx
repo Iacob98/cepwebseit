@@ -8,25 +8,23 @@ import { BreadcrumbNav } from "@/components/shared/BreadcrumbNav";
 import { FAQAccordion } from "@/components/shared/FAQAccordion";
 import { CTABanner } from "@/components/shared/CTABanner";
 import { TrustBadges } from "@/components/shared/TrustBadges";
-import { PartnersSection } from "@/components/shared/PartnersSection";
 import { FoerderungServiceCallout } from "@/components/shared/FoerderungServiceCallout";
 import { TrustBadgeItem } from "@/components/shared/TrustBadges";
 import { HeatingCostChart } from "@/components/shared/HeatingCostChart";
 import { COPComparisonChart } from "@/components/shared/COPComparisonChart";
 import { ComparisonTable } from "@/components/shared/ComparisonTable";
-import { getServices, getFAQ, getPartners, getPageContent } from "@/lib/dal";
+import { getServices, getFAQ, getPageContent } from "@/lib/dal";
 
 export const metadata: Metadata = {
   title: "Wärmepumpen — Effizient heizen mit erneuerbarer Energie",
   description:
-    "Wärmepumpen von Arvernus: Luft-Wasser, Sole-Wasser & Wasser-Wasser. Professionelle Beratung, Installation und bis zu 70% Förderung. Seit 2014.",
+    "Wärmepumpen von CEP Energie: Luft-Wasser, Sole-Wasser & Wasser-Wasser. Professionelle Beratung, Installation und bis zu 70% Förderung. Seit 2014.",
 };
 
 export default async function WaermepumpenPage() {
-  const [servicesData, faq, partners, pageContent] = await Promise.all([
+  const [servicesData, faq, pageContent] = await Promise.all([
     getServices(),
     getFAQ(),
-    getPartners(),
     getPageContent("waermepumpen"),
   ]);
   const t = (section: string, field: string, fallback: string) =>
@@ -78,18 +76,19 @@ export default async function WaermepumpenPage() {
       <BreadcrumbNav items={[{ label: "Wärmepumpen" }]} />
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-primary-50 to-white py-16">
+      <section className="bg-white py-16">
         <Container>
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
             <div>
-              <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
+              <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[WÄRMEPUMPEN]</span>
+              <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
                 {t("hero", "title", "Wärmepumpen — Effizient heizen mit erneuerbarer Energie")}
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">
                 {t("hero", "description", "Eine Wärmepumpe nutzt kostenlose Umweltwärme aus Luft, Erde oder Grundwasser und wandelt sie in Heizenergie um. So sparen Sie bis zu 75% Heizkosten und profitieren von bis zu 70% staatlicher Förderung.")}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Button href="/waermepumpen-rechner" size="lg">Kosten berechnen</Button>
+                <Button href="/energie-rechner" size="lg">Kosten berechnen</Button>
                 <Button href="/kontakt" variant="outline" size="lg">Beratung anfragen</Button>
               </div>
             </div>
@@ -98,7 +97,7 @@ export default async function WaermepumpenPage() {
               <img
                 src={t("hero", "image", "/images/wp-outdoor.jpg")}
                 alt="Wärmepumpe Außengerät an einem modernen Einfamilienhaus"
-                className="rounded-2xl shadow-lg object-cover w-full"
+                className="rounded-2xl shadow-sm object-cover w-full"
               />
             </div>
           </div>
@@ -106,7 +105,7 @@ export default async function WaermepumpenPage() {
       </section>
 
       {/* Trust */}
-      <section className="py-8 border-b border-border">
+      <section className="py-8">
         <Container>
           <TrustBadges items={wpBadges} />
         </Container>
@@ -118,6 +117,7 @@ export default async function WaermepumpenPage() {
           <SectionHeading
             title={t("types", "title", "Wärmepumpen-Typen im Überblick")}
             subtitle={t("types", "subtitle", "Jeder Typ hat seine Stärken. Wir finden die optimale Lösung für Ihr Zuhause.")}
+            tag="TYPEN"
           />
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {waermepumpenTypes.map((type) => (
@@ -162,6 +162,7 @@ export default async function WaermepumpenPage() {
           <SectionHeading
             title={t("comparison", "title", "Wärmepumpen im Vergleich")}
             subtitle={t("comparison", "subtitle", "Finden Sie den passenden Typ für Ihre Anforderungen.")}
+            tag="VERGLEICH"
           />
           <ComparisonTable
             types={waermepumpenTypes.map((wp) => ({
@@ -187,6 +188,7 @@ export default async function WaermepumpenPage() {
           <SectionHeading
             title={t("charts", "title", "Heizkosten im Vergleich")}
             subtitle={t("charts", "subtitle", "Sehen Sie auf einen Blick, wie viel Sie mit einer Wärmepumpe sparen können.")}
+            tag="KOSTEN"
           />
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <Card>
@@ -211,6 +213,7 @@ export default async function WaermepumpenPage() {
           <SectionHeading
             title={t("benefits", "title", "Vorteile einer Wärmepumpe")}
             subtitle={t("benefits", "subtitle", "Warum sich der Umstieg auf eine Wärmepumpe lohnt.")}
+            tag="VORTEILE"
           />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -235,13 +238,10 @@ export default async function WaermepumpenPage() {
       {/* Förderung-Service */}
       <FoerderungServiceCallout />
 
-      {/* Partners */}
-      <PartnersSection compact partners={partners} />
-
       {/* FAQ */}
       <section className="py-20">
         <Container className="max-w-3xl">
-          <SectionHeading title="Häufige Fragen zu Wärmepumpen" />
+          <SectionHeading title="Häufige Fragen zu Wärmepumpen" tag="FAQ" />
           <FAQAccordion items={faq.waermepumpen} />
         </Container>
       </section>

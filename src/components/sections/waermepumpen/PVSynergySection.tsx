@@ -15,7 +15,7 @@ export function PVSynergySection({
   title = "Wärmepumpe + Photovoltaik",
 }: PVSynergySectionProps) {
   return (
-    <section className="py-20 bg-gradient-to-b from-primary-50 to-white">
+    <section className="py-20 bg-muted/30">
       <Container>
         <ScrollReveal>
           <SectionHeading
@@ -56,7 +56,7 @@ export function PVSynergySection({
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                 </svg>
                 <div>
-                  <p className="font-semibold text-foreground">Arvernus als Komplettanbieter</p>
+                  <p className="font-semibold text-foreground">CEP Energie als Komplettanbieter</p>
                   <p className="text-sm text-muted-foreground">Wärmepumpe und PV-Anlage aus einer Hand — perfekt abgestimmt, ein Ansprechpartner.</p>
                 </div>
               </li>

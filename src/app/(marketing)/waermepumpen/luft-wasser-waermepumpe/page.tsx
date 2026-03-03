@@ -21,7 +21,7 @@ import { getServices, getPageContent } from "@/lib/dal";
 export const metadata: Metadata = {
   title: "Luft-Wasser-Wärmepumpe — Die beliebte Lösung",
   description:
-    "Luft-Wasser-Wärmepumpe von Arvernus: Einfache Installation, geringe Kosten, bis zu 70% Förderung. Die beliebteste Wärmepumpenart für Ihr Zuhause.",
+    "Luft-Wasser-Wärmepumpe von CEP Energie: Einfache Installation, geringe Kosten, bis zu 70% Förderung. Die beliebteste Wärmepumpenart für Ihr Zuhause.",
 };
 
 const defaultFaq = [
@@ -95,19 +95,20 @@ export default async function LuftWasserPage() {
       />
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-primary-50 to-white py-16">
+      <section className="bg-white py-16">
         <Container>
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
             <div>
-              <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
+              <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[LUFT-WASSER]</span>
+              <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
                 Luft-Wasser-Wärmepumpe
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">{type.description}</p>
-              <div className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary-50 px-4 py-2 text-sm font-semibold text-primary">
+              <div className="mt-4 inline-flex items-center gap-2 rounded-lg bg-muted/50 border border-border px-4 py-2 text-sm font-semibold text-primary">
                 COP: {type.cop} &middot; Ideal für: {type.idealFor}
               </div>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Button href="/waermepumpen-rechner" size="lg">Kosten berechnen</Button>
+                <Button href="/energie-rechner" size="lg">Kosten berechnen</Button>
                 <Button href="/kontakt" variant="outline" size="lg">Beratung anfragen</Button>
               </div>
             </div>
@@ -116,7 +117,7 @@ export default async function LuftWasserPage() {
               <img
                 src={t("hero", "image", "/images/wp-outdoor.jpg")}
                 alt="Luft-Wasser-Wärmepumpe Außengerät"
-                className="rounded-2xl shadow-lg object-cover w-full"
+                className="rounded-2xl shadow-sm object-cover w-full"
               />
             </div>
           </div>
@@ -124,7 +125,7 @@ export default async function LuftWasserPage() {
       </section>
 
       {/* Trust Badges */}
-      <section className="py-8 border-b border-border">
+      <section className="py-8">
         <Container><TrustBadges items={wpBadges} /></Container>
       </section>
 
@@ -143,7 +144,7 @@ export default async function LuftWasserPage() {
       {/* Advantages */}
       <section className="py-20">
         <Container>
-          <SectionHeading title={t("advantages", "title", "Vorteile der Luft-Wasser-Wärmepumpe")} />
+          <SectionHeading title={t("advantages", "title", "Vorteile der Luft-Wasser-Wärmepumpe")} tag="VORTEILE" />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {type.advantages.map((adv) => (
               <Card key={adv}>
@@ -180,7 +181,7 @@ export default async function LuftWasserPage() {
       {/* Funktionsweise */}
       <section className="py-20">
         <Container>
-          <SectionHeading title={t("function", "title", "Funktionsweise")} subtitle={t("function", "subtitle", "So funktioniert eine Luft-Wasser-Wärmepumpe.")} />
+          <SectionHeading title={t("function", "title", "Funktionsweise")} subtitle={t("function", "subtitle", "So funktioniert eine Luft-Wasser-Wärmepumpe.")} tag="TECHNIK" />
           <div className="mb-12 flex justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -280,6 +281,7 @@ export default async function LuftWasserPage() {
           <SectionHeading
             title={t("charts", "title", "Heizkosten im Vergleich")}
             subtitle={t("charts", "subtitle", "Wärmepumpe vs. konventionelle Heizsysteme — jährliche Kosten im Überblick.")}
+            tag="KOSTEN"
           />
           <div className="max-w-2xl mx-auto">
             <HeatingCostChart />
@@ -290,7 +292,7 @@ export default async function LuftWasserPage() {
       {/* FAQ */}
       <section className="py-20">
         <Container className="max-w-3xl">
-          <SectionHeading title="Häufige Fragen" />
+          <SectionHeading title="Häufige Fragen" tag="FAQ" />
           <FAQAccordion items={defaultFaq} />
         </Container>
       </section>

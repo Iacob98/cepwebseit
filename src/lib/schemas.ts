@@ -19,8 +19,10 @@ export const rechnerStep3Schema = z.object({
 });
 
 export const rechnerStep4Schema = z.object({
-  waermepumpentyp: z.string().min(1, "Bitte wählen Sie einen Typ"),
-  photovoltaik: z.string().min(1, "Bitte wählen Sie eine Option"),
+  interesse: z.string().min(1, "Bitte wählen Sie Ihr Interesse"),
+  waermepumpentyp: z.string().optional(),
+  speicher: z.string().optional(),
+  photovoltaik: z.string().optional(),
   zeitrahmen: z.string().min(1, "Bitte wählen Sie den Zeitrahmen"),
 });
 

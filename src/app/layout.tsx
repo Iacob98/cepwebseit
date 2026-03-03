@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleTagManager } from "@/components/layout/GoogleTagManager";
+import { Toaster } from "@/components/ui/Sonner";
 import "./globals.css";
 
 const inter = Inter({
@@ -10,26 +11,29 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Arvernus – Wärmepumpen & Photovoltaik | Seit 2014",
-    template: "%s | Arvernus",
+    default: "CEP Energie – Solar, Wärmepumpen & Energiespeicher | Hennigsdorf",
+    template: "%s | CEP Energie",
   },
   description:
-    "Arvernus ist Ihr Experte für Wärmepumpen und Photovoltaik. Seit 2014 installieren wir energieeffiziente Heizsysteme und Solaranlagen. Bis zu 70% Förderung möglich.",
+    "CEP Clever Energie Power GmbH — Ihr Partner für Photovoltaik, Wärmepumpen und Energiespeicher in Hennigsdorf & Brandenburg. Bis zu 70% Förderung möglich.",
   keywords: [
-    "Wärmepumpe",
     "Photovoltaik",
+    "Wärmepumpe",
+    "Energiespeicher",
     "Solaranlage",
-    "Luft-Wasser-Wärmepumpe",
+    "Hennigsdorf",
+    "Brandenburg",
     "Förderung",
     "KfW",
     "BAFA",
     "Energieberatung",
+    "Energieeffizienz",
   ],
-  authors: [{ name: "Arvernus GmbH" }],
+  authors: [{ name: "CEP Clever Energie Power GmbH" }],
   openGraph: {
     type: "website",
     locale: "de_DE",
-    siteName: "Arvernus",
+    siteName: "CEP Energie",
   },
   alternates: {
     types: {
@@ -48,6 +52,7 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`}>
         <GoogleTagManager />
         {children}
+        <Toaster />
       </body>
     </html>
   );
