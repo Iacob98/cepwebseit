@@ -119,6 +119,7 @@ export default async function UeberUnsPage() {
       <CTABanner
         title={t("cta", "title", "Lassen Sie sich von uns beraten")}
         description={t("cta", "description", "Lernen Sie uns persönlich kennen — wir freuen uns auf Ihr Projekt.")}
+        image={t("cta", "image", "/images/pv-roof-close.jpg")}
       />
     </>
   );

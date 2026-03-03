@@ -129,6 +129,7 @@ export default async function RatgeberPage() {
       <CTABanner
         title={t("cta", "title", "Haben Sie Fragen?")}
         description={t("cta", "description", "Unsere Experten beraten Sie kostenlos und unverbindlich zu Wärmepumpen, Photovoltaik und Fördermöglichkeiten.")}
+        image={t("cta", "image", "/images/pv-roof-close.jpg")}
       />
     </>
   );

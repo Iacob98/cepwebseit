@@ -237,6 +237,7 @@ export default async function FoerderungPage() {
       <CTABanner
         title={t("cta", "title", "Förderung nutzen — jetzt beraten lassen")}
         description={t("cta", "description", "Wir prüfen kostenlos Ihre Fördermöglichkeiten und erstellen ein individuelles Angebot für Ihre Solaranlage.")}
+        image={t("cta", "image", "/images/pv-roof-close.jpg")}
       />
     </>
   );

@@ -187,6 +187,7 @@ export default async function ArticlePage({ params }: PageProps) {
       <CTABanner
         title="Kostenlose Beratung vereinbaren"
         description="Unsere Experten helfen Ihnen bei der Planung Ihrer Wärmepumpe oder Photovoltaikanlage."
+        image="/images/pv-roof-close.jpg"
       />
     </>
   );

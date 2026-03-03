@@ -198,6 +198,7 @@ export default async function PhotovoltaikPage() {
       <CTABanner
         title={t("cta", "title", "Interesse an einer Solaranlage?")}
         description={t("cta", "description", "Lassen Sie sich kostenlos beraten — wir planen die optimale Anlage für Ihr Dach.")}
+        image={t("cta", "image", "/images/pv-roof-close.jpg")}
         primaryLabel="Beratung anfragen"
         primaryHref="/kontakt"
       />

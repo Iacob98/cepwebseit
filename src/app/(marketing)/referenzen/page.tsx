@@ -102,6 +102,7 @@ export default async function ReferenzenPage() {
       <CTABanner
         title={t("cta", "title", "Ihr Projekt könnte das nächste sein")}
         description={t("cta", "description", "Kontaktieren Sie uns für eine kostenlose Beratung und ein individuelles Angebot.")}
+        image={t("cta", "image", "/images/pv-roof-close.jpg")}
       />
     </>
   );

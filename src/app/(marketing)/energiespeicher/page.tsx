@@ -184,6 +184,7 @@ export default async function EnergiespeicherPage() {
       <CTABanner
         title={t("cta", "title", "Interesse an einem Energiespeicher?")}
         description={t("cta", "description", "Lassen Sie sich kostenlos beraten — wir finden den passenden Speicher für Ihre Anlage.")}
+        image={t("cta", "image", "/images/pv-roof-close.jpg")}
         primaryLabel="Beratung anfragen"
         primaryHref="/kontakt"
       />

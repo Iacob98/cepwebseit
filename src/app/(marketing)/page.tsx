@@ -94,6 +94,7 @@ export default async function HomePage() {
       <CTABanner
         title={cta?.title}
         description={cta?.description}
+        image={cta?.image}
       />
     </>
   );
