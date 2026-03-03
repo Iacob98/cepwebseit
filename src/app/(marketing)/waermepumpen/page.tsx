@@ -80,8 +80,7 @@ export default async function WaermepumpenPage() {
         <Container>
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
             <div>
-              <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[WÄRMEPUMPEN]</span>
-              <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
+              <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
                 {t("hero", "title", "Wärmepumpen — Effizient heizen mit erneuerbarer Energie")}
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">
@@ -117,7 +116,7 @@ export default async function WaermepumpenPage() {
           <SectionHeading
             title={t("types", "title", "Wärmepumpen-Typen im Überblick")}
             subtitle={t("types", "subtitle", "Jeder Typ hat seine Stärken. Wir finden die optimale Lösung für Ihr Zuhause.")}
-            tag="TYPEN"
+           
           />
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {waermepumpenTypes.map((type) => (
@@ -162,7 +161,7 @@ export default async function WaermepumpenPage() {
           <SectionHeading
             title={t("comparison", "title", "Wärmepumpen im Vergleich")}
             subtitle={t("comparison", "subtitle", "Finden Sie den passenden Typ für Ihre Anforderungen.")}
-            tag="VERGLEICH"
+           
           />
           <ComparisonTable
             types={waermepumpenTypes.map((wp) => ({
@@ -188,7 +187,7 @@ export default async function WaermepumpenPage() {
           <SectionHeading
             title={t("charts", "title", "Heizkosten im Vergleich")}
             subtitle={t("charts", "subtitle", "Sehen Sie auf einen Blick, wie viel Sie mit einer Wärmepumpe sparen können.")}
-            tag="KOSTEN"
+           
           />
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <Card>
@@ -213,7 +212,7 @@ export default async function WaermepumpenPage() {
           <SectionHeading
             title={t("benefits", "title", "Vorteile einer Wärmepumpe")}
             subtitle={t("benefits", "subtitle", "Warum sich der Umstieg auf eine Wärmepumpe lohnt.")}
-            tag="VORTEILE"
+           
           />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -241,7 +240,7 @@ export default async function WaermepumpenPage() {
       {/* FAQ */}
       <section className="py-20">
         <Container className="max-w-3xl">
-          <SectionHeading title="Häufige Fragen zu Wärmepumpen" tag="FAQ" />
+          <SectionHeading title="Häufige Fragen zu Wärmepumpen" />
           <FAQAccordion items={faq.waermepumpen} />
         </Container>
       </section>

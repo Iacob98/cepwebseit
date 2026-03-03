@@ -40,7 +40,7 @@ export function HeroSection({ content, slides = [] }: HeroSectionProps) {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <span className="text-sm font-medium text-muted-foreground mb-4 block">
-              // {content?.badge || "Zertifizierter Fachbetrieb · Seit 2018"}
+              {content?.badge || "Zertifizierter Fachbetrieb · Seit 2018"}
             </span>
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               {content?.title || (<>Ihre Experten für{" "}<span className="text-primary">Photovoltaik</span> &{" "}<span className="text-primary">Energiespeicher</span></>)}

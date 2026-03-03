@@ -67,8 +67,7 @@ export default async function PhotovoltaikPage() {
         <Container>
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
             <div>
-              <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[PHOTOVOLTAIK]</span>
-              <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
+              <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
                 {t("hero", "title", "Photovoltaik — Erzeugen Sie Ihren eigenen Strom")}
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">
@@ -102,7 +101,7 @@ export default async function PhotovoltaikPage() {
           <SectionHeading
             title={t("benefits", "title", "Vorteile einer Photovoltaikanlage")}
             subtitle={t("benefits", "subtitle", "Warum sich Photovoltaik für Sie lohnt.")}
-            tag="VORTEILE"
+           
           />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -127,7 +126,7 @@ export default async function PhotovoltaikPage() {
           <SectionHeading
             title={t("components", "title", "Komponenten Ihrer Solaranlage")}
             subtitle={t("components", "subtitle", "Hochwertige Technik für maximale Erträge.")}
-            tag="TECHNIK"
+           
           />
           <div className="mb-12 overflow-hidden rounded-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -159,7 +158,7 @@ export default async function PhotovoltaikPage() {
           <SectionHeading
             title="Kosten & Wirtschaftlichkeit"
             subtitle="Was kostet eine PV-Anlage — und was bringt sie?"
-            tag="WIRTSCHAFTLICHKEIT"
+           
           />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
             <div className="rounded-xl border border-border bg-background p-6 text-center">
@@ -191,7 +190,7 @@ export default async function PhotovoltaikPage() {
 
       <section className="py-20 bg-muted/30">
         <Container className="max-w-3xl">
-          <SectionHeading title="Häufige Fragen zur Photovoltaik" tag="FAQ" />
+          <SectionHeading title="Häufige Fragen zur Photovoltaik" />
           <FAQAccordion items={faq.photovoltaik} />
         </Container>
       </section>

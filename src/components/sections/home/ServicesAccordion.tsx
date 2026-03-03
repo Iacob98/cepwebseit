@@ -28,7 +28,6 @@ export function ServicesAccordion({ services }: ServicesAccordionProps) {
           title={
             <>Ganzheitliche <span className="text-primary">Energielösungen</span></>
           }
-          tag="LEISTUNGEN"
           centered={false}
         />
         <ScrollReveal>

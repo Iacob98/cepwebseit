@@ -98,8 +98,7 @@ export default async function SoleWasserPage() {
         <Container>
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
             <div>
-              <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[SOLE-WASSER]</span>
-              <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
+              <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
                 Sole-Wasser-Wärmepumpe
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">{type.description}</p>
@@ -143,7 +142,7 @@ export default async function SoleWasserPage() {
       {/* Advantages */}
       <section className="py-20">
         <Container>
-          <SectionHeading title={t("advantages", "title", "Vorteile der Sole-Wasser-Wärmepumpe")} tag="VORTEILE" />
+          <SectionHeading title={t("advantages", "title", "Vorteile der Sole-Wasser-Wärmepumpe")} />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {type.advantages.map((adv) => (
               <Card key={adv}>
@@ -183,7 +182,7 @@ export default async function SoleWasserPage() {
           <SectionHeading
             title={t("function", "title", "Funktionsweise")}
             subtitle={t("function", "subtitle", "So nutzt eine Sole-Wasser-Wärmepumpe die Erdwärme.")}
-            tag="TECHNIK"
+           
           />
           <div className="mb-12 flex justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -199,7 +198,7 @@ export default async function SoleWasserPage() {
       {/* Erdsonden vs Kollektoren */}
       <section className="py-20 bg-muted/30">
         <Container>
-          <SectionHeading title={t("comparison", "title", "Erdsonden vs. Flächenkollektoren")} tag="VERGLEICH" />
+          <SectionHeading title={t("comparison", "title", "Erdsonden vs. Flächenkollektoren")} />
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <Card>
               <CardTitle>{t("comparison", "sondenTitle", "Erdsonden (Tiefenbohrung)")}</CardTitle>
@@ -298,7 +297,7 @@ export default async function SoleWasserPage() {
           <SectionHeading
             title={t("charts", "title", "Heizkosten im Vergleich")}
             subtitle={t("charts", "subtitle", "Wärmepumpe vs. konventionelle Heizsysteme — jährliche Kosten im Überblick.")}
-            tag="KOSTEN"
+           
           />
           <div className="max-w-2xl mx-auto">
             <HeatingCostChart />
@@ -309,7 +308,7 @@ export default async function SoleWasserPage() {
       {/* FAQ */}
       <section className="py-20">
         <Container className="max-w-3xl">
-          <SectionHeading title="Häufige Fragen" tag="FAQ" />
+          <SectionHeading title="Häufige Fragen" />
           <FAQAccordion items={defaultFaq} />
         </Container>
       </section>

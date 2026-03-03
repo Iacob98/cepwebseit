@@ -15,12 +15,9 @@ export function FoerderungTeaser({ content }: FoerderungTeaserProps) {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <ScrollReveal direction="left">
             <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-muted-foreground">
-                  // {content?.label || "Staatliche Förderung"}
-                </span>
-                <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[FÖRDERUNG]</span>
-              </div>
+              <span className="text-sm font-medium text-muted-foreground mb-2 block">
+                {content?.label || "Staatliche Förderung"}
+              </span>
               <h2 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">
                 {content?.title || "Bis zu 70% Zuschuss für Ihre Wärmepumpe"}
               </h2>

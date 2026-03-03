@@ -39,12 +39,9 @@ export function AboutTeaser({ content }: AboutTeaserProps) {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <ScrollReveal direction="left">
             <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-muted-foreground">
-                  // {content?.label || "Über uns"}
-                </span>
-                <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[ÜBER UNS]</span>
-              </div>
+              <span className="text-sm font-medium text-muted-foreground mb-2 block">
+                {content?.label || "Über uns"}
+              </span>
               <h2 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">
                 {content?.title || "Ihr lokaler Photovoltaik-Partner in Hennigsdorf"}
               </h2>

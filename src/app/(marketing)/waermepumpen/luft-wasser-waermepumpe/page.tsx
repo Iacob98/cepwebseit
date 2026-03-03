@@ -99,8 +99,7 @@ export default async function LuftWasserPage() {
         <Container>
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
             <div>
-              <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[LUFT-WASSER]</span>
-              <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
+              <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
                 Luft-Wasser-Wärmepumpe
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">{type.description}</p>
@@ -144,7 +143,7 @@ export default async function LuftWasserPage() {
       {/* Advantages */}
       <section className="py-20">
         <Container>
-          <SectionHeading title={t("advantages", "title", "Vorteile der Luft-Wasser-Wärmepumpe")} tag="VORTEILE" />
+          <SectionHeading title={t("advantages", "title", "Vorteile der Luft-Wasser-Wärmepumpe")} />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {type.advantages.map((adv) => (
               <Card key={adv}>
@@ -181,7 +180,7 @@ export default async function LuftWasserPage() {
       {/* Funktionsweise */}
       <section className="py-20">
         <Container>
-          <SectionHeading title={t("function", "title", "Funktionsweise")} subtitle={t("function", "subtitle", "So funktioniert eine Luft-Wasser-Wärmepumpe.")} tag="TECHNIK" />
+          <SectionHeading title={t("function", "title", "Funktionsweise")} subtitle={t("function", "subtitle", "So funktioniert eine Luft-Wasser-Wärmepumpe.")} />
           <div className="mb-12 flex justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -281,7 +280,7 @@ export default async function LuftWasserPage() {
           <SectionHeading
             title={t("charts", "title", "Heizkosten im Vergleich")}
             subtitle={t("charts", "subtitle", "Wärmepumpe vs. konventionelle Heizsysteme — jährliche Kosten im Überblick.")}
-            tag="KOSTEN"
+           
           />
           <div className="max-w-2xl mx-auto">
             <HeatingCostChart />
@@ -292,7 +291,7 @@ export default async function LuftWasserPage() {
       {/* FAQ */}
       <section className="py-20">
         <Container className="max-w-3xl">
-          <SectionHeading title="Häufige Fragen" tag="FAQ" />
+          <SectionHeading title="Häufige Fragen" />
           <FAQAccordion items={defaultFaq} />
         </Container>
       </section>

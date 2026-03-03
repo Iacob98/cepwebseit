@@ -69,8 +69,7 @@ export default async function PartnerWerdenPage() {
       <section className="bg-white py-16">
         <Container>
           <div className="max-w-3xl">
-            <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[PARTNER]</span>
-            <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
+            <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
               {t("hero", "title", "Partner werden")}
             </h1>
             <p className="mt-6 text-lg text-muted-foreground">

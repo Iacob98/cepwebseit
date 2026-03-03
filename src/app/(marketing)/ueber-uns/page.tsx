@@ -31,8 +31,7 @@ export default async function UeberUnsPage() {
       <section className="bg-white py-16">
         <Container>
           <div className="max-w-3xl">
-            <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[ÜBER UNS]</span>
-            <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
+            <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
               {t("hero", "title", "Über CEP Energie")}
             </h1>
             <p className="mt-6 text-lg text-muted-foreground">
@@ -51,7 +50,7 @@ export default async function UeberUnsPage() {
       {/* Timeline */}
       <section className="py-20">
         <Container>
-          <SectionHeading title={t("timeline", "title", "Unsere Geschichte")} subtitle={t("timeline", "subtitle", "Von der Gründung bis heute.")} tag="HISTORIE" />
+          <SectionHeading title={t("timeline", "title", "Unsere Geschichte")} subtitle={t("timeline", "subtitle", "Von der Gründung bis heute.")} />
           <div className="max-w-3xl mx-auto">
             <div className="relative border-l-2 border-primary/20 ml-4 space-y-10">
               {timeline.map((event) => (
@@ -70,7 +69,7 @@ export default async function UeberUnsPage() {
       {/* Team */}
       <section className="py-20 bg-muted/30">
         <Container>
-          <SectionHeading title={t("team", "title", "Unser Team")} subtitle={t("team", "subtitle", "Die Menschen hinter CEP Energie.")} tag="TEAM" />
+          <SectionHeading title={t("team", "title", "Unser Team")} subtitle={t("team", "subtitle", "Die Menschen hinter CEP Energie.")} />
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((member) => (
               <Card key={member.id} className="text-center">
@@ -94,7 +93,7 @@ export default async function UeberUnsPage() {
       {(company.certificates?.length ?? 0) > 0 && (
       <section className="py-20">
         <Container>
-          <SectionHeading title={t("certificates", "title", "Zertifikate")} subtitle={t("certificates", "subtitle", "Qualität, der Sie vertrauen können.")} tag="QUALITÄT" />
+          <SectionHeading title={t("certificates", "title", "Zertifikate")} subtitle={t("certificates", "subtitle", "Qualität, der Sie vertrauen können.")} />
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 max-w-3xl mx-auto">
             {(company.certificates ?? []).map((cert, i) => (
               <div key={i} className="flex flex-col items-center p-6 rounded-xl border border-border bg-background text-center">

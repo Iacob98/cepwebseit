@@ -62,7 +62,6 @@ export default async function HomePage() {
               label="Kundenstimmen"
               title="Das sagen unsere Kunden"
               subtitle="Über 350 zufriedene Kunden in Brandenburg und Berlin vertrauen auf CEP Energie."
-              tag="REFERENZEN"
             />
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {topTestimonials.map((t) => (
@@ -84,7 +83,6 @@ export default async function HomePage() {
               label="FAQ"
               title="Häufige Fragen"
               subtitle="Die wichtigsten Antworten rund um Photovoltaik, Energiespeicher und Förderung."
-              tag="FAQ"
             />
             <div className="mx-auto max-w-3xl">
               <FAQAccordion items={homeFAQ} />

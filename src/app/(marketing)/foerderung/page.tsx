@@ -53,8 +53,7 @@ export default async function FoerderungPage() {
       <section className="bg-white py-16">
         <Container>
           <div className="max-w-3xl">
-            <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[FÖRDERUNG]</span>
-            <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
+            <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
               {t("hero", "title", "Förderung für Photovoltaik & Energiespeicher")}
             </h1>
             <p className="mt-6 text-lg text-muted-foreground">
@@ -74,7 +73,7 @@ export default async function FoerderungPage() {
           <SectionHeading
             title={t("overview", "title", "Förderung im Überblick")}
             subtitle={t("overview", "subtitle", "Diese Vorteile gelten bundesweit für Photovoltaik und Energiespeicher.")}
-            tag="FÖRDERUNG"
+           
           />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {foerderungen.map((item) => (
@@ -105,7 +104,7 @@ export default async function FoerderungPage() {
           <SectionHeading
             title="Regionale Förderung: Berlin & Brandenburg"
             subtitle="Je nach Standort gibt es zusätzliche Fördermöglichkeiten."
-            tag="REGIONAL"
+           
           />
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 max-w-4xl mx-auto">
             <Card>
@@ -167,7 +166,7 @@ export default async function FoerderungPage() {
       {/* Rechenbeispiel PV */}
       <section className="py-20">
         <Container className="max-w-3xl">
-          <SectionHeading title="Rechenbeispiel: 10 kWp PV-Anlage*" subtitle="So rechnet sich Ihre Solaranlage." tag="BEISPIEL" />
+          <SectionHeading title="Rechenbeispiel: 10 kWp PV-Anlage*" subtitle="So rechnet sich Ihre Solaranlage." />
           <Card>
             <div className="space-y-4">
               <div className="flex justify-between py-3 border-b border-border">
@@ -209,7 +208,7 @@ export default async function FoerderungPage() {
       {/* Prozess */}
       <section className="py-20 bg-muted/30">
         <Container>
-          <SectionHeading title={t("process", "title", "So unterstützen wir Sie")} subtitle={t("process", "subtitle", "Von der Beratung bis zur Inbetriebnahme.")} tag="ABLAUF" />
+          <SectionHeading title={t("process", "title", "So unterstützen wir Sie")} subtitle={t("process", "subtitle", "Von der Beratung bis zur Inbetriebnahme.")} />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 max-w-4xl mx-auto">
             {[
               { step: "1", title: t("process", "step1Title", "Kostenlose Beratung"), desc: t("process", "step1Desc", "Wir analysieren Ihr Dach, berechnen die optimale Anlagengröße und prüfen alle Fördermöglichkeiten.") },
@@ -230,7 +229,7 @@ export default async function FoerderungPage() {
 
       <section className="py-20">
         <Container className="max-w-3xl">
-          <SectionHeading title="Häufige Fragen zur Förderung" tag="FAQ" />
+          <SectionHeading title="Häufige Fragen zur Förderung" />
           <FAQAccordion items={faq.foerderung} />
         </Container>
       </section>

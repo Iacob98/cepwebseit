@@ -67,8 +67,7 @@ export default async function EnergiespeicherPage() {
         <Container>
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
             <div>
-              <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[ENERGIESPEICHER]</span>
-              <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
+              <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
                 {t("hero", "title", "Energiespeicher — Solarstrom rund um die Uhr")}
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">
@@ -101,7 +100,7 @@ export default async function EnergiespeicherPage() {
           <SectionHeading
             title={t("benefits", "title", "Vorteile eines Energiespeichers")}
             subtitle={t("benefits", "subtitle", "Warum sich ein Batteriespeicher für Sie lohnt.")}
-            tag="VORTEILE"
+           
           />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -126,7 +125,7 @@ export default async function EnergiespeicherPage() {
           <SectionHeading
             title={t("technology", "title", "Moderne Speichertechnologie")}
             subtitle={t("technology", "subtitle", "Zuverlässige Technik für Ihr Zuhause.")}
-            tag="TECHNIK"
+           
           />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 max-w-4xl mx-auto">
             {[
@@ -149,7 +148,7 @@ export default async function EnergiespeicherPage() {
           <SectionHeading
             title={t("combo", "title", "Perfekte Kombination: PV + Speicher")}
             subtitle={t("combo", "subtitle", "Gemeinsam noch wirtschaftlicher.")}
-            tag="KOMBINATION"
+           
           />
           <div className="max-w-3xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
@@ -176,7 +175,7 @@ export default async function EnergiespeicherPage() {
       {faq.energiespeicher && faq.energiespeicher.length > 0 && (
         <section className="py-20 bg-muted/30">
           <Container className="max-w-3xl">
-            <SectionHeading title="Häufige Fragen zu Energiespeichern" tag="FAQ" />
+            <SectionHeading title="Häufige Fragen zu Energiespeichern" />
             <FAQAccordion items={faq.energiespeicher} />
           </Container>
         </section>

@@ -98,8 +98,7 @@ export default async function WasserWasserPage() {
         <Container>
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
             <div>
-              <span className="text-xs font-medium tracking-widest text-muted-foreground/50 uppercase">[WASSER-WASSER]</span>
-              <h1 className="mt-2 text-4xl font-bold text-foreground sm:text-5xl">
+              <h1 className="text-4xl font-bold text-foreground sm:text-5xl">
                 Wasser-Wasser-Wärmepumpe
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">{type.description}</p>
@@ -143,7 +142,7 @@ export default async function WasserWasserPage() {
       {/* Advantages */}
       <section className="py-20">
         <Container>
-          <SectionHeading title={t("advantages", "title", "Vorteile der Wasser-Wasser-Wärmepumpe")} tag="VORTEILE" />
+          <SectionHeading title={t("advantages", "title", "Vorteile der Wasser-Wasser-Wärmepumpe")} />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {type.advantages.map((adv) => (
               <Card key={adv}>
@@ -183,7 +182,7 @@ export default async function WasserWasserPage() {
           <SectionHeading
             title={t("function", "title", "Funktionsweise")}
             subtitle={t("function", "subtitle", "So nutzt eine Wasser-Wasser-Wärmepumpe das Grundwasser.")}
-            tag="TECHNIK"
+           
           />
           <div className="mb-12 flex justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -199,7 +198,7 @@ export default async function WasserWasserPage() {
       {/* Voraussetzungen */}
       <section className="py-20 bg-muted/30">
         <Container>
-          <SectionHeading title={t("requirements", "title", "Voraussetzungen")} subtitle={t("requirements", "subtitle", "Was Sie für eine Wasser-Wasser-Wärmepumpe benötigen.")} tag="ANFORDERUNGEN" />
+          <SectionHeading title={t("requirements", "title", "Voraussetzungen")} subtitle={t("requirements", "subtitle", "Was Sie für eine Wasser-Wasser-Wärmepumpe benötigen.")} />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 max-w-3xl mx-auto">
             {[
               { title: t("requirements", "req1Title", "Grundwasservorkommen"), desc: t("requirements", "req1Desc", "Ausreichend Grundwasser in erreichbarer Tiefe (typisch 5–15 Meter).") },
@@ -285,7 +284,7 @@ export default async function WasserWasserPage() {
           <SectionHeading
             title={t("charts", "title", "Heizkosten im Vergleich")}
             subtitle={t("charts", "subtitle", "Wärmepumpe vs. konventionelle Heizsysteme — jährliche Kosten im Überblick.")}
-            tag="KOSTEN"
+           
           />
           <div className="max-w-2xl mx-auto">
             <HeatingCostChart />
@@ -296,7 +295,7 @@ export default async function WasserWasserPage() {
       {/* FAQ */}
       <section className="py-20">
         <Container className="max-w-3xl">
-          <SectionHeading title="Häufige Fragen" tag="FAQ" />
+          <SectionHeading title="Häufige Fragen" />
           <FAQAccordion items={defaultFaq} />
         </Container>
       </section>
