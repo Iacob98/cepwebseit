@@ -267,6 +267,7 @@ export const defaultPages: PagesData = {
     hero: {
       title: "Energiespeicher — Solarstrom auch nachts nutzen",
       description: "Ohne Speicher nutzen Sie nur ca. 30% Ihres Solarstroms selbst. Mit einem modernen Batteriespeicher steigern Sie den Eigenverbrauch auf 70–80%* und machen sich unabhängig von steigenden Strompreisen.",
+      image: "/images/pv-house-full.jpg",
     },
     benefits: {
       title: "Vorteile eines Energiespeichers",

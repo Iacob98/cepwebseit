@@ -79,10 +79,13 @@ export default async function EnergiespeicherPage() {
               </div>
             </div>
             <div className="relative">
-              <div className="rounded-2xl bg-muted/30 border border-border p-12 flex items-center justify-center">
-                <svg className="h-48 w-48 text-primary/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={0.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                </svg>
+              <div className="overflow-hidden rounded-2xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={t("hero", "image", "/images/pv-house-full.jpg")}
+                  alt="Energiespeicher"
+                  className="h-full w-full object-cover"
+                />
               </div>
             </div>
           </div>
