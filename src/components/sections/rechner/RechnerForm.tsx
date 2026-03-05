@@ -1,7 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
+import {
+  trackFormStart,
+  trackFormSubmit,
+  trackFormComplete,
+  trackRechnerStepView,
+  trackRechnerStepComplete,
+} from "@/lib/analytics";
 import {
   rechnerStep1Schema,
   rechnerStep2Schema,
@@ -65,14 +72,30 @@ const initialData: RechnerFormData = {
 
 export function RechnerForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const prevStep = useRef(0);
   const form = useMultiStepForm<RechnerFormData>({
     totalSteps: 5,
     schemas,
     initialData,
   });
 
+  // Track step views and form_start on mount
+  useEffect(() => {
+    if (form.currentStep === 0) {
+      trackFormStart({ form_name: "rechner", form_step: 1, form_step_name: stepTitles[0] });
+    }
+    trackRechnerStepView(form.currentStep + 1, stepTitles[form.currentStep]);
+
+    // Track step complete when moving forward
+    if (form.currentStep > prevStep.current) {
+      trackRechnerStepComplete(prevStep.current + 1, stepTitles[prevStep.current]);
+    }
+    prevStep.current = form.currentStep;
+  }, [form.currentStep]);
+
   const handleSubmit = async () => {
     if (!form.complete()) return;
+    trackFormSubmit({ form_name: "rechner", form_step: 5, form_step_name: stepTitles[4] });
     setIsSubmitting(true);
     try {
       await submitRechner(form.data);
@@ -82,6 +105,12 @@ export function RechnerForm() {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (form.isCompleted) {
+      trackFormComplete({ form_name: "rechner" });
+    }
+  }, [form.isCompleted]);
 
   if (form.isCompleted) {
     return <RechnerResult />;

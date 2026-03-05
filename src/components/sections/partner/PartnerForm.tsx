@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import Link from "next/link";
+import { trackFormStart, trackFormSubmit, trackFormComplete } from "@/lib/analytics";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/Textarea";
@@ -36,8 +37,17 @@ export function PartnerForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const hasStarted = useRef(false);
+
+  const handleFormInteraction = useCallback(() => {
+    if (!hasStarted.current) {
+      hasStarted.current = true;
+      trackFormStart({ form_name: "partner" });
+    }
+  }, []);
 
   const updateField = (field: keyof PartnerFormData, value: unknown) => {
+    handleFormInteraction();
     setData((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => {
       const next = { ...prev };
@@ -60,9 +70,11 @@ export function PartnerForm() {
       return;
     }
 
+    trackFormSubmit({ form_name: "partner" });
     setIsSubmitting(true);
     try {
       await submitPartnerForm(data);
+      trackFormComplete({ form_name: "partner" });
       setIsSuccess(true);
     } catch {
       // Error handling

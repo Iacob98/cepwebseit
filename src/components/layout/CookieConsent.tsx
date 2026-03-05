@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { updateConsent } from "@/lib/analytics";
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -16,12 +17,14 @@ export function CookieConsent() {
 
   const handleAccept = () => {
     localStorage.setItem("cookie-consent", "accepted");
+    updateConsent(true);
     window.dispatchEvent(new Event("cookie-consent-update"));
     setVisible(false);
   };
 
   const handleDecline = () => {
     localStorage.setItem("cookie-consent", "declined");
+    updateConsent(false);
     window.dispatchEvent(new Event("cookie-consent-update"));
     setVisible(false);
   };

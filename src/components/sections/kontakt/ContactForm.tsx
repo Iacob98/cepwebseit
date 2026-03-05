@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import Link from "next/link";
+import { trackFormStart, trackFormSubmit, trackFormComplete } from "@/lib/analytics";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { RadioGroup } from "@/components/ui/RadioGroup";
@@ -25,8 +26,17 @@ export function ContactForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const hasStarted = useRef(false);
+
+  const handleFormInteraction = useCallback(() => {
+    if (!hasStarted.current) {
+      hasStarted.current = true;
+      trackFormStart({ form_name: "contact" });
+    }
+  }, []);
 
   const updateField = (field: keyof ContactFormData, value: unknown) => {
+    handleFormInteraction();
     setData((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => {
       const next = { ...prev };
@@ -49,9 +59,11 @@ export function ContactForm() {
       return;
     }
 
+    trackFormSubmit({ form_name: "contact" });
     setIsSubmitting(true);
     try {
       await submitContact(data);
+      trackFormComplete({ form_name: "contact" });
       setIsSuccess(true);
     } catch {
       // Error handling

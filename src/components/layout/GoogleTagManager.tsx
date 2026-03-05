@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Script from "next/script";
+import { initConsentDefaults } from "@/lib/analytics";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
@@ -9,6 +10,8 @@ export function GoogleTagManager() {
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
+    initConsentDefaults();
+
     if (!GTM_ID) return;
 
     const check = () => {

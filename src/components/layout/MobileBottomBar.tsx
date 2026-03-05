@@ -1,6 +1,7 @@
 "use client";
 
 import type { CompanyData } from "@/types";
+import { trackPhoneClick, trackCTAClick } from "@/lib/analytics";
 
 interface MobileBottomBarProps {
   company: CompanyData;
@@ -12,6 +13,7 @@ export function MobileBottomBar({ company }: MobileBottomBarProps) {
       <div className="flex gap-2">
         <a
           href={`tel:${company.phone}`}
+          onClick={() => trackPhoneClick("mobile_bottom_bar")}
           className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-border bg-white py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -21,6 +23,7 @@ export function MobileBottomBar({ company }: MobileBottomBarProps) {
         </a>
         <a
           href="/energie-rechner"
+          onClick={() => trackCTAClick({ cta_text: "Angebot erhalten", cta_location: "mobile_bottom_bar", cta_destination: "/energie-rechner" })}
           className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark"
         >
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

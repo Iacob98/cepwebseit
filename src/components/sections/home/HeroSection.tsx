@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion } from "motion/react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { trackCTAClick } from "@/lib/analytics";
 import type { HeroSlideData } from "@/lib/dal-schemas";
 
 interface HeroSectionProps {
@@ -49,10 +50,19 @@ export function HeroSection({ content, slides = [] }: HeroSectionProps) {
               {content?.subtitle || "Solarstrom ab 6 ct/kWh statt 37 ct/kWh aus dem Netz. Von der Beratung bis zur Installation — alles aus einer Hand. 0% Mehrwertsteuer auf PV-Anlagen."}
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Button href="/energie-rechner" size="lg">
+              <Button
+                href="/energie-rechner"
+                size="lg"
+                onClick={() => trackCTAClick({ cta_text: content?.primaryButton || "Kostenlos berechnen", cta_location: "hero", cta_destination: "/energie-rechner" })}
+              >
                 {content?.primaryButton || "Kostenlos berechnen"}
               </Button>
-              <Button href="/kontakt" variant="outline" size="lg">
+              <Button
+                href="/kontakt"
+                variant="outline"
+                size="lg"
+                onClick={() => trackCTAClick({ cta_text: content?.secondaryButton || "Beratung anfragen", cta_location: "hero", cta_destination: "/kontakt" })}
+              >
                 {content?.secondaryButton || "Beratung anfragen"}
               </Button>
             </div>
